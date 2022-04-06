@@ -1,0 +1,94 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="homestyle.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <title>Pollorino</title>
+    </head>
+    <body id="mBody">
+        <div class="se-pre-con"></div>
+
+    
+            <div id="topbar">
+                <button id="barbtn" onclick="openNav()"><i class="material-icons">menu</i></button>
+                    <h2 id="topTitle">Home</h2>
+            </div>
+        
+        <div id="mySidenav" onmouseover="openNav()" onmouseout="closeNav()" class="sidenav">
+            <span onclick="window.location.href='index.html';"><div class="NavBox">
+                <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">home</i></div>
+                <div class="textSection"><p>Home</p></div>
+            </div></span>
+            <span onclick="window.location.href='note.html';"><div class="NavBox">
+                <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">text_snippet</i></div>
+                <div class="textSection"><p>Notebook</p></div>
+            </div></span>
+            <span onclick="window.location.href='event.html';"><div class="NavBox">
+                <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">event</i></div>
+                <div class="textSection"><p>Events</p></div>
+            </div></span>
+            <span onclick="window.location.href='settings.html';"><div class="NavBox">
+                <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">settings</i></div>
+                <div class="textSection"><p>Settings</p></div>
+            </div></span>
+        </div>
+           
+          <div class="content">
+              <div class="content-scroll">
+                    <div class="container">
+                                <div class="contChild"><!-- Container for the TODO List -->
+                                    <h2>To-Do</h2>
+                                    <div class="contChildsub hide-scrollbar" id="entryLog"> 
+                                        
+                                    </div>
+                                </div>
+                
+                        <div class="contChild">  <!-- Container for the 3 small boxes on the right -->
+                                <div class="subcont">
+                                    <h2>Add a Class</h2>
+                                    <button class="newEntity_btn btnAddClass">+</button>
+                                </div>
+
+                                <div class="subcont">
+                                    <h2>Add a Task</h2>
+                                    <button class="newEntity_btn btnAddTask"><i class="material-icons">add_task</i></button>
+                                </div>
+
+                                <div class="subcont">
+                                    <h2>Remove all</h2>
+                                    <button class="newEntity_btn btnDeleteAll"><i class="material-icons">delete_forever</i></button>
+                                </div>
+                        </div>
+                    </div>
+                    
+                    <div id="contB-Wrap"><!-- Container for the Display Classes -->
+                        <h1>Classes</h1>
+                            <div class="containerB hide-scrollbar">
+                                
+                            </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div id="popupC" class="popupC">
+                <div class="popup-content-C">
+                    <span style="cursor: pointer;" class="close"><i class="material-icons">close</i></span>
+                    <p>Remove All:</p>
+                    <div>
+                        <label for="ClassName">Classes</label>
+                        <input type="checkbox" id="clearClassVal">
+                    </div>
+                    <div>
+                        <label>Tasks</label>
+                        <input type="checkbox" id="clearTaskVal">
+                    </div>
+                    <button id="remove_btn" class="popupBtn">Remove</button>
+                </div>
+            </div>
+    <script src="control.js"></script> 
+    <script src="home.js"></script>
+    </body>
+    
+</html>

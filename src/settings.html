@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="sett.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <title>Pollorino</title>
+    </head>
+    <body id="mBody">
+      <div class="se-pre-con"></div>
+</div>
+    <div id="topbar"><button id="barbtn" onclick="openNav()"><i class="material-icons">menu</i></button>
+    <h2 id="topTitle">Settings</h2>
+    </div>
+    <div id="mySidenav" onmouseover="openNav()" onmouseout="closeNav()" class="sidenav">
+      <span onclick="window.location.href='index.html';"><div class="NavBox">
+          <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">home</i></div>
+          <div class="textSection"><p>Home</p></div>
+      </div></span>
+      <span onclick="window.location.href='note.html';"><div class="NavBox">
+          <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">text_snippet</i></div>
+          <div class="textSection"><p>Notebook</p></div>
+      </div></span>
+      <span onclick="window.location.href='event.html';"><div class="NavBox">
+          <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">event</i></div>
+          <div class="textSection"><p>Events</p></div>
+      </div></span>
+      <span onclick="window.location.href='settings.html';"><div class="NavBox">
+          <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">settings</i></div>
+          <div class="textSection"><p>Settings</p></div>
+      </div></span>
+      
+    </div>
+          <div class="content">
+            <div class="settingsBox">
+              <span id="selectedSetting">Appearance</span>
+              <span>General</span>
+              <span>About</span>
+            </div>
+            <div class="settingsBox">
+              <div id="Appearance">
+                <div class="optionContainer">
+                <h2 class="optionHeader">Theme</h2>
+                <span class="radio">Light<input type="radio" name="colorTheme" id="ch1"><div class="mark"><i class="material-icons">check</i></div></span>
+                <span class="radio">Dark<input type="radio" name="colorTheme" id="ch2"><div class="mark" checked><i class="material-icons">check</i></div></span>
+                <h2 class="optionHeader">Coloured Event Markers</h2>
+                <span class="checkBox eventMarkerVis">Visible<input type="checkbox" id="ch3" onclick="checkBoxSave()" checked><div class="mark"><i class="material-icons">check</i></div></span>
+                </div> 
+              </div>
+              <div id="General">
+                <div class="optionContainer">
+                <h2 class="optionHeader">Functionality</h2>
+                <span class="checkBox" id="openInBrowser">Open Class Links In Default Browser<input type="checkbox" id="ch4" onclick="checkBoxSave()"><div class="mark"><i class="material-icons">check</i></div></span>
+                <h2 class="optionHeader">Start-Up</h2>
+                <span class="checkBox" id="autoLuanch">Auto-Luanch Pollorino on Start-Up<input type="checkbox" id="ch5" onclick="checkBoxSave()"><div class="mark"><i class="material-icons">check</i></div></span>
+                <span class="checkBox" id="minToTray">Close button minimizes Pollorino to tray<input type="checkbox" id="ch6" onclick="checkBoxSave()"><div class="mark"><i class="material-icons">check</i></div></span>
+                <span class="checkBox">Option 4<input type="checkbox" id="ch7" onclick="checkBoxSave()"><div class="mark"><i class="material-icons">check</i></div></span>
+                </div>
+              </div>
+              <div id="About">
+                <div class="optionContainer">
+                  <h2 class="optionHeader">Pollorino v2.0.5</h2>
+                  <h3>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h3>
+                </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          <div class="restartWarning">
+            One or more setting(s) require app restart
+          </div>
+       <script src="control.js"></script> 
+          <script src="settscript.js"></script>
+          
+
+    </body>
+</html>

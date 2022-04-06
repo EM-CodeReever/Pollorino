@@ -1,0 +1,104 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="eventstyle.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <title>Pollorino</title>
+    </head>
+    <body id="mBody">
+    <div class="se-pre-con"></div>
+    
+        <div id="topbar"><button id="barbtn" onclick="openNav()"><i class="material-icons">menu</i></button>
+        <h2 id="topTitle">Events</h2>
+        </div>
+        
+        <div id="mySidenav" onmouseover="openNav()" onmouseout="closeNav()" class="sidenav">
+            <span onclick="window.location.href='index.html';"><div class="NavBox">
+                <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">home</i></div>
+                <div class="textSection"><p>Home</p></div>
+            </div></span>
+            <span onclick="window.location.href='note.html';"><div class="NavBox">
+                <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">text_snippet</i></div>
+                <div class="textSection"><p>Notebook</p></div>
+            </div></span>
+            <span onclick="window.location.href='event.html';"><div class="NavBox">
+                <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">event</i></div>
+                <div class="textSection"><p>Events</p></div>
+            </div></span>
+            <span onclick="window.location.href='settings.html';"><div class="NavBox">
+                <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">settings</i></div>
+                <div class="textSection"><p>Settings</p></div>
+            </div></span>
+            
+          </div>
+           
+          <div class="content">
+              <div class="container">
+                <div class="subCont">
+                    <h2 id="noEvent">No Upcoming Events</h2>
+                <div class="wrapper"><h2>Upcoming Event:</h2><div><h2 id="nextEventName"></h2></div></div>
+                <div class="wrapper">
+                    <h2>Time Until:</h2>
+                    <div class="eventCountdown">
+                        <div id="weeks">00</div>
+                        <div id="days">00</div>
+                        <div id="hours">00</div>
+                        <div id="minutes">00</div>
+                        <div id="seconds">00</div>
+                        <div>Weeks</div>
+                        <div>Days</div>
+                        <div>Hours</div>
+                        <div>Mins</div>
+                        <div>Secs</div>
+                      </div>
+                  </div>
+                </div>
+                <div class="subCont">
+                    <h2>Add Event</h2>
+                    <button id="addEvent" onclick="showPopUp()"><i class="material-icons">event_note</i></button>
+                </div>
+              </div>
+              <div class="eventContainer">
+                  <h2>Events</h2>
+                  <div class="eventWrap">
+                
+                </div>
+                </div>  
+
+                <div id="popup" class="popup">
+                    <div class="popup-content">
+                        <span style="cursor: pointer;" class="close"><i class="material-icons">close</i></span>
+                        <p>Add Event Details</p>
+                        <form id="form">
+                            <div class="line">
+                                <label for="EventName">Name:</label>
+                                <input type="text" class="inputArea" id="event_Name" maxlength="60">
+                            </div>
+                            <div class="line">
+                                <label for="Date" >Date:</label>
+                                <input type="datetime-local" class="inputArea" id="eventDate">
+                            </div>
+                            <div class="line"> 
+                            <label for="EventType">Type:</label>
+                            <select id="event_type" name="typeofevents" class="inputArea">
+                                <option value="Assignment">Assignment</option>
+                                <option value="Special Occasion">Special Occasion</option>
+                                <option value="Deadline">Deadline</option>
+                                <option value="Custom">Custom</option>
+                              </select>
+                            </div>
+                            <div class="line"> 
+                            <label for="link">Memo:</label>
+                            <textarea class="inputArea" id="eventMemo"></textarea>
+                            </div>
+                        </form>
+                        <button id="addEventBtn" class="popupBtn">Add</button>
+                    </div> 
+                </div>
+
+          </div>
+          <script src="control.js"></script> 
+          <script src="event.js"></script>
+        </body>
+</html>

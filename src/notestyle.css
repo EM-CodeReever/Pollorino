@@ -1,0 +1,251 @@
+*{
+    box-sizing: border-box;
+}
+.noteWrapper{
+    width:100%;
+    height: calc(100% - 10px);
+    display: flex;
+    justify-content: space-between;
+}
+
+.noteBox:first-child{
+    background-color: transparent;
+    min-width: 180px;
+    max-width: 180px;
+    padding: 0px 0px 0px 5px;
+    height: 100%;
+}
+.noteBox:first-child h2{
+    text-align: center;
+    color: black;
+    margin-bottom: 10px;
+}
+.noteBox:last-child{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid white;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+}
+.books{
+    background-color: #d1d1d1;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    height: 50px;
+    width: 100%;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    align-items: right;
+    overflow-y: hidden;
+    font-weight: bold;
+    cursor: pointer;
+}
+.books > p{
+    font-size: large;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.noteHeader{
+    height: fit-content;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #008891;;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.noteHeader h3{
+    color: black;
+    margin: 5px;
+}
+.textDisplay{
+    height: 100%;
+    width: 100%;
+    max-width: calc(100vw - 330px);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    padding-top: 20px;
+    color: #d1d1d1;
+    overflow-y: scroll;
+    word-wrap: break-word;
+}
+.textDisplay::-webkit-scrollbar{
+    background-color: transparent;
+    width: 3px;
+}
+.textDisplay::-webkit-scrollbar-thumb{
+    background-color: #d1d1d1;
+    border-radius: 10px;
+}
+.topic{
+    width: 100%;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 5px;
+}
+.topic{
+    font-style: italic;
+}
+.topic:hover{
+    background-color:rgba(0, 0, 0, 0.5);
+}
+.bookDelete{
+    position: fixed;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    width: 30px;
+    background-color: transparent;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0, 0, 0,0.5);
+}
+.bookDelete > span:hover{
+    color: rgb(155, 31, 0);;
+}
+.noteAddBtn{
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    background-color: green;
+    text-align: center;
+    border: none;
+    margin: 0px 0px 10px 70px;
+    color: #d1d1d1;
+    font-weight: bold;
+}
+.noteAddBtn:hover{
+    color: black;
+}
+.buttonHolder{
+    display: flex;
+    justify-content: flex-end;
+    height: 60px;
+    align-items: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #008891;;
+}
+.buttonHolder button{
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 60px;
+    height: 30px;
+    margin-right: 15px;
+    font-weight: bold;
+}
+.buttonHolder button:nth-child(1):hover{
+    background-color: #a12f1b;
+    transition: .3s;
+}
+.buttonHolder button:nth-child(2):hover{
+    background-color: green;
+    transition: .3s;
+}
+.buttonHolder button:nth-child(3):hover{
+    background-color: #1b67a1;
+    transition: .3s;
+}
+.popup {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 150px; 
+    left: 0;
+    top: 25px;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4);
+}
+
+.popup-content {
+    background-color: #d1d1d1;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 500px;
+    height: fit-content;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* padding-bottom: 20px; */
+}
+.close{
+    position: absolute;
+    color: rgb(82, 82, 82);
+    top: 5px;
+    right: 5px;
+}
+.close:hover{
+    color: black;
+}
+
+.popup-inner-box{
+    width: 100%;
+    height: fit-content;
+    background-color: transparent;
+    padding: 45px 15px 15px 15px;
+    font-family: calibri;
+    font-weight: bold;
+}
+#choice{
+    width: 80px;
+    height: 25px;
+    position: absolute;
+    right: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#bookChoice{
+    border-radius: 5px;
+    height: 25px;
+    width: 150px;
+}
+.addForm{
+    margin-top: 30px;
+}
+.addForm:last-child{
+    display: none;
+}
+.line{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+input{
+    border: none;
+    border-radius: 5px;
+    height: 20px;
+    font-size: 15px;
+}
+
+button#add_Note_Btn{
+    width: 60px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    transform: translateX(204px);
+}
+p#bookErrorMsg,p#topicErrorMsg{
+    text-align: center;
+    color: rgb(155, 31, 0);
+    display: none;
+}

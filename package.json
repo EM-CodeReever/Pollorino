@@ -1,0 +1,40 @@
+{
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "mssql": "^8.0.2",
+    "open": "^8.4.0"
+  },
+  "name": "pollorino",
+  "version": "2.0.5",
+  "description": "\"A Student Companion App\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "build-installer": "electron-builder"
+  },
+  "build": {
+    "appId": "Pollorino",
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "src/images/icon.ico",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "installerIcon": "src/images/setupicon.ico",
+      "uninstallerIcon": "src/images/setupicon.ico",
+      "uninstallDisplayName": "Pollorino",
+      "license": "license.txt",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^18.0.2",
+    "electron-builder": "^22.14.13"
+  },
+  "author": "Elliot Morrison",
+  "license": "ISC"
+}

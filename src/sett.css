@@ -1,0 +1,200 @@
+*{
+  box-sizing: border-box;
+}
+.content{
+  display: flex;
+  justify-content: space-around;
+}
+h2.optionHeader{
+  text-align: left;
+}
+
+  :root {
+    --offwhite: #d1d1d1;
+    --darkBlue: #0d1f3d;
+    --lightBlue: #008891;
+    --offBlue: #00416d;
+    --green: #00914d;
+    --pink: #ff4b77;
+    --black: #000;
+  }
+.optionContainer {
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  
+}
+.optionHeader{
+  color: white;
+}
+.optionHeader:first-of-type{
+  margin-top: 0;
+}
+
+.optionContainer span{
+  width: 100%;
+  /* max-width: 500px; */
+  height: 30px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+#Appearance .optionContainer span {
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+#Appearance .optionContainer span:nth-of-type(1){
+  background-image: url('images/light.jpg');
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  opacity: .5;
+}
+#Appearance .optionContainer span:nth-of-type(2){
+  color: var(--black);
+  background-image: url('images/dark.jpg');
+  background-size: cover;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  opacity: .5;
+}
+#Appearance .optionContainer span:nth-of-type(n+3){
+  background-color: var(--lightBlue);
+  color: var(--black);
+  border-radius: 5px;
+}
+#Appearance .optionContainer span:nth-of-type(n+3):hover {
+  background-color:var(--offBlue);
+}
+#General .optionContainer span {
+  background-color: var(--lightBlue);
+  color: var(--black);
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#General .optionContainer span:last-child{
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+} 
+#General h2 + span{
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+} 
+#General span:first-of-type{
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+} 
+#About .optionContainer h3{
+  bottom: 0;
+  color: var(--offwhite);
+}
+.settingsBox {
+  height: calc(100% - 15px);
+}
+.settingsBox span{
+  font-weight: bold;
+}
+.settingsBox:first-child{
+  padding-left: 5px;
+  padding-top: 10px;
+  max-width: 200px;
+  width: 30%;
+  min-width: 150px;
+  background-color: transparent;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+.settingsBox:first-child span{
+  padding-left: 10px;
+  font-size: 18px;
+  text-align: left;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  height: 30px;
+  background-color: var(--offwhite);
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+/* .settingsBox:first-child span:hover{
+  background-color: gray;
+  transition: .3s;
+} */
+.settingsBox:last-child{
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.685);
+  border-radius: 10px;
+  padding: 30px;
+}
+#General,#About,#Appearance{
+  display: none;
+}
+
+/* #selectedSetting{
+  background-color: red;
+} */
+.radio input{
+  display: none;
+}
+.radio input:checked ~ .mark {
+  background-color: green;
+}
+.radio input:checked ~ .mark > i{
+  color: var(--offwhite);
+  display: block;
+}
+.checkBox input{
+ display: none;
+}
+.checkBox input:checked ~ .mark {
+  background-color: green;
+}
+.mark > i{
+  display: none;
+  font-size: 15px;
+}
+.checkBox input:checked ~ .mark > i{
+  display: block;
+  color: var(--offwhite);
+}
+.mark{
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  background-color: #d1d1d1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mark:hover{
+  background-color: gray;
+}
+.restartWarning{
+  position: absolute;
+  background-color: #d1d1d1;
+  width: 350px;
+  padding-left: 20px;
+  height: 50px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  right: 0;
+  bottom: 50px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-family: calibri;
+  font-size: medium;
+  border-bottom: 3px solid rgb(196, 25, 25);
+}

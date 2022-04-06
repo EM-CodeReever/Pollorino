@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="notestyle.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <title>Pollorino</title>
+    </head>
+    <body id="mBody">
+        <div class="se-pre-con"></div>
+    
+        <div id="topbar"><button id="barbtn" onclick="openNav()"><i class="material-icons">menu</i></button>
+        <h2 id="topTitle">Notebook</h2>
+        </div>
+        
+        <div id="mySidenav" onmouseover="openNav()" onmouseout="closeNav()" class="sidenav">
+            <span onclick="window.location.href='index.html';"><div class="NavBox">
+                <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">home</i></div>
+                <div class="textSection"><p>Home</p></div>
+            </div></span>
+            <span onclick="window.location.href='note.html';"><div class="NavBox">
+                <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">text_snippet</i></div>
+                <div class="textSection"><p>Notebook</p></div>
+            </div></span>
+            <span onclick="window.location.href='event.html';"><div class="NavBox">
+                <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">event</i></div>
+                <div class="textSection"><p>Events</p></div>
+            </div></span>
+            <span onclick="window.location.href='settings.html';"><div class="NavBox">
+                <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">settings</i></div>
+                <div class="textSection"><p>Settings</p></div>
+            </div></span>
+            
+          </div>
+           
+        <div class="content">
+            <div class=noteWrapper>
+           <div class="noteBox">
+               <h2>Notebooks</h2>
+               <button class="noteAddBtn"><span class="material-icons">
+                add_circle_outline
+                </span></button>
+
+           </div>
+           <div class="noteBox">
+            <div class="noteHeader">
+               <h3 id="noteTitle">Topic: </h3>
+               <h3 id="noteDesc">Description: </h3>
+            </div>
+            <div class="textDisplay"></div>
+            <div class="buttonHolder">
+                <button id="noteDelete">Delete</button>
+                <button id="noteSave">Save</button>
+                <button id="noteEdit">Edit</button>
+            </div>
+            </div>
+            </div>
+        </div>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span style="cursor: pointer;" class="close"><i class="material-icons">close</i></span>
+                <div class="popup-inner-box">
+                    <label>Create a New:</label>
+                    <select id="choice">
+                      <option value="Book" id="bookOption">Book</option>
+                      <option value="Topic" id="topicOption">Topic</option>
+                    </select>
+                    <div class="formWrapper">
+                        <form class="addForm">
+                            <div class="line">
+                                <label for="Book">Notebook Name:</label>
+                                <input type="text" class="inputArea" id="bookInput" maxlength="18">
+                            </div>
+                            <p id="bookErrorMsg">some text</p>
+                        </form>
+                        <form class="addForm">
+                            <div class="line">
+                            <label>Book:</label>
+                            <select id="bookChoice">
+                                
+                              </select>
+                            </div>
+                            <div class="line">
+                                <label for="Topic">Topic Title:</label>
+                                <input type="text" class="inputArea" id="topicInput">
+                            </div>
+                            <div class="line">
+                                <label for="TopicDescription">Description:</label>
+                                <input type="text" class="inputArea" id="descInput">
+                            </div>
+                            <p id="topicErrorMsg">some text</p>
+                        </form>
+                    </div>
+                    <button id="add_Note_Btn" class="popupBtn">Add</button>
+                </div>
+                
+            </div> 
+        </div>
+    <script src="control.js"></script> 
+    <script src="note.js"></script>
+    </body>
+    
+</html>

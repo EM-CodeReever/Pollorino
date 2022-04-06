@@ -1,0 +1,207 @@
+@keyframes fade-in {
+  0%{
+      opacity: 0;
+  }
+  100%{
+      opacity: 1;
+  }
+}
+*{
+  user-select:none;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(221, 221, 221);
+  margin: 0;
+  height: calc(100vh - 75px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  /* margin-right: 50px; */
+}
+.content{
+  margin-top: 50px;
+  height: calc(100vh - 75px);
+  padding-top: 25px;
+  padding-left: 100px;
+  padding-right: 50px;
+  font-family: calibri;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.content::-webkit-scrollbar {
+  background-color: transparent;
+  width: 5px;
+}
+.content::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.623);
+  border-radius: 10px;
+}
+.hide-scrollbar::-webkit-scrollbar-thumb{
+  visibility : hidden;
+}
+.content::-webkit-scrollbar-thumb:hover{
+  background-color: #008891;
+  transition: 5s;
+}
+.se-pre-con {
+position: fixed;
+left: 0px;
+top: 0px;
+width: 100%;
+height: 100%;
+z-index: 9999;
+background-color: #1c2c47;
+}
+button{
+cursor: pointer;
+}
+
+#title-bar-btns {
+display: inline-block;
+font-size: 10px;
+-webkit-app-region: no-drag;
+position: fixed;
+top: 0px;
+right: 0px;
+}
+#title-bar-btns button{
+height: 25px;
+width: 35px;
+border: none;
+color: #000000;
+background-color: rgba(255, 255, 255, 0);
+align-items: center;
+}
+#topbar button{
+border: none;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color: rgb(26, 8, 43);
+  background-color:  #008891;
+  font-size: 20px;
+  z-index: 3;
+  border-bottom: 1px solid black;
+}
+#topbar{
+      height: 50px;
+      width: 100%;
+      top: 0px;
+      left: 0px;
+      background-color: #008891;
+      position: absolute;
+      z-index: 3;
+      border-bottom: 1px solid black;
+      display: flex;
+      align-items: center;
+}
+#topbar h2{
+top: 0px; /*used to be -10*/
+font-family: calibri;
+margin: 0;
+}
+#mySidenav {
+ position: fixed;
+ height: 100%;
+ left: 0px;
+ top: 0;
+ width: 50px;
+ overflow-x: hidden;
+ white-space: nowrap;
+ background-color: #d1d1d1;
+ z-index: 1;
+ display: flex;
+ flex-direction: column;
+ justify-content: left;
+}
+.NavBox{
+  position: relative;
+  width: 100%;
+  background-color: transparent;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.NavBox:hover{
+  background-color: #008891;
+  transition: .5s;
+}
+.iconSection{
+  height: 100%;
+  width: 50px;
+  min-width: 50px;
+  background-color: transparent;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.textSection{
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding-left: 1px;
+}
+.textSection p{
+  font-size: 20px;
+  font-family: Calibri;
+  color: #000000;
+}
+.maticn{
+  -webkit-text-stroke: 1.2px rgb(0, 0, 0);
+  color: transparent; 
+}
+#mySidenav span:first-child{
+  margin-top: 50px;
+}
+#mySidenav span:last-child{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.selectedNavOption{
+  position: absolute;
+  height: 80%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius:5px;
+  width: 3px;
+  background-color: #000000;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+}
+#webHeadIcns{
+font-size: 20px;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+#max-btn:hover{
+background-color:rgb(51, 84, 112);
+transition: .3s;
+}
+#min-btn:hover{
+background-color: rgb(51, 84, 112);
+transition: .3s;
+}
+#close-btn:hover{
+background-color: rgb(230, 0, 0);
+color: white;
+transition: .3s;
+}
+
+#footer{
+  background-color: rgb(221, 221, 221);
+  width: 100%;
+  height: 10px;
+  right: 5px;
+  position: fixed;
+  bottom: 0;
+}
