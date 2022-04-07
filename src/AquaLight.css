@@ -1,0 +1,186 @@
+
+  :root {
+    --NavbarBG: #1a2647;
+    --SidenavBG: #265e8c;
+    --Background: #bad0d9;
+    --textColor: #ddd;
+    --Transparentish: rgba(0,0,0,0.5)
+  }
+  body {
+    background-color: var(--Background);
+
+  }
+
+  .content::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.623);
+  }
+
+  .content::-webkit-scrollbar-thumb:hover{
+    background-color: var(--NavbarBG);
+  }
+  .se-pre-con {
+  background-color: var(--Background);
+  }
+
+  #title-bar-btns button{
+  color: var(--textColor);
+  background-color: rgba(255, 255, 255, 0);
+  }
+
+  #topbar button{
+    color: var(--textColor);
+    background-color:  var(--NavbarBG);
+    border-bottom: 1px solid black;
+  }
+  #topbar{
+        background-color: var(--NavbarBG);
+        border-bottom: 1px solid black;
+  }
+  #mySidenav {
+   background-color: var(--SidenavBG);
+  }
+  .NavBox:hover{
+    background-color: var(--NavbarBG);
+  }
+  .textSection p{
+    color: var(--textColor);
+  }
+  #topbar h2{
+    color: var(--textColor);
+  }
+  .maticn{
+    -webkit-text-stroke: 1.2px var(--textColor);
+  }
+
+
+  .selectedNavOption{
+    background-color: var(--textColor);
+  }
+
+  .contChild:nth-child(1){
+    background-color: var(--SidenavBG);
+  }
+  .subcont{
+    background-color: var(--SidenavBG);
+  }
+  .subcont h2{
+    color: var(--textColor);
+}
+#contB-Wrap{
+  padding-top: 15px;
+  background-color: var(--SidenavBG);
+  border-radius: 10px;
+  box-shadow: 0 0 10px 1px rgba(0,0,0,0.4);
+}
+.popup-content {
+  background-color: var(--SidenavBG);
+}
+.popup-content-B {
+  background-color: var(--SidenavBG);
+}
+.popup-content-C {
+  background-color: var(--SidenavBG);
+}
+.popup-content p{
+  color: var(--textColor);
+}
+.popup-content-B p{
+  color: var(--textColor);
+}
+.popup-content-C p{
+  color: var(--textColor);
+}
+.tile_btn{
+  background-color: rgb(33, 112, 53);
+  color: white;
+}
+.del_btn{
+  background-color: rgb(33, 112, 53);
+  color: white;
+}
+.tile{
+  background-color: var(--Transparentish);
+}
+.entry{
+  background-color: var(--Transparentish);
+}
+.tile h3{
+  color: var(--textColor);
+}
+#contB-Wrap h1{
+  color: var(--textColor);
+}
+.noteBox:first-child h2{
+  color: var(--textColor);
+}
+.books{
+  background-color: var(--SidenavBG);
+}
+.noteHeader{
+  background-color: var(--NavbarBG);
+}
+.noteHeader h3{
+  color: var(--textColor);
+}
+.textDisplay{
+  background-color: rgba(0, 0, 0, 0.5);
+  color: var(--textColor);
+}
+.buttonHolder{
+  background-color: var(--NavbarBG);
+}
+.topic{
+  color: var(--textColor);
+}
+.books > p{
+  color: var(--textColor);
+}
+.bookDelete{
+  color: var(--textColor);
+}
+.subCont{
+  background-color: var(--SidenavBG)
+}
+.subCont h2{
+  color: var(--textColor);
+}
+#noEvent{
+  color: var(--textColor);
+}
+.eventContainer{
+  background-color: var(--SidenavBG);
+}
+.eventContainer h2:first-child{
+  color: var(--textColor);
+}
+.eventWrap::-webkit-scrollbar-thumb{
+  background-color: var(--textColor);
+}
+.eventCard{
+  background-color: var(--Transparentish)
+}
+.eventCard h2{
+  color: var(--textColor);
+}
+#memoBox{
+  background-color: #d1d1d1;
+  color: rgb(0, 0, 0);
+}
+.wrapper{
+  background-color: var(--Transparentish)
+}
+#Appearance .optionContainer span{
+  background-color: var(--SidenavBG);
+  color: var(--textColor);
+}
+#General .optionContainer span {
+  background-color: var(--SidenavBG);
+  color: var(--textColor);
+}
+/* #Appearance .optionContainer span:nth-of-type(1){
+    background-color: var(--SidenavBG);
+}
+  #Appearance .optionContainer span:nth-of-type(2){
+    background-color: var(--Background);
+    color: var(--textColor);
+  } */
