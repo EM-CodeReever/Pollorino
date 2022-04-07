@@ -6,6 +6,7 @@
     --textColor: #ddd;
     --Transparentish: rgba(0,0,0,0.5)
   }
+
   body {
     background-color: var(--Background);
 
@@ -177,10 +178,20 @@
   background-color: var(--SidenavBG);
   color: var(--textColor);
 }
-/* #Appearance .optionContainer span:nth-of-type(1){
-    background-color: var(--SidenavBG);
-}
-  #Appearance .optionContainer span:nth-of-type(2){
-    background-color: var(--Background);
-    color: var(--textColor);
-  } */
+
+  .newEntity_btn{
+    background-color: var(--NavbarBG);
+  }
+  .entryBtn{
+    background-color: var(--NavbarBG);
+  }
+  button#addEvent {
+    background-color: var(--NavbarBG);
+  }
+  .radio input:checked ~ .mark {
+    background-color: var(--NavbarBG);
+  }
+  .checkBox input:checked ~ .mark {
+    background-color: var(--NavbarBG);
+  }
+  

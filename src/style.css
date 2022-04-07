@@ -73,6 +73,7 @@ border: none;
   text-align: center;
   font-size: 20px;
   z-index: 3;
+  border-bottom: 1px solid black;
 }
 #topbar{
       height: 50px;

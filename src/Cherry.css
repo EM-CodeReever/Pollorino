@@ -184,3 +184,18 @@
     background-color: var(--Background);
     color: var(--textColor);
   } */
+  .newEntity_btn{
+    background-color: green;
+  }
+  .entryBtn{
+    background-color: green;
+  }
+  button#addEvent {
+    background-color: green;
+  }
+  .radio input:checked ~ .mark {
+    background-color: green;
+  }
+  .checkBox input:checked ~ .mark {
+    background-color: green;
+  }

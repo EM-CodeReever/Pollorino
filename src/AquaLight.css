@@ -177,10 +177,18 @@
   background-color: var(--SidenavBG);
   color: var(--textColor);
 }
-/* #Appearance .optionContainer span:nth-of-type(1){
-    background-color: var(--SidenavBG);
+.newEntity_btn{
+  background-color: green;
 }
-  #Appearance .optionContainer span:nth-of-type(2){
-    background-color: var(--Background);
-    color: var(--textColor);
-  } */
+.entryBtn{
+  background-color: green;
+}
+button#addEvent {
+  background-color: green;
+}
+.radio input:checked ~ .mark {
+  background-color: green;
+}
+.checkBox input:checked ~ .mark {
+  background-color: green;
+}

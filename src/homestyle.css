@@ -91,7 +91,6 @@
     
 }
 .entryBtn{
-    background-color: green;
     height: 100%;
     width: 25px;
     border: none;
@@ -115,7 +114,6 @@
 }
 
 .newEntity_btn{
-    background-color: green;
     color: white;
     border-radius: 5px;
     height: 40px;

@@ -43,7 +43,6 @@ button#addEvent {
    margin-bottom: 20px;
    border:none;
    border-radius: 10px;
-   background-color: green;
    color: white;
 } 
 #addEvent i.material-icons{

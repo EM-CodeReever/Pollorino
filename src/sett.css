@@ -140,9 +140,7 @@ h2.optionHeader{
 .radio input{
   display: none;
 }
-.radio input:checked ~ .mark {
-  background-color: green;
-}
+
 .radio input:checked ~ .mark > i{
   color: var(--offwhite);
   display: block;
@@ -150,9 +148,7 @@ h2.optionHeader{
 .checkBox input{
  display: none;
 }
-.checkBox input:checked ~ .mark {
-  background-color: green;
-}
+
 .mark > i{
   display: none;
   font-size: 15px;
