@@ -1,8 +1,10 @@
-// main.js
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Menu, Tray } = require('electron')
 const path = require('path')
+
+let tray = null
 app.disableHardwareAcceleration()
+
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -22,8 +24,27 @@ const createWindow = () => {
   // and load the index.html of the app.
   mainWindow.loadFile('src/index.html')
 
+  app.whenReady().then(() => {
+    tray = new Tray(path.join(__dirname + '\\src\\images\\icon.ico'))
+    tray.on("click",function(){
+      mainWindow.show()
+    })
+    const contextMenu = Menu.buildFromTemplate([
+        { role: 'about' },
+        { type: 'separator' },
+        { role: 'toggleDevTools', click: function(){mainWindow.webContents.isDevToolsOpened() ? mainWindow.webContents.closeDevTools() : mainWindow.webContents.openDevTools()}},
+        { type: 'separator' }, 
+        { role: 'hide', click : function(){mainWindow.hide()} },
+        { role: 'unhide', click : function(){mainWindow.show()} },
+        { type: 'separator' },
+        { role: 'quit' }
+    ])
+    tray.setToolTip('Pollorino')
+    tray.setContextMenu(contextMenu)
+  })
   // Open the DevTools.
-  mainWindow.webContents.openDevTools({mode: 'detach'})
+  //mainWindow.webContents.openDevTools({mode: 'detach'})
+  mainWindow.webContents.isDevToolsOpened()
 }
 
 // This method will be called when Electron has finished
@@ -45,6 +66,5 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
-console.log(app.getPath('userData'))
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

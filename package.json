@@ -5,6 +5,7 @@
     "open": "^8.4.0"
   },
   "name": "pollorino",
+  "productName": "Pollorino",
   "version": "2.0.5",
   "description": "\"A Student Companion App\"",
   "main": "index.js",
