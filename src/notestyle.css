@@ -17,7 +17,6 @@
 }
 .noteBox:first-child h2{
     text-align: center;
-    color: black;
     margin-bottom: 10px;
 }
 .noteBox:last-child{
@@ -30,7 +29,6 @@
     height: 100%;
 }
 .books{
-    background-color: #d1d1d1;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
     height: 50px;
@@ -58,12 +56,10 @@
     justify-content: space-between;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    background-color: #008891;;
     padding-left: 15px;
     padding-right: 15px;
 }
 .noteHeader h3{
-    color: black;
     margin: 5px;
 }
 .textDisplay{
@@ -73,7 +69,6 @@
     background-color: rgba(0, 0, 0, 0.5);
     padding: 10px;
     padding-top: 20px;
-    color: #d1d1d1;
     overflow-y: scroll;
     word-wrap: break-word;
 }
@@ -112,7 +107,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: rgba(0, 0, 0,0.5);
 }
 .bookDelete > span:hover{
     color: rgb(155, 31, 0);;
@@ -138,7 +132,6 @@
     align-items: center;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    background-color: #008891;;
 }
 .buttonHolder button{
     background-color: white;
