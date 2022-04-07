@@ -2,7 +2,7 @@ var currentBook;
 var textUpdate;
 var title;
 var noteOptions = "";
-const path = require('path')
+
 var filePath = path.join(__dirname + "\\jsonFiles\\NotebookStorage.json");
 var noteTemplate = {NoteBook: []}
 function noteFile(){

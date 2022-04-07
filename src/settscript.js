@@ -1,6 +1,14 @@
-const path = require('path')
 
 $(".restartWarning").hide()
+let config;
+fs.readFile(path.join(__dirname + "\\jsonFiles\\config.json"),"utf-8",(err,jsonString)=>{
+   config = JSON.parse(jsonString)
+})
+function WriteToFile(Object){
+  fs.writeFile(path.join(__dirname + "\\jsonFiles\\config.json"),JSON.stringify(Object, null, 2),err => {
+      if(err){console.log(err)}
+  })
+}
 function configFile()
 {
 
@@ -27,14 +35,12 @@ function radioLoad(){
     var radioInputs = JSON.parse(localStorage.getItem('radioInputs'));
   radioInputs.forEach((input) => {
     document.getElementById(input.id).checked = input.checked;
-    if(input.checked){
-      document.getElementById(input.id).parentElement.style.opacity = "1"
-    }
   });
   }else{
     radioSave();
     radioLoad();
   }
+      console.log(radioInputs);
 }
 function checkBoxLoad(){
   if(localStorage.checkBoxInputs){
@@ -51,43 +57,30 @@ function selSetTheme(){
   $(".settingsBox:first-child span").css("color","black");
   (localStorage.ldMode == "dark") ? $(".settingsBox:first-child").find("span#selectedSetting").css("color","#d1d1d1") : $(".settingsBox:first-child").children("span").css("color","black")
   $(".settingsBox:first-child").children("span").css("background-color","#d1d1d1")
-  $("#selectedSetting").css("background-color","#008891")
+  $("#selectedSetting").css("background-color","var(--SidenavBG)")
 }
 radioLoad();
 checkBoxLoad();
 selSetTheme()
 
 $(`#${$("#selectedSetting").html()}`).show()
-$("#selectedSetting").css("background-color","#008891")
+$("#selectedSetting").css("background-color","var(--SidenavBG)")
 $(".optionContainer").find(".radio").on("click",function(){
-  $(this).find("input").prop("checked",true)
-  $(".optionContainer").find(".radio").css("opacity",".5")
-  $(this).css("opacity","1")
-  radioSave()
-  if(ch1.checked){
-    localStorage.setItem('ldMode','light');
-   }else if(!ch1.checked){
-    localStorage.setItem('ldMode','dark');
-   }
-  location.reload();
-});
-$(".optionContainer").find(".radio").on("mouseenter",function(){
-  $(this).css("opacity","1")
-});
-$(".optionContainer").find(".radio").on("mouseleave",function(){
-  if($(this).find("input").prop("checked") != true){
-    $(this).css("opacity",".5")
+  if(!$(this).find("input").prop("checked")){
+    $(this).find("input").prop("checked",true)
+    let themeIndex = config.Settings.Theme.Name.indexOf($(this).text().replace("check",""))
+    config.Settings.Theme.IndexChosen = themeIndex;
+    WriteToFile(config)
+    radioSave()
+    location.reload()
   }
 });
+
 $(".optionContainer").find(".checkBox").on("click",function(){
   ($(this).find("input").prop("checked")) ? $(this).find("input").prop("checked",false) : $(this).find("input").prop("checked",true)
   checkBoxSave()
 });
-$(".settingsBox:first-child").children("span").on("mouseenter",function(){
-  if($(this).attr("id") != "selectedSetting"){
-    $(this).css("background-color","grey")
-  }
-});
+
 $(".settingsBox:first-child").children("span").on("mouseleave",function(){
   if($(this).attr("id") != "selectedSetting"){
     $(this).css("background-color","#d1d1d1")
@@ -101,11 +94,10 @@ $(".settingsBox:first-child").children("span").on("click",function(){
   $(`#${$(this).html()}`).show()
 });
 $("#Appearance").find(".optionContainer").find(".eventMarkerVis").on("click",function(){
-  console.log("dn")
   if($(this).find("input").prop("checked")){
-    localStorage.setItem("eventMarkerVis","show")
+    console.log("on")
   }else{
-    localStorage.setItem("eventMarkerVis","hide")
+    console.log("off")
   }
   
 })

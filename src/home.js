@@ -1,4 +1,3 @@
-const path = require('path')
 const op = require("open")
 let ClassObjectArray;
 var taskArray = []
@@ -6,7 +5,7 @@ localStorage.taskStore ? taskArray = JSON.parse(localStorage.taskStore) : taskAr
 
 function DisplayTasks(tArr){
     for(var i = 0;i < tArr.length; i++){
-        $(".contChildsub").append(`<div class="entry" style="background-color: rgba(0, 0, 0, 0.5);">${tArr[i]}
+        $(".contChildsub").append(`<div class="entry">${tArr[i]}
         <div class="entryBtn" id="${i}">
             <span class="taskBin">
                 <i class="material-icons">delete</i>

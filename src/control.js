@@ -1,7 +1,8 @@
 const $ = require('jquery');
 var currentDocUrlString = document.URL;
 var pageList = ["index.html","note.html","event.html","settings.html"];
-const fs = require('fs')
+const fs = require('fs');
+const path = require('path');
 
 function openNav(){
   document.getElementById("mySidenav").style.width = "200px";
@@ -39,10 +40,20 @@ window.onload = () => {
   $(".se-pre-con").fadeOut("fast");
 }
 
-function stayHome() {
-  alert("You Are Not Allowed on This Page.")
+function ThemeChange() {
+  
+  fs.readFile(path.join(__dirname + "\\jsonFiles\\config.json"),"utf-8",(err,jsonString)=>{
+    const config = JSON.parse(jsonString)
+    var theme = $("#ThemeStyleSheet")
+    console.log(config)
+    for( var i = 0; i < config.Settings.Theme.Name.length; i++){
+      if(i == config.Settings.Theme.IndexChosen){
+        theme.attr("href",`${config.Settings.Theme.Name[i]}.css`)
+      }
+    }
+  })
 }
-
+ThemeChange()
 
 
 
