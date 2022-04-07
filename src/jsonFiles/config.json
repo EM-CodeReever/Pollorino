@@ -1,0 +1,15 @@
+{
+  "Settings": {
+    "MinimizeOnClose": false,
+    "OpenOnStartup": false,
+    "Theme": {
+      "Name": [
+        "Midnight",
+        "AquaLight",
+        "Cherry",
+        "Nature"
+      ],
+      "IndexChosen": 3
+    }
+  }
+}
