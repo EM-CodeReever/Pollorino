@@ -2,11 +2,12 @@
   "dependencies": {
     "jquery": "^3.6.0",
     "mssql": "^8.0.2",
-    "open": "^8.4.0"
+    "open": "^8.4.0",
+    "os": "^0.1.2"
   },
   "name": "pollorino",
   "productName": "Pollorino",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "\"A Student Companion App\"",
   "main": "index.js",
   "scripts": {

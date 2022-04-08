@@ -1,11 +1,11 @@
 
 $(".restartWarning").hide()
 let config;
-fs.readFile(path.join(__dirname + "\\jsonFiles\\config.json"),"utf-8",(err,jsonString)=>{
+fs.readFile(path.join(dir + "\\config.json"),"utf-8",(err,jsonString)=>{
    config = JSON.parse(jsonString)
 })
 function WriteToFile(Object){
-  fs.writeFile(path.join(__dirname + "\\jsonFiles\\config.json"),JSON.stringify(Object, null, 2),err => {
+  fs.writeFile(path.join(dir + "\\config.json"),JSON.stringify(Object, null, 2),err => {
       if(err){console.log(err)}
   })
 }
@@ -40,7 +40,6 @@ function radioLoad(){
     radioSave();
     radioLoad();
   }
-      console.log(radioInputs);
 }
 function checkBoxLoad(){
   if(localStorage.checkBoxInputs){

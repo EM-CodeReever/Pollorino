@@ -3,7 +3,7 @@ var textUpdate;
 var title;
 var noteOptions = "";
 
-var filePath = path.join(__dirname + "\\jsonFiles\\NotebookStorage.json");
+var filePath = path.join(dir + "\\NotebookStorage.json");
 var noteTemplate = {NoteBook: []}
 function noteFile(){
     fs.readFile(filePath,"utf-8",(err,jsonString) => {
@@ -63,8 +63,6 @@ function noteFile(){
                 $(".buttonHolder").find("button").prop('disabled', false);
             })
             $(".topic").on("click",function(){
-                // console.log($(this).html())
-                // console.log($(this).parent().find("p").html())
                 for(var x = 0; x < Note.NoteBook.length; x++){
                     if(Note.NoteBook[x].Name == $(this).parent().find("p").html()){
                         for(var i = 0; i < Note.NoteBook[x].Topic.length; i++){
@@ -91,7 +89,6 @@ function noteFile(){
                 textUpdate = $(".textDisplay").html()
                 title = $("#noteTitle").html()
                 title = title.substr(7)
-                // console.log(currentBook)
                 for(var x = 0; x < Note.NoteBook.length; x++){
                     if(Note.NoteBook[x].Name == currentBook){
                         for(var i = 0; i < Note.NoteBook[x].Topic.length; i++){

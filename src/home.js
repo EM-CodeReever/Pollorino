@@ -1,6 +1,7 @@
 const op = require("open")
 let ClassObjectArray;
 var taskArray = []
+const devPath = path.join(dir + "\\jsonFiles\\ClassStorage.json");
 localStorage.taskStore ? taskArray = JSON.parse(localStorage.taskStore) : taskArray = [] 
 
 function DisplayTasks(tArr){
@@ -23,11 +24,11 @@ DisplayTasks(taskArray);
 //Opens Json file (creates it if it doesnt exist)
 function OpenFile()
 {
-    fs.readFile(path.join(__dirname + "\\jsonFiles\\ClassStorage.json"),(err,jsonString) => 
+    fs.readFile(path.join(dir + "\\ClassStorage.json"),(err,jsonString) => 
     {
         if(err){
             console.log(err)
-            fs.writeFile(path.join(__dirname + "\\jsonFiles\\ClassStorage.json"),JSON.stringify({Classes : []}, null, 2),err => {
+            fs.writeFile(path.join(dir + "\\ClassStorage.json"),JSON.stringify({Classes : []}, null, 2),err => {
                 if(err){
                     console.log(err)
                 }else{OpenFile()}
