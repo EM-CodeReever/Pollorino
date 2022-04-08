@@ -7,8 +7,8 @@
   },
   "name": "pollorino",
   "productName": "Pollorino",
-  "version": "2.1.6",
-  "description": "\"A Student Companion App\"",
+  "version": "2.2.0",
+  "description": "\"A Student's Companion App\"",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

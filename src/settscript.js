@@ -70,8 +70,10 @@ $(".optionContainer").find(".radio").on("click",function(){
     let themeIndex = config.Settings.Theme.Name.indexOf($(this).text().replace("check",""))
     config.Settings.Theme.IndexChosen = themeIndex;
     WriteToFile(config)
+    $(".se-pre-con").show()
+    $(".se-pre-con").fadeOut(1000)
     radioSave()
-    location.reload()
+    ThemeChange()
   }
 });
 

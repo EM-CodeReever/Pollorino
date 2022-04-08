@@ -200,18 +200,16 @@ button#addEvent {
 }
 
 .popup-content {
-    background-color: #008891;
     margin: auto;
-    border: 1px solid rgb(14, 88, 138);
     border-radius: 5px;
     width: 500px;
     height: 350px;
     position: relative;
+    padding-top: 1px;
 }
 .popup-content p{
     font-family: Calibri;
     font-size: 20px;
-    color: #000000;
     text-align: center;
     margin: 0;
     margin-bottom: 30px;

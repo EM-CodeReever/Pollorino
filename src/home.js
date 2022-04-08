@@ -1,7 +1,7 @@
 const op = require("open")
 let ClassObjectArray;
 var taskArray = []
-const devPath = path.join(dir + "\\jsonFiles\\ClassStorage.json");
+
 localStorage.taskStore ? taskArray = JSON.parse(localStorage.taskStore) : taskArray = [] 
 
 function DisplayTasks(tArr){
@@ -83,12 +83,11 @@ function UpdateDisplayClasses(ClassObjectArray)
         $(".del_btn").on("click",function(){
             ClassObjectArray.Classes.splice($(this).attr("id"),1)
             WriteToFile(ClassObjectArray)
-            $(this).parent().fadeOut(300)
         })
 }
 //writes new class to json file 
 function WriteToFile(Object){
-    fs.writeFile(path.join(__dirname + "\\jsonFiles\\ClassStorage.json"),JSON.stringify(Object, null, 2),err => {
+    fs.writeFile(path.join(dir + "\\ClassStorage.json"),JSON.stringify(Object, null, 2),err => {
         if(err){console.log(err)}
     })
 }
@@ -118,6 +117,7 @@ const AddClassPopupHTMLString = `<div id="popup" class="popup">
     <button id="addClass_btn" class="popupBtn">Add</button>
 </div> 
 </div>`
+//Add Task Popup HTML String
 const AddTaskPopupHTMLString = `<div id="popupB" class="popupB">
 <div class="popup-content-B">
     <span style="cursor: pointer;" class="close"><i class="material-icons">close</i></span>
@@ -127,56 +127,82 @@ const AddTaskPopupHTMLString = `<div id="popupB" class="popupB">
 </div>
 </div>`
 $(".btnAddClass").on("click",function(){
-    $("#mBody").append(AddClassPopupHTMLString)
     $(".popup").fadeIn(300);
     $(".close").on("click",function(){
         $(".popup").fadeOut(300);
     })
-    $("#addClass_btn").on("click",function(){
-        let cName = $('#cName').val()
-        let med = $('#med').val()
-        var time = $('#time').val()
-        var mLink = $('#form_link').val()
-        if(cName != "" && med != "" && time != "" && mLink != ""){
-            ClassObjectArray.Classes.push({
-                Name : cName,
-                Time : time,
-                Medium : med,
-                Link : mLink
-            })
-            WriteToFile(ClassObjectArray)
-            UpdateDisplayClasses(ClassObjectArray)
-        }
-        $(".popup").fadeOut(300);
-        })
 })
+
 $(".btnAddTask").on("click",function(){
-    $("#mBody").append(AddTaskPopupHTMLString)
     $(".popupB").fadeIn(300);
     $(".close").on("click",function(){
         $(".popupB").fadeOut(300);
     })
-    $("#addTask_btn").on("click",function(){
-        var task = $("#taskInput").val()
-        if(task != ""){
-        taskArray.push(task)
-        localStorage.setItem('taskStore',JSON.stringify(taskArray))
-        
-        $(".contChildsub").append(`<div class="entry" style="background-color: rgba(0, 0, 0, 0.5);">${task}
-        <div class="entryBtn" id="${taskArray.length-1}">
-            <span class="taskBin">
-                <i class="material-icons">delete</i>
-            </span>
-        </div>
-    </div>`)
-        $(".entryBtn").off("click")
-        $(".entryBtn").on("click",function(){
-            $(this).parent().fadeOut(300)
-            taskArray.splice($(this).attr("id"),1)
-            localStorage.setItem('taskStore',JSON.stringify(taskArray))
-        })
-        $(".popupB").fadeOut(300);
-       }
+})
+$(".btnDeleteAll").on("click",function(){
+    $(".popupC").fadeIn(300);
+    $(".close").on("click",function(){
+        $(".popupC").fadeOut(300);
     })
 })
+
 OpenFile();
+
+$("#mBody").append(AddTaskPopupHTMLString)
+$("#addTask_btn").on("click",function(){
+    var task = $("#taskInput").val()
+    if(task != ""){
+    taskArray.push(task)
+    localStorage.setItem('taskStore',JSON.stringify(taskArray))
+    
+    $(".contChildsub").append(`<div class="entry" style="background-color: rgba(0, 0, 0, 0.5);">${task}
+    <div class="entryBtn" id="${taskArray.length-1}">
+        <span class="taskBin">
+            <i class="material-icons">delete</i>
+        </span>
+    </div>
+</div>`)
+    $(".entryBtn").off("click")
+    $(".entryBtn").on("click",function(){
+        $(this).parent().fadeOut(300)
+        taskArray.splice($(this).attr("id"),1)
+        localStorage.setItem('taskStore',JSON.stringify(taskArray))
+    })
+    $(".popupB").fadeOut(300);
+   }
+})
+$("#mBody").append(AddClassPopupHTMLString)
+$("#addClass_btn").on("click",function(){
+    console.log("WHAT")
+    let cName = $('#cName').val()
+    let med = $('#med').val()
+    var time = $('#time').val()
+    var mLink = $('#form_link').val()
+    if(cName != "" && med != "" && time != "" && mLink != ""){
+        ClassObjectArray.Classes.push({
+            Name : cName,
+            Time : time,
+            Medium : med,
+            Link : mLink
+        })
+        WriteToFile(ClassObjectArray)
+        UpdateDisplayClasses(ClassObjectArray)
+    }
+    $(".popup").fadeOut(300);
+})
+
+$("#remove_btn").on("click",function(){
+    if($("#clearClassVal").prop("checked") && $("#clearTaskVal").prop("checked")){
+        WriteToFile({Classes : []})
+        localStorage.removeItem('taskStore')
+        $(".entry").fadeOut(300);
+        $(".tile").fadeOut(300);
+    }else if($("#clearClassVal").prop("checked")){
+        WriteToFile({Classes : []})
+        $(".tile").fadeOut(300);
+    }else if($("#clearTaskVal").prop("checked")){
+        localStorage.removeItem('taskStore')
+        $(".entry").fadeOut(300);
+    }
+    $(".popupC").fadeOut(300)
+})

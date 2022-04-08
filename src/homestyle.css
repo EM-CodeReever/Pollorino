@@ -210,6 +210,7 @@
     width: 500px;
     height: 280px;
     position: relative;
+    padding: 1px;
 }
 .popup-content p{
     font-family: Calibri;
@@ -253,7 +254,6 @@
 }
 .close{
     position: absolute;
-    color: rgb(82, 82, 82);
     top: 5px;
     right: 5px;
 }

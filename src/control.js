@@ -27,10 +27,12 @@ if (!fs.existsSync(dir)){
 function openNav(){
   document.getElementById("mySidenav").style.width = "200px";
   document.getElementById("mySidenav").style.transition = ".3s";
+  $(".content").css("opacity","0.5")
 }
 function closeNav(){
   document.getElementById("mySidenav").style.width = "50px";
   document.getElementById("mySidenav").style.transition = ".3s";
+  $(".content").css("opacity","1")
 }
 
 $(".NavBox").on("mouseenter",function(){

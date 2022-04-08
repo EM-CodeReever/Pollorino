@@ -194,4 +194,18 @@
   .checkBox input:checked ~ .mark {
     background-color: var(--NavbarBG);
   }
-  
+  .noteBox:first-child h2{
+    color: var(--NavbarBG);
+  }
+  form div.line label{
+    color: var(--textColor);
+  }
+  .close{
+    color: var(--textColor);
+  }
+  .popup-content-C div label{
+    color: var(--textColor);
+  }
+  .popup-inner-box label{
+    color: var(--textColor);
+  }

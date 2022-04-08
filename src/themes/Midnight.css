@@ -199,3 +199,15 @@ button#addEvent {
 .checkBox input:checked ~ .mark {
   background-color: green;
 }
+form div.line label{
+  color: var(--textColor);
+}
+.close{
+  color: var(--textColor);
+}
+.popup-content-C div label{
+  color: var(--textColor);
+}
+.popup-inner-box label{
+  color: var(--textColor);
+}

@@ -168,7 +168,6 @@
 }
 
 .popup-content {
-    background-color: #d1d1d1;
     margin: auto;
     border: 1px solid black;
     border-radius: 5px;
@@ -183,7 +182,6 @@
 }
 .close{
     position: absolute;
-    color: rgb(82, 82, 82);
     top: 5px;
     right: 5px;
 }
@@ -222,6 +220,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+.line label{
+    color: black;
 }
 input{
     border: none;
