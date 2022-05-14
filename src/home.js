@@ -4,6 +4,7 @@ var taskArray = []
 
 localStorage.taskStore ? taskArray = JSON.parse(localStorage.taskStore) : taskArray = [] 
 
+//Renders all task to the Homepage
 function DisplayTasks(tArr){
     for(var i = 0;i < tArr.length; i++){
         $(".contChildsub").append(`<div class="entry">${tArr[i]}
@@ -21,6 +22,7 @@ function DisplayTasks(tArr){
     })
 }
 DisplayTasks(taskArray);
+
 //Opens Json file (creates it if it doesnt exist)
 function OpenFile()
 {
@@ -39,6 +41,7 @@ function OpenFile()
         }
     })
 }
+
 //Displays classes with data from json file
 function DisplayClasses(ClassObjectArray)
 {
@@ -62,6 +65,7 @@ function DisplayClasses(ClassObjectArray)
         $(this).parent().fadeOut(300)
     })
 }
+
 //appends a newly added class to the Document as well as refreshes events
 function UpdateDisplayClasses(ClassObjectArray)
 {
@@ -85,70 +89,38 @@ function UpdateDisplayClasses(ClassObjectArray)
             WriteToFile(ClassObjectArray)
         })
 }
+
 //writes new class to json file 
 function WriteToFile(Object){
     fs.writeFile(path.join(dir + "\\ClassStorage.json"),JSON.stringify(Object, null, 2),err => {
         if(err){console.log(err)}
     })
 }
-//Add Class Popup HTML String
-const AddClassPopupHTMLString = `<div id="popup" class="popup">
-<div class="popup-content">
-    <span style="cursor: pointer;" class="close"><i class="material-icons">close</i></span>
-    <p>Add Class Details</p>
-    <form id="form">
-        <div class="line">
-            <label for="ClassName">Class Name:</label>
-            <input type="text" class="inputArea" id="cName">
-        </div>
-        <div class="line">
-            <label for="Time" >Time:</label>
-            <input type="time" class="inputArea" id="time">
-        </div>
-        <div class="line"> 
-        <label for="Medium">Medium:</label>
-        <input type="text" class="inputArea" id="med">
-        </div>
-        <div class="line"> 
-        <label for="link">Meeting Link:</label>
-        <input type="text" class="inputArea" id="form_link" placeholder="must contain 'https://' prefix">
-        </div>
-    </form>
-    <button id="addClass_btn" class="popupBtn">Add</button>
-</div> 
-</div>`
-//Add Task Popup HTML String
-const AddTaskPopupHTMLString = `<div id="popupB" class="popupB">
-<div class="popup-content-B">
-    <span style="cursor: pointer;" class="close"><i class="material-icons">close</i></span>
-    <p>New Task:</p>
-    <textarea id="taskInput"></textarea>
-    <button id="addTask_btn" class="popupBtn">Add</button>
-</div>
-</div>`
+
+//Adds click events to add and close buttons for all popups
 $(".btnAddClass").on("click",function(){
-    $(".popup").fadeIn(300);
+    $(".AddClassModal").fadeIn(300);
     $(".close").on("click",function(){
-        $(".popup").fadeOut(300);
+        $(".AddClassModal").fadeOut(300);
     })
 })
 
 $(".btnAddTask").on("click",function(){
-    $(".popupB").fadeIn(300);
+    $(".AddTaskModal").fadeIn(300);
     $(".close").on("click",function(){
-        $(".popupB").fadeOut(300);
+        $(".AddTaskModal").fadeOut(300);
     })
 })
 $(".btnDeleteAll").on("click",function(){
-    $(".popupC").fadeIn(300);
+    $(".DeleteAllModal").fadeIn(300);
     $(".close").on("click",function(){
-        $(".popupC").fadeOut(300);
+        $(".DeleteAllModal").fadeOut(300);
     })
 })
 
 OpenFile();
 
-$("#mBody").append(AddTaskPopupHTMLString)
+//click event for a new task to be created, appends a newly added task to the Document as well as refreshes events
 $("#addTask_btn").on("click",function(){
     var task = $("#taskInput").val()
     if(task != ""){
@@ -168,12 +140,12 @@ $("#addTask_btn").on("click",function(){
         taskArray.splice($(this).attr("id"),1)
         localStorage.setItem('taskStore',JSON.stringify(taskArray))
     })
-    $(".popupB").fadeOut(300);
+    $(".AddTaskModal").fadeOut(300);
    }
 })
-$("#mBody").append(AddClassPopupHTMLString)
+
+//click event for submitting data for a new class to be created
 $("#addClass_btn").on("click",function(){
-    console.log("WHAT")
     let cName = $('#cName').val()
     let med = $('#med').val()
     var time = $('#time').val()
@@ -188,9 +160,10 @@ $("#addClass_btn").on("click",function(){
         WriteToFile(ClassObjectArray)
         UpdateDisplayClasses(ClassObjectArray)
     }
-    $(".popup").fadeOut(300);
+    $(".AddClassModal").fadeOut(300);
 })
 
+// click event for the DeleteAllModal 'delete button'
 $("#remove_btn").on("click",function(){
     if($("#clearClassVal").prop("checked") && $("#clearTaskVal").prop("checked")){
         WriteToFile({Classes : []})
@@ -204,5 +177,5 @@ $("#remove_btn").on("click",function(){
         localStorage.removeItem('taskStore')
         $(".entry").fadeOut(300);
     }
-    $(".popupC").fadeOut(300)
+    $(".DeleteAllModal").fadeOut(300)
 })

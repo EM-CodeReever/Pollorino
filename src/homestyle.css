@@ -191,7 +191,7 @@
     width: 70px;
     border-radius: 10px;
 }
-.popup {
+.AddClassModal {
     display: none; 
     position: fixed; 
     z-index: 1; 
@@ -204,7 +204,7 @@
     background-color: rgba(0,0,0,0.4);
 }
 
-.popup-content {
+.AddClassModalContent {
     margin: auto;
     border-radius: 5px;
     width: 500px;
@@ -212,7 +212,7 @@
     position: relative;
     padding: 1px;
 }
-.popup-content p{
+.AddClassModalContent p{
     font-family: Calibri;
     font-size: 20px;
     text-align: center;
@@ -220,7 +220,7 @@
     margin-bottom: 30px;
     margin-top: 30px;
 }
-.popupB {
+.AddTaskModal {
     display: none; 
     position: fixed; 
     z-index: 1; 
@@ -232,7 +232,7 @@
     overflow: auto; 
     background-color: rgba(0,0,0,0.4);
 }
-.popup-content-B {
+.AddTaskModalContent {
     margin: auto;
     border-radius: 5px;
     width: 500px;
@@ -240,7 +240,7 @@
     position: relative;
     padding: 30px;
 }
-.popup-content-B p{
+.AddTaskModalContent p{
     font-family: Calibri;
     font-size: 20px;
     text-align: left;
@@ -284,7 +284,7 @@ form label{
 form div.line{
     margin-bottom: 10px;
 }
-.popupC {
+.DeleteAllModal {
     display: none; 
     position: fixed; 
     z-index: 1; 
@@ -296,7 +296,7 @@ form div.line{
     overflow: auto; 
     background-color: rgba(0,0,0,0.4);
 }
-.popup-content-C {
+.DeleteAllModalContent {
     margin: auto;
     border-radius: 5px;
     width: 300px;
@@ -304,7 +304,7 @@ form div.line{
     position: relative;
     padding: 30px;
 }
-.popup-content-C p{
+.DeleteAllModalContent p{
     font-family: Calibri;
     font-size: 25px;
     text-align: center;
@@ -313,20 +313,20 @@ form div.line{
     margin-bottom: 10px;
     margin-top: 10px;
 }
-.popup-content-C button#remove_btn{
+.DeleteAllModalContent button#remove_btn{
     width: 70px;
 }
-.popup-content-C div{
+.DeleteAllModalContent div{
     margin: 5px 0px 5px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.popup-content-C div label{
+.DeleteAllModalContent div label{
     font-family: Calibri;
     font-size: 18px;
 }
-.popup-content-C div input{
+.DeleteAllModalContent div input{
     height: 25px;
     width: 25px;
     cursor: pointer;
