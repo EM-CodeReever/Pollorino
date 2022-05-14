@@ -9,8 +9,6 @@ function WriteToFile(Object){
       if(err){console.log(err)}
   })
 }
-function configFile()
-{
 
 
 
@@ -20,6 +18,7 @@ function radioSave(){
   radioInputs.forEach((input) => {
     arrRadioData.push({ id: input.id, checked: input.checked });
   });
+  if(!localStorage.radioInputs){arrRadioData.forEach((e)=>{if(e.id == 'ch1'){e.checked = true}})}
   localStorage.setItem('radioInputs', JSON.stringify(arrRadioData));
 }
 function checkBoxSave(){
@@ -103,5 +102,3 @@ $("#Appearance").find(".optionContainer").find(".eventMarkerVis").on("click",fun
   
 })
 
-}
-configFile()
