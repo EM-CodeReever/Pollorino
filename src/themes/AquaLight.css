@@ -75,19 +75,25 @@
 .popup-content {
   background-color: var(--SidenavBG);
 }
-.popup-content-B {
+.AddClassModalContent {
   background-color: var(--SidenavBG);
 }
-.popup-content-C {
+.AddTaskModalContent {
+  background-color: var(--SidenavBG);
+}
+.DeleteAllModalContent {
   background-color: var(--SidenavBG);
 }
 .popup-content p{
   color: var(--textColor);
 }
-.popup-content-B p{
+.AddClassModalContent p{
   color: var(--textColor);
 }
-.popup-content-C p{
+.AddTaskModalContent p{
+  color: var(--textColor);
+}
+.DeleteAllModalContent p{
   color: var(--textColor);
 }
 .tile_btn{
