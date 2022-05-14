@@ -1,13 +1,13 @@
 {
   "dependencies": {
     "jquery": "^3.6.0",
-    "mssql": "^8.0.2",
+    "mssql": "^8.1.0",
     "open": "^8.4.0",
     "os": "^0.1.2"
   },
   "name": "pollorino",
   "productName": "Pollorino",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "\"A Student's Companion App\"",
   "main": "index.js",
   "scripts": {
@@ -34,7 +34,7 @@
     }
   },
   "devDependencies": {
-    "electron": "^18.0.2",
+    "electron": "^18.2.3",
     "electron-builder": "^22.14.13"
   },
   "author": "Elliot Morrison",
