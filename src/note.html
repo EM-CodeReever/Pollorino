@@ -5,6 +5,8 @@
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="notestyle.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
         <title>Pollorino</title>
     </head>
     <body id="mBody">
@@ -35,7 +37,29 @@
           </div>
            
         <div class="content">
-            <div class=noteWrapper>
+            <div class="Note-Editor">
+                <span><h3>Title:</h3><input type="text"></span>
+                <span><h3>Description:</h3><input type="text"></span>
+                <div class="Note-Textarea" style="height: calc(100vh - 258px);">
+
+                </div>
+                <div class="Note-Footer"><button id="SaveNote">Save</button></div>
+            </div>
+            <div class="Note-Container">
+                <h1>Your Notes</h1>
+                <div class="Note-Grid">
+                    <div class="Notes">
+                        <span class="Headings"><input type="checkbox"><p style="margin-left: 5px;">Note Title</p></span>
+                        <span class="Headings"><button>View</button><button>Edit</button></span>
+                    </div>
+                    <div class="Notes">2 note</div>
+                    <div class="Notes">3 note</div>
+                    <div class="Notes">4 note</div>
+                </div>
+                <div class="Note-Footer"><button id="CreateNote">Create New</button></div>
+            </div>
+        </div>
+            <!-- <div class=noteWrapper>
            <div class="noteBox">
                <h2>Notebooks</h2>
                <button class="noteAddBtn"><span class="material-icons">
@@ -95,8 +119,7 @@
                     <button id="add_Note_Btn" class="popupBtn">Add</button>
                 </div>
                 
-            </div> 
-        </div>
+            </div> -->
     <script src="control.js"></script> 
     <script src="note.js"></script>
     </body>
