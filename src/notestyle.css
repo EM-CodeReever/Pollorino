@@ -1,261 +1,32 @@
-*{
-    box-sizing: border-box;
-}
-/* .noteWrapper{
-    width:100%;
-    height: calc(100% - 10px);
-    display: flex;
-    justify-content: space-between;
-}
 
-.noteBox:first-child{
-    background-color: transparent;
-    min-width: 180px;
-    max-width: 180px;
-    padding: 0px 0px 0px 5px;
-    height: 100%;
-}
-.noteBox:first-child h2{
-    text-align: center;
-    margin-bottom: 10px;
-}
-.noteBox:last-child{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border: 1px solid white;
-    border-radius: 10px;
-    width: 100%;
-    height: 100%;
-}
-.books{
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px;
-    height: 50px;
-    width: 100%;
-    margin-bottom: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    text-align: center;
-    align-items: right;
-    overflow-y: hidden;
-    font-weight: bold;
-    cursor: pointer;
-}
-.books > p{
-    font-size: large;
-    margin-bottom: 15px;
-    margin-top: 15px;
-}
-.noteHeader{
-    height: fit-content;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-.noteHeader h3{
-    margin: 5px;
-}
-.textDisplay{
-    height: 100%;
-    width: 100%;
-    max-width: calc(100vw - 330px);
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    padding-top: 20px;
-    overflow-y: scroll;
-    word-wrap: break-word;
-}
-.textDisplay::-webkit-scrollbar{
-    background-color: transparent;
-    width: 3px;
-}
-.textDisplay::-webkit-scrollbar-thumb{
-    background-color: #d1d1d1;
-    border-radius: 10px;
-}
-.topic{
-    width: 100%;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    background-color: transparent;
-    border-radius: 5px;
-}
-.topic{
-    font-style: italic;
-}
-.topic:hover{
-    background-color:rgba(0, 0, 0, 0.5);
-}
-.bookDelete{
-    position: fixed;
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px;
-    width: 30px;
-    background-color: transparent;
-    height: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.bookDelete > span:hover{
-    color: rgb(155, 31, 0);;
-}
-.noteAddBtn{
-    height: 40px;
-    width: 40px;
-    border-radius: 10px;
-    background-color: green;
-    text-align: center;
-    border: none;
-    margin: 0px 0px 10px 70px;
-    color: #d1d1d1;
-    font-weight: bold;
-}
-.noteAddBtn:hover{
-    color: black;
-}
-.buttonHolder{
-    display: flex;
-    justify-content: flex-end;
-    height: 60px;
-    align-items: center;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-.buttonHolder button{
-    background-color: white;
-    border-radius: 5px;
-    border: 1px solid black;
-    width: 60px;
-    height: 30px;
-    margin-right: 15px;
-    font-weight: bold;
-}
-.buttonHolder button:nth-child(1):hover{
-    background-color: #a12f1b;
-    transition: .3s;
-}
-.buttonHolder button:nth-child(2):hover{
-    background-color: green;
-    transition: .3s;
-}
-.buttonHolder button:nth-child(3):hover{
-    background-color: #1b67a1;
-    transition: .3s;
-}
-.popup {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
-    padding-top: 150px; 
-    left: 0;
-    top: 25px;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(0,0,0,0.4);
-}
-
-.popup-content {
-    margin: auto;
-    border: 1px solid black;
-    border-radius: 5px;
-    width: 500px;
-    height: fit-content;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.close{
-    position: absolute;
-    top: 5px;
-    right: 5px;
-}
-.close:hover{
-    color: black;
-}
-
-.popup-inner-box{
-    width: 100%;
-    height: fit-content;
-    background-color: transparent;
-    padding: 45px 15px 15px 15px;
-    font-family: calibri;
-    font-weight: bold;
-}
-#choice{
-    width: 80px;
-    height: 25px;
-    position: absolute;
-    right: 15px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-#bookChoice{
-    border-radius: 5px;
-    height: 25px;
-    width: 150px;
-}
-.addForm{
-    margin-top: 30px;
-}
-.addForm:last-child{
-    display: none;
-}
-.line{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.line label{
-    color: black;
-}
-input{
-    border: none;
-    border-radius: 5px;
-    height: 20px;
-    font-size: 15px;
-}
-
-button#add_Note_Btn{
-    width: 60px;
-    height: 30px;
-    border-radius: 5px;
-    border: none;
-    transform: translateX(204px);
-}
-p#bookErrorMsg,p#topicErrorMsg{
-    text-align: center;
-    color: rgb(155, 31, 0);
-    display: none;
-} */
 .Note-Editor{
+    border-radius: 10px;
     width: 100%;
     height: fit-content;
     background-color: aliceblue;
     display: none;
+    margin-bottom: 25px;
 }
 .Note-Editor > span{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     height: fit-content;
     padding: 5px 15px;
 }
 .Note-Editor > span input{
     width: 75%;
+    border: none;
+    border-radius: 5px;
+    font-size: medium;
+    padding: 3px 8px;
+    font-weight: 500;
+    height: 25px;
+
+}
+.Note-Editor > span input:focus{
+    outline: none;
+    border: .5px solid blue;
 }
 .Note-Editor span h3{
     margin: 0px;
@@ -263,32 +34,32 @@ p#bookErrorMsg,p#topicErrorMsg{
 }
 .Note-Textarea{
     width: inherit;
-    
+    border: none;
 }
 .Note-Container{
     border-radius: 15px;
     width: 100%;
     height: fit-content;
-    background-color: cornflowerblue;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 .Note-Container h1 {
     text-align: center;
+    margin: 10px 0px;
 }
 .Note-Grid{
     width: calc(100% - 40px);
-    height: 100%;
+    height: calc(100vh - 209px);
     margin: 0px 20px;
-    border: 1px solid black;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 5px;
+    padding: 0px 5px;
+    overflow-y: scroll;
 }
 .Notes{
-    background-color: aquamarine;
     border-radius: 6px;
     width: 100%;
     height: 50px;
@@ -308,6 +79,11 @@ p#bookErrorMsg,p#topicErrorMsg{
     width: 18px;
     cursor: pointer;
 }
+.Headings > p{
+    margin-left: 5px;
+    font-weight: bold;
+    font-size: large;
+}
 .Notes button{
     justify-self: flex-end;
     margin: 0px 4px;
@@ -316,7 +92,112 @@ p#bookErrorMsg,p#topicErrorMsg{
     height: 50px;
     width: 100%;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
-    padding: 0px 30px;
+    padding: 0px 25px;
+}
+.Note-Editor > .Note-Footer{
+    justify-content: flex-end;
+}
+.Note-Container > .Note-Footer{
+    justify-content: space-between;
+}
+.Note-Viewer{
+    display: none;
+    height: calc(100vh - 100px);
+    width: 100%;
+}
+#ErrorMsg{
+    display: none; 
+    color: white;
+    height: 21px; 
+    margin-right: 20px;
+    background-color: rgb(179, 0, 0);
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 0px 5px;
+}
+#SelectedItemsText{
+    color: white;
+    height: 21px; 
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 0px 5px;
+}
+.SelectionOptionsSpan{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: fit-content;
+}
+.SelectionOptionsSpan > *{
+    display: none; 
+    margin-right: 10px;
+}
+button{
+    color: rgb(0, 40, 75);
+    height: 30px;
+    width: fit-content;
+    border: none;
+    border-radius: 5px;
+}
+.DisplayHeadings{
+    position: relative;
+    border-radius: 8px;
+    padding: 5px 0px;
+}
+.DisplayHeadings > *{
+    color: white;
+    text-align: center;
+}
+#NoteDisplay-Title{
+    margin: 0px;
+}
+#NoteDisplay-Description{
+    margin: 5px 0px;
+    font-style: italic;
+    font-weight: 400;
+}
+#NoteDisplay-Body{
+    height: calc(100vh - 182px);
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 10px;
+    background-color: #d1d1d1;
+    overflow-y: scroll;
+}
+#NoteDisplay-Body > *{
+    margin: 0px;
+}
+.Note-Grid::-webkit-scrollbar, #NoteDisplay-Body::-webkit-scrollbar{
+    background-color: transparent;
+    width: 3px;
+}
+.Note-Grid::-webkit-scrollbar-thumb, #NoteDisplay-Body::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+}
+#ReturnToNotes{
+    color: black;
+    border-radius: 5px;
+    width: fit-content;
+    border: none;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+#btnCancelSelection{
+    background-color: transparent;
+    color: aliceblue;
+}
+.ql-align-center{
+    text-align: center;
+}
+.marked{
+    color: #f7ad00 !important;
+}
+#NoteDisplay-Body pre{
+    background-color: #23241f;
+    color: #f8f8f2;
+    padding: 15px;
+    border-radius: 5px;
+    white-space: pre-wrap;
 }
