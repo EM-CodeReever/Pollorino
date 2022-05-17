@@ -51,18 +51,11 @@ function checkBoxLoad(){
     checkBoxLoad();
   }
 }
-function selSetTheme(){
-  $(".settingsBox:first-child span").css("color","black");
-  (localStorage.ldMode == "dark") ? $(".settingsBox:first-child").find("span#selectedSetting").css("color","#d1d1d1") : $(".settingsBox:first-child").children("span").css("color","black")
-  $(".settingsBox:first-child").children("span").css("background-color","#d1d1d1")
-  $("#selectedSetting").css("background-color","var(--SidenavBG)")
-}
+
 radioLoad();
 checkBoxLoad();
-selSetTheme()
 
 $(`#${$("#selectedSetting").html()}`).show()
-$("#selectedSetting").css("background-color","var(--SidenavBG)")
 $(".optionContainer").find(".radio").on("click",function(){
   if(!$(this).find("input").prop("checked")){
     $(this).find("input").prop("checked",true)
@@ -81,16 +74,10 @@ $(".optionContainer").find(".checkBox").on("click",function(){
   checkBoxSave()
 });
 
-$(".settingsBox:first-child").children("span").on("mouseleave",function(){
-  if($(this).attr("id") != "selectedSetting"){
-    $(this).css("background-color","#d1d1d1")
-  }
-});
 $(".settingsBox:first-child").children("span").on("click",function(){
   $(".settingsBox:first-child").children().removeAttr("id")
   $(".settingsBox:last-child").children().hide()
   $(this).attr("id","selectedSetting")
-  selSetTheme()
   $(`#${$(this).html()}`).show()
 });
 $("#Appearance").find(".optionContainer").find(".eventMarkerVis").on("click",function(){
@@ -99,6 +86,5 @@ $("#Appearance").find(".optionContainer").find(".eventMarkerVis").on("click",fun
   }else{
     console.log("off")
   }
-  
 })
 
