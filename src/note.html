@@ -38,88 +38,37 @@
            
         <div class="content">
             <div class="Note-Editor">
-                <span><h3>Title:</h3><input type="text"></span>
-                <span><h3>Description:</h3><input type="text"></span>
-                <div class="Note-Textarea" style="height: calc(100vh - 258px);">
-
-                </div>
-                <div class="Note-Footer"><button id="SaveNote">Save</button></div>
+                <span><h3>Title:</h3><input type="text" id="Note-Title" required></span>
+                <span><h3>Description:</h3><input type="text" id="Note-Description" required></span>
+                <div class="Note-Textarea" style="height: calc(100vh - 260px);"></div>
+                <div class="Note-Footer"><p id="ErrorMsg"></p><button id="Cancel" style="margin-right: 20px;">Cancel</button><button id="SaveNote">Save</button><button id="CreateNewNote">Create</button></div>
             </div>
             <div class="Note-Container">
                 <h1>Your Notes</h1>
                 <div class="Note-Grid">
-                    <div class="Notes">
-                        <span class="Headings"><input type="checkbox"><p style="margin-left: 5px;">Note Title</p></span>
-                        <span class="Headings"><button>View</button><button>Edit</button></span>
-                    </div>
-                    <div class="Notes">2 note</div>
-                    <div class="Notes">3 note</div>
-                    <div class="Notes">4 note</div>
+                    <!-- Note Divs go here -->
                 </div>
-                <div class="Note-Footer"><button id="CreateNote">Create New</button></div>
+                <div class="Note-Footer">
+                    <span class="SelectionOptionsSpan">
+                        <p id="SelectedItemsText"></p>
+                        <button id="btnDelete"><i class="material-icons">delete</i></button>
+                        <button id="btnMark"><i class="material-icons">priority_high</i></button>
+                        <button id="btnCancelSelection"><i class="material-icons">cancel</i></button>
+                    </span>
+                    <button id="CreateNote">Create New</button>
+                </div>
+            </div>
+            <div class="Note-Viewer">
+                <div class="DisplayHeadings">
+                    <button id="ReturnToNotes"><i class="material-icons">arrow_back</i></button>
+                    <h2 id="NoteDisplay-Title"></h1>
+                    <h3 id="NoteDisplay-Description"></h2>
+                </div>
+                <div id="NoteDisplay-Body">
+                    <!-- HTML Content of Notes go here -->
+                </div>
             </div>
         </div>
-            <!-- <div class=noteWrapper>
-           <div class="noteBox">
-               <h2>Notebooks</h2>
-               <button class="noteAddBtn"><span class="material-icons">
-                add_circle_outline
-                </span></button>
-
-           </div>
-           <div class="noteBox">
-            <div class="noteHeader">
-               <h3 id="noteTitle">Topic: </h3>
-               <h3 id="noteDesc">Description: </h3>
-            </div>
-            <div class="textDisplay"></div>
-            <div class="buttonHolder">
-                <button id="noteDelete">Delete</button>
-                <button id="noteSave">Save</button>
-                <button id="noteEdit">Edit</button>
-            </div>
-            </div>
-            </div>
-        </div>
-        <div id="popup" class="popup">
-            <div class="popup-content">
-                <span style="cursor: pointer;" class="close"><i class="material-icons">close</i></span>
-                <div class="popup-inner-box">
-                    <label>Create a New:</label>
-                    <select id="choice">
-                      <option value="Book" id="bookOption">Book</option>
-                      <option value="Topic" id="topicOption">Topic</option>
-                    </select>
-                    <div class="formWrapper">
-                        <form class="addForm">
-                            <div class="line">
-                                <label for="Book">Notebook Name:</label>
-                                <input type="text" class="inputArea" id="bookInput" maxlength="18">
-                            </div>
-                            <p id="bookErrorMsg">some text</p>
-                        </form>
-                        <form class="addForm">
-                            <div class="line">
-                            <label>Book:</label>
-                            <select id="bookChoice">
-                                
-                              </select>
-                            </div>
-                            <div class="line">
-                                <label for="Topic">Topic Title:</label>
-                                <input type="text" class="inputArea" id="topicInput">
-                            </div>
-                            <div class="line">
-                                <label for="TopicDescription">Description:</label>
-                                <input type="text" class="inputArea" id="descInput">
-                            </div>
-                            <p id="topicErrorMsg">some text</p>
-                        </form>
-                    </div>
-                    <button id="add_Note_Btn" class="popupBtn">Add</button>
-                </div>
-                
-            </div> -->
     <script src="control.js"></script> 
     <script src="note.js"></script>
     </body>
