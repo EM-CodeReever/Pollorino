@@ -7,9 +7,7 @@
   }
   body {
     background-color: var(--Background);
-
   }
-
   .content::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.623);
   }
@@ -115,33 +113,27 @@
 #contB-Wrap h1{
   color: var(--textColor);
 }
-.noteBox:first-child h2{
+.Notes button{
+  background-color: var(--SidenavBG);
   color: var(--textColor);
 }
-.books{
+.Note-Container{
   background-color: var(--SidenavBG);
 }
-.noteHeader{
-  background-color: var(--NavbarBG);
-}
-.noteHeader h3{
+.Note-Container h1 {
   color: var(--textColor);
 }
-.textDisplay{
-  background-color: rgba(0, 0, 0, 0.5);
+.Notes{
+  background-color: var(--Background);
+}
+.Headings > p{
   color: var(--textColor);
 }
-.buttonHolder{
-  background-color: var(--NavbarBG);
+.DisplayHeadings{
+  background-color: var(--SidenavBG);
 }
-.topic{
-  color: var(--textColor);
-}
-.books > p{
-  color: var(--textColor);
-}
-.bookDelete{
-  color: var(--textColor);
+.Note-Grid::-webkit-scrollbar-thumb, #NoteDisplay-Body::-webkit-scrollbar-thumb{
+  background-color: var(--textColor);
 }
 .subCont{
   background-color: var(--SidenavBG)
@@ -188,6 +180,14 @@
 }
 #Appearance .optionContainer span:nth-of-type(2){
   background-color: var(--Background);
+  color: var(--textColor);
+}
+.settingsBox:first-of-type span{
+  background-color: var(--textColor);
+  color: var(--NavbarBG);
+}
+#selectedSetting{
+  background-color: var(--NavbarBG);
   color: var(--textColor);
 }
 .newEntity_btn{

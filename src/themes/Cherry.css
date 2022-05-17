@@ -4,13 +4,13 @@
     --SidenavBG: #8C265E;
     --Background: #D9BAD7;
     --textColor: #ddd;
+    --textColorDark: #40283C;
     --Transparentish: rgba(0,0,0,0.5)
   }
-  body {
+
+body {
     background-color: var(--Background);
-
   }
-
   .content::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.623);
   }
@@ -116,33 +116,27 @@
 #contB-Wrap h1{
   color: var(--textColor);
 }
-.noteBox:first-child h2{
+.Notes button{
+  background-color: var(--SidenavBG);
   color: var(--textColor);
 }
-.books{
+.Note-Container{
   background-color: var(--SidenavBG);
 }
-.noteHeader{
-  background-color: var(--NavbarBG);
-}
-.noteHeader h3{
+.Note-Container h1 {
   color: var(--textColor);
 }
-.textDisplay{
-  background-color: rgba(0, 0, 0, 0.5);
+.Notes{
+  background-color: var(--Transparentish);
+}
+.Headings > p{
   color: var(--textColor);
 }
-.buttonHolder{
-  background-color: var(--NavbarBG);
+.DisplayHeadings{
+  background-color: var(--SidenavBG);
 }
-.topic{
-  color: var(--textColor);
-}
-.books > p{
-  color: var(--textColor);
-}
-.bookDelete{
-  color: var(--textColor);
+.Note-Grid::-webkit-scrollbar-thumb, #NoteDisplay-Body::-webkit-scrollbar-thumb{
+  background-color: var(--textColor);
 }
 .subCont{
   background-color: var(--SidenavBG)
@@ -173,50 +167,56 @@
   color: rgb(0, 0, 0);
 }
 .wrapper{
-  background-color: var(--Transparentish)
+  background-color: var(--Background)
 }
-#Appearance .optionContainer span{
-  background-color: var(--SidenavBG);
+#Appearance .optionContainer span:nth-of-type(n+3){
+  background-color: var(--NavbarBG);
   color: var(--textColor);
 }
 #General .optionContainer span {
-  background-color: var(--SidenavBG);
+  background-color: var(--NavbarBG);
   color: var(--textColor);
 }
-/* #Appearance .optionContainer span:nth-of-type(1){
-    background-color: var(--SidenavBG);
+#Appearance .optionContainer span:nth-of-type(1){
+  background-color: var(--NavbarBG);
+  color: var(--textColor);
 }
-  #Appearance .optionContainer span:nth-of-type(2){
-    background-color: var(--Background);
-    color: var(--textColor);
-  } */
-  .newEntity_btn{
-    background-color: green;
-  }
-  .entryBtn{
-    background-color: green;
-  }
-  button#addEvent {
-    background-color: green;
-  }
-  .radio input:checked ~ .mark {
-    background-color: green;
-  }
-  .checkBox input:checked ~ .mark {
-    background-color: green;
-  }
-  .noteBox:first-child h2{
-    color: var(--NavbarBG);
-  }
-  form div.line label{
-    color: var(--textColor);
-  }
-  .close{
-    color: var(--textColor);
-  }
-  .popup-content-C div label{
-    color: var(--textColor);
-  }
-  .popup-inner-box label{
-    color: var(--textColor);
-  }
+#Appearance .optionContainer span:nth-of-type(2){
+  background-color: var(--NavbarBG);
+  color: var(--textColor);
+}
+.settingsBox:first-of-type span{
+  background-color: var(--textColor);
+  color: var(--NavbarBG);
+}
+#selectedSetting{
+  background-color: var(--NavbarBG);
+  color: var(--textColor);
+}
+.newEntity_btn{
+  background-color: green;
+}
+.entryBtn{
+  background-color: green;
+}
+button#addEvent {
+  background-color: green;
+}
+.radio input:checked ~ .mark {
+  background-color: green;
+}
+.checkBox input:checked ~ .mark {
+  background-color: green;
+}
+form div.line label{
+  color: var(--textColor);
+}
+.close{
+  color: var(--textColor);
+}
+.popup-content-C div label{
+  color: var(--textColor);
+}
+.popup-inner-box label{
+  color: var(--textColor);
+}
