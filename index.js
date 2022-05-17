@@ -53,7 +53,7 @@ const createWindow = () => {
       }
     })
   //Open the DevTools.
-  mainWindow.webContents.openDevTools({mode: 'detach'})
+  //mainWindow.webContents.openDevTools({mode: 'detach'})
   }
 app.whenReady().then(() => {
   createWindow()
