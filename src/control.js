@@ -4,7 +4,7 @@ var pageList = ["index.html","note.html","event.html","settings.html"];
 const fs = require('fs');
 const path = require('path');
 var os = require('os');
-var dir = path.join(os.homedir + "\\AppData\\Local\\Programs\\Pollorino\\Data");
+var dir = path.join(os.homedir + "\\AppData\\Roaming\\Pollorino\\JSON_Data");
 const configTemplate = {
   Settings: {
     MinimizeOnClose: false,
