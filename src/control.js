@@ -59,7 +59,7 @@ for(var x = 0;x < pageList.length;x++){
   }
 }
 window.onload = () => {
-  $(".se-pre-con").fadeOut("fast");
+  $(".se-pre-con").fadeOut("slow");
 }
 
 function ThemeChange() {
