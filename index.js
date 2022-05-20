@@ -24,7 +24,7 @@ const createWindow = () => {
   })
   mainWindow.removeMenu(true)
   // and load the index.html of the app.
-  mainWindow.loadFile('src/index.html')
+  mainWindow.loadFile('src/Home/home.html')
 
   app.whenReady().then(() => {
     tray = new Tray(path.join(__dirname + '\\src\\images\\icon.ico'))
