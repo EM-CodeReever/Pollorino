@@ -15,10 +15,6 @@
   .content::-webkit-scrollbar-thumb:hover{
     background-color: var(--NavbarBG);
   }
-  .se-pre-con {
-  background-color: var(--Background);
-  }
-
   #title-bar-btns button{
   color: var(--textColor);
   background-color: rgba(255, 255, 255, 0);
