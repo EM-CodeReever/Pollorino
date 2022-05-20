@@ -23,7 +23,8 @@ const createWindow = () => {
     }
   })
   mainWindow.removeMenu(true)
-  // and load the index.html of the app.
+
+  //load the entrypoint of the app.
   mainWindow.loadFile('src/Home/home.html')
 
   app.whenReady().then(() => {
