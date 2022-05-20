@@ -80,11 +80,12 @@ $(".settingsBox:first-child").children("span").on("click",function(){
   $(this).attr("id","selectedSetting")
   $(`#${$(this).html()}`).show()
 });
+
 $("#Appearance").find(".optionContainer").find(".eventMarkerVis").on("click",function(){
   if($(this).find("input").prop("checked")){
-    console.log("on")
+    localStorage.setItem('eventMarkerVisible',true)
   }else{
-    console.log("off")
+    localStorage.setItem('eventMarkerVisible',false)
   }
 })
 

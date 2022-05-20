@@ -1,6 +1,6 @@
 const $ = require('jquery');
 var currentDocUrlString = document.URL;
-var pageList = ["index.html","note.html","event.html","settings.html"];
+var pageList = ["index.html","task.html","note.html","event.html","meetings.html","settings.html"];
 const fs = require('fs');
 const path = require('path');
 var os = require('os');
