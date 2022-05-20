@@ -1,12 +1,10 @@
 var eventArray = []
-//kerryanncurtisclasses@gmail.com
 var eventContentArray = []
 var countDownArray = []
-var showcount = 0;
-var hidecount = 0;
 month_string_arr = ["January","February","March","April","May","June","July","August","September","October","November","December"]
 var typeName = ["Assignment","Deadline","Special Occasion","Custom"]
 var typeColor = ["green","#7B22A8","#FF8000","#1DB5B8"]
+
 function twoDigit(x){
     var output
     if(x < 10){
@@ -34,7 +32,7 @@ function dateConverter(rawDate){
     output = month_string_arr[rawDate.getMonth()] + " " + rawDate.getDate() + ", " + rawDate.getFullYear() + " " + twoDigit(hrs) + ":" + twoDigit(rawDate.getMinutes()) +" "+ mer
     return output
 }
-function converter(millis){
+function milliSecondsConverter(millis){
     var con_secs = (millis/1000);
     var con_secs_rounded = Math.round(con_secs);
     var con_mins = 0;
@@ -83,41 +81,35 @@ class EventClass
         this.status = "Upcoming";
     }
     createEventCard = () => {
-        var eventWrap = document.getElementsByClassName("eventWrap")[0];
-        var newCard = document.createElement('div');
-        newCard.setAttribute("class","eventCard");
-        if(localStorage.eventMarkerVis == "show"){
-            for(var x = 0;x <= 3;x++){
+        var eventMarker;
+        if(JSON.parse(localStorage.eventMarkerVisible)){
+            for(var x = 0; x < typeName.length; x++){
                 if(this.type == typeName[x]){
-                newCard.style.borderBottom = `5px solid ${typeColor[x]}`;
+                eventMarker = `5px solid ${typeColor[x]}`;
                 }
             }
-        }
-        var eventContent = `<h2 id="eventName">${this.name}</h2>`+
-        `<h2><span>Date:</span><span>${this.date}</span></h2>`+
-        `<h2><span>Type:</span><span>${this.type}</span></h2>`+
-        `<h2><span>Status:</span><span id="status">${this.status}</span></h2>`+
-        `<h2>Memo:</h2>`+
-        `<div id="memoBox">${this.memo}</div>`+
-        `<button class="deleteEvent">Delete</button>`
-        newCard.innerHTML = eventContent;
-        eventWrap.appendChild(newCard)
-        if(localStorage.ldMode == "light"){
-            $(".eventCard").css("background-color","rgb(0,0,0,0.5)");
-        }
+        }else{eventMarker = 'none'}
+        var eventContent = `<div class="eventCard" style="border-bottom: ${eventMarker}"><h2 id="eventName">${this.name}</h2>
+        <h2><span>Date:</span><span>${this.date}</span></h2>
+        <h2><span>Type:</span><span>${this.type}</span></h2>
+        <h2><span>Status:</span><span id="status">${this.status}</span></h2>
+        <h2>Memo:</h2>
+        <div id="memoBox">${this.memo}</div>
+        <button class="deleteEvent">Delete</button>
+        </div>`
+        $(".eventWrap").append(eventContent)
     }
 }
 
 (localStorage.eventContentArrayStorage) ? eventContentArray = JSON.parse(localStorage.eventContentArrayStorage) : eventContentArray = [];
 
-if(eventContentArray)
+
+for(x=0;x<eventContentArray.length;x++)
 {
-    for(x=0;x<eventContentArray.length;x++)
-    {
-        eventArray.push(new EventClass(eventContentArray[x][0],eventContentArray[x][1],eventContentArray[x][2],eventContentArray[x][3]))
-        eventArray[x].createEventCard()
-    }
+    eventArray.push(new EventClass(eventContentArray[x][0],eventContentArray[x][1],eventContentArray[x][2],eventContentArray[x][3]))
+    eventArray[x].createEventCard()
 }
+
 function showPopUp(){
     $(".popup").fadeIn("fast")
 }
@@ -159,22 +151,18 @@ $(".deleteEvent").on("click",function(){
 }
 function timeCountDown(){
     var CurrentDate = new Date();
-    var diff;
-    var gigalo = 0;
-    var upcomingEventName = "Null";
-    for(var x = 0;x < eventArray.length;x++){
-        diff = (eventArray[x].rawDate - CurrentDate);
-        if(gigalo == 0 && diff > 0){
-            gigalo = diff
+    var timeLeftForEvent;
+    var lowestTimeLeftForEvent = 0;
+    var upcomingEventName;
+    for(var x = 0;x < eventArray.length; x++){
+        timeLeftForEvent = (eventArray[x].rawDate - CurrentDate);
+        if(lowestTimeLeftForEvent == 0 && timeLeftForEvent > 0){
+            lowestTimeLeftForEvent = timeLeftForEvent
             upcomingEventName = eventContentArray[x][0]
-        }else if(diff < 0 && eventArray.length == 0){
+        }else if(timeLeftForEvent < 0 && eventArray.length == 0){
             $(".wrapper").fadeOut("fast","linear",function(){$("#noEvent").fadeIn("fast")})
-            // eventContentArray.splice(x,1)
-            // eventArray.splice(x,1)
-            // localStorage.setItem('eventContentArrayStorage',JSON.stringify(eventContentArray))     
-        }else if(diff < 0){
+        }else if(timeLeftForEvent < 0){
             if($(`.eventCard:nth-child(${x+1})`).attr("id") != "expired"){
-                // $(`.eventCard:nth-child(${x+1})`).css("background-color","#82160e")
                 $(`.eventCard:nth-child(${x+1})`).find("h2:nth-child(4)").find("span:nth-child(2)").css("color","#d63529")
                 $(`.eventCard:nth-child(${x+1})`).attr("id","expired")
                 eventArray[x].status = "Date Passed"
@@ -184,20 +172,18 @@ function timeCountDown(){
                 
             }
         }else{
-            if(gigalo > diff && diff > 0){
-                gigalo = diff
+            if(lowestTimeLeftForEvent > timeLeftForEvent && timeLeftForEvent > 0){
+                lowestTimeLeftForEvent = timeLeftForEvent
                 upcomingEventName = eventContentArray[x][0]
             } 
         }
     }
-    if((eventArray.length != 0 && diff > 0) || (eventArray.length != 0 && gigalo > 0)){
+    if((eventArray.length != 0 && timeLeftForEvent > 0) || (eventArray.length != 0 && lowestTimeLeftForEvent > 0)){
 
              $(".wrapper").show().children().show()
              $("#noEvent").hide()
 
-        countDownArray = converter(gigalo)
-        // console.log(countDownArray)
-        //console.log(upcomingEventName)
+        countDownArray = milliSecondsConverter(lowestTimeLeftForEvent)
         
         $("#nextEventName").html(upcomingEventName)
         $("#weeks").html(twoDigit(countDownArray[0]))
@@ -206,9 +192,7 @@ function timeCountDown(){
         $("#minutes").html(twoDigit(countDownArray[3]))
         $("#seconds").html(twoDigit(countDownArray[4]))
     }else{
-             $(".wrapper").fadeOut(200,"linear",function(){$("#noEvent").show()})
-             
-
+        $(".wrapper").fadeOut(200,"linear",function(){$("#noEvent").show()})
     }
 }
 deleteEvent()
