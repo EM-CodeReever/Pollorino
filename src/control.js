@@ -1,6 +1,6 @@
 const $ = require('jquery');
 var currentDocUrlString = document.URL;
-var pageList = ["index.html","task.html","note.html","event.html","meetings.html","settings.html"];
+var pageList = ["home.html","task.html","note.html","event.html","meetings.html","settings.html"];
 const fs = require('fs');
 const path = require('path');
 var os = require('os');
@@ -72,7 +72,7 @@ function ThemeChange() {
       var theme = $("#ThemeStyleSheet")
       for( var i = 0; i < config.Settings.Theme.Name.length; i++){
         if(i == config.Settings.Theme.IndexChosen){
-          theme.attr("href",`themes\\${config.Settings.Theme.Name[i]}.css`)
+          theme.attr("href",`../themes/${config.Settings.Theme.Name[i]}.css`)
         }
       }
     }

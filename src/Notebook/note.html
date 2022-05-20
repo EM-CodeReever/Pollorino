@@ -2,11 +2,11 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link id="ThemeStyleSheet" rel="stylesheet" href="">
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="notestyle.css">
-        <link rel="stylesheet" href="../node_modules/material-icons/iconfont/material-icons.css">
-        <script src="../node_modules/quill/dist/quill.js"></script>
-        <link href="../node_modules/quill/dist/quill.snow.css" rel="stylesheet">
+        <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="note.css">
+        <link rel="stylesheet" href="../../node_modules/material-icons/iconfont/material-icons.css">
+        <script src="../../node_modules/quill/dist/quill.js"></script>
+        <link href="../../node_modules/quill/dist/quill.snow.css" rel="stylesheet">
         <title>Pollorino</title>
     </head>
     <body id="mBody">
@@ -17,23 +17,30 @@
         </div>
         
         <div id="mySidenav" onmouseover="openNav()" onmouseout="closeNav()" class="sidenav">
-            <span onclick="window.location.href='index.html';"><div class="NavBox">
+            <span onclick="window.location.href='../Home/home.html';"><div class="NavBox">
                 <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">home</i></div>
                 <div class="textSection"><p>Home</p></div>
             </div></span>
-            <span onclick="window.location.href='note.html';"><div class="NavBox">
+            <span onclick="window.location.href='../Tasks/task.html';"><div class="NavBox">
+                <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">task</i></div>
+                <div class="textSection"><p>Tasks</p></div>
+            </div></span>
+            <span onclick="window.location.href='../Notebook/note.html';"><div class="NavBox">
                 <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">text_snippet</i></div>
                 <div class="textSection"><p>Notebook</p></div>
             </div></span>
-            <span onclick="window.location.href='event.html';"><div class="NavBox">
+            <span onclick="window.location.href='../Events/event.html';"><div class="NavBox">
                 <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">event</i></div>
                 <div class="textSection"><p>Events</p></div>
             </div></span>
-            <span onclick="window.location.href='settings.html';"><div class="NavBox">
+            <span onclick="window.location.href='../Meetings/meetings.html';"><div class="NavBox">
+                <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">duo</i></div>
+                <div class="textSection"><p>Meetings</p></div>
+            </div></span>
+            <span onclick="window.location.href='../Settings/settings.html';"><div class="NavBox">
                 <div class="iconSection"><div class="selectedNavOption"></div><i class="material-icons maticn">settings</i></div>
                 <div class="textSection"><p>Settings</p></div>
             </div></span>
-            
           </div>
            
         <div class="content">
@@ -69,7 +76,7 @@
                 </div>
             </div>
         </div>
-    <script src="control.js"></script> 
+    <script src="../control.js"></script> 
     <script src="note.js"></script>
     </body>
     
