@@ -3,6 +3,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link id="ThemeStyleSheet" rel="stylesheet" href="">
         <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="task.css">
         <link rel="stylesheet" href="../../node_modules/material-icons/iconfont/material-icons.css">
         <title>Pollorino</title>
     </head>
@@ -41,9 +42,55 @@
           </div>
            
         <div class="content">
-            
+            <div class="taskContainer">
+                <div class="taskWrapper">
+                    <div class="taskSort">
+                        <p class="filter">Filter by</p>
+                        <span>
+                            <label class="High">High</label>
+                            <input type="radio" name="task-sort" />
+                        </span>
+                        <span>
+                            <label class="Medium">Medium</label>
+                            <input type="radio" name="task-sort" />
+                        </span>
+                        <span>
+                            <label class="Low">Low</label>
+                            <input type="radio" name="task-sort" />
+                        </span>
+                        <span>
+                            <label style="color: lightblue;">All</label>
+                            <input type="radio" name="task-sort" checked/>
+                        </span>
+                    </div>
+                </div>
+                <div class="taskWrapper">
+                    <div class="newTask">
+                        <input type="text" id="txtNewTask" />
+                        <span id="btnNewTask">Add Task</span>
+                    </div>
+                    <div class="taskPriority"> 
+                        <span>
+                            <label class="High">High</label>
+                            <input type="radio" name="priority-chioce" />
+                        </span>
+                        <span>
+                            <label class="Medium">Medium</label>
+                            <input type="radio" name="priority-chioce" />
+                        </span>
+                        <span>
+                            <label class="Low">Low</label>
+                            <input type="radio" name="priority-chioce"  checked/>
+                        </span>
+                    </div>
+                    <div class="taskList">
+                        <!-- Tasks go here -->
+                    </div>
+                </div>
+            </div>
         </div>
     <script src="../control.js"></script> 
+    <script src="./task.js"></script>
     </body>
     
 </html>
