@@ -1,0 +1,162 @@
+.taskContainer{
+    height: calc(100vh - 100px);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.newTask{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    padding: 0px 30px;
+}
+.newTask > input{
+    width: 100%;
+    height: inherit;
+    border: none;
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+    padding: 10px;
+    font-family: cursive;
+    font-size: medium;
+}
+.newTask > span{
+    min-width: 80px;
+    height: inherit;
+    font-weight: bold;
+    background-color: #42ba96;
+    border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.taskWrapper:first-child{
+    width: 25%;
+    padding: 15px;
+}
+.taskWrapper:last-child{
+    background-color: var(--SidenavBG);
+    width: 75%;
+    padding: 15px;
+    border-radius: 10px;
+}
+.taskList{
+    height: calc(100% - 70px);
+    padding-top: 15px;
+    border-radius: 10px;
+}
+.taskSort{
+    border: 1px solid var(--NavbarBG);
+    position: relative;
+    border-radius: 5px;
+    display: flex;
+    padding: 15px;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.filter{
+    font-weight: bold;
+    position: absolute;
+    top: -9.5px;
+    left: 15px;
+    margin: 0px;
+    border-radius: 3px;
+    background-color: var(--Background);
+    padding: 0px 3px;
+}
+.taskSort span{
+    color: var(--textColor);
+    background-color: var(--NavbarBG);
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    border-radius: 5px;
+}
+.taskSort span:first-child{
+    margin-top: 0px;
+}
+.taskPriority{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px 110px;
+}
+.taskPriority span{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: var(--Transparentish);
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    padding: 0px 10px;
+}
+.task{
+    background-color: var(--Transparentish);
+    height: fit-content;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px;
+}
+.task:not(:last-child){
+    margin-bottom: 5px;
+}
+.task > p{
+    color: var(--textColor);
+    margin: 5px 0px;
+    padding: 0px 5px;
+    width: 100%;
+}
+.task > span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    padding: 5px;
+}
+.task > span:hover{
+   background-color: var(--SidenavBG);
+   transition: .3s;
+}
+.task > div{
+    margin-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #42ba96;
+    width: fit-content;
+}
+.High{
+    color: #df4759;
+}
+.Medium{
+    color: #ffc107;
+}
+.Low{
+    color: #42ba96;
+}
+@media screen and (max-width: 850px) {
+    .taskContainer{
+        flex-direction: column;
+    }
+    .taskWrapper:last-child{
+        width: 100%;
+        height: 100%;
+    }
+    .taskWrapper:first-child{
+        width: 100%;
+        padding: 0px;
+        margin-bottom: 15px;
+    }
+  }
