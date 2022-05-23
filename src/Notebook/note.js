@@ -28,7 +28,7 @@ var toolbarOptions = [
     ['clean']                                         // remove formatting button
   ];
   
-async function noteFile(){
+function noteFile(){
     fs.readFile(filePath,"utf-8",(err,jsonString) => {
         if(err){
             console.log(err)
@@ -140,7 +140,6 @@ function GetCurrentNoteInstance(){
 }
 var quill = new Quill('.Note-Textarea', {
     modules: {
-        // Equivalent to { toolbar: { container: '#toolbar' }}
         toolbar: toolbarOptions
     },
     theme: 'snow',
@@ -157,7 +156,7 @@ $("#CreateNewNote").on('click',()=>{
         NewNote = GetCurrentNoteInstance()
         NotebookStorage.NoteList.push(NewNote)
         WriteToNoteFile(NotebookStorage)          
-        ClearEditor()
+        location.reload()
     }catch(err){
         DisplayError(err)
     }
@@ -203,11 +202,11 @@ $("#btnMark").on('click',()=>{
     var SelectedID
     $(":checked").each(function(){
         SelectedID = Number($(this).parent().parent().attr('id'))
+        console.log(SelectedID)
+        console.log(NotebookStorage.NoteList[SelectedID].isMarked )
         NotebookStorage.NoteList[SelectedID].isMarked = !NotebookStorage.NoteList[SelectedID].isMarked
         SelectedArray.push(SelectedID)
     })
-    console.log(NotebookStorage.NoteList[SelectedID].isMarked)
-    console.log(SelectedArray)
     for(var i = 0; i < SelectedArray.length; i++){
         if(NotebookStorage.NoteList[SelectedArray[i]].isMarked){
             $(`#${SelectedArray[i]}`).find("p").addClass('marked');

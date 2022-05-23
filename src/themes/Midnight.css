@@ -213,3 +213,9 @@ form div.line label{
 .popup-inner-box label{
   color: var(--textColor);
 }
+.taskPriority span{
+  background-color: var(--Background) !important;
+}
+.task{
+  background-color: var(--Background) !important;
+}
