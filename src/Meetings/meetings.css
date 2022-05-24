@@ -1,0 +1,95 @@
+.meetingContainer{
+    height: calc(100vh - 100px);
+    width: 100%;
+    background-color: var(--SidenavBG);
+    border-radius: 10px;
+}
+.meetingHeader{
+    height: fit-content;
+    width: inherit;
+    padding: 20px 20px 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.meetingHeader > div{
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    justify-content: flex-start;
+    height: 35px;
+}
+.tab-item{
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 15px;
+    margin-right: 10px;
+    border-radius: 15px;
+    border: 1px solid var(--Background);
+    color: var(--textColor);
+}
+#btnCreateMeeting {
+    height: inherit;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #42ba96;
+    color: black;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.meetingList{
+    height: calc(100% - 75px);
+    width: 100%;
+    padding: 0px 20px;
+}
+.Meeting{
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    height: 150px;
+    background-color: var(--Transparentish);
+}
+.meetingInfo:first-child{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+}
+.meetingInfo:first-child p{
+    margin: 0px;
+}
+.meetingInfo:first-child span{
+    color: var(--textColor);
+    font-weight: bold;
+    font-size: larger;
+    width: inherit;
+    display: flex;
+    justify-content: flex-start;
+}
+.meetingInfo:last-child{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+    max-width: fit-content;
+}
+.meetingInfo button{
+    height: 30px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #42ba96;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

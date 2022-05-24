@@ -11,6 +11,7 @@
   box-sizing: border-box;
 }
 body {
+  background-color: var(--Background);
   margin: 0;
   height: fit-content;
   overflow-x: hidden;
@@ -32,12 +33,14 @@ body {
   width: 5px;
 }
 .content::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.623);
   border-radius: 10px;
 }
 .hide-scrollbar::-webkit-scrollbar-thumb{
   visibility : hidden;
 }
 .content::-webkit-scrollbar-thumb:hover{
+  background-color: var(--NavbarBG);
   transition: 5s;
 }
 .se-pre-con {
@@ -62,12 +65,17 @@ top: 0px;
 right: 0px;
 }
 #title-bar-btns button{
+  color: var(--textColor);
+  background-color: rgba(255, 255, 255, 0);
 height: 25px;
 width: 35px;
 border: none;
 align-items: center;
 }
 #topbar button{
+  color: var(--textColor);
+    background-color:  var(--NavbarBG);
+    border-bottom: 1px solid black;
 border: none;
   width: 50px;
   height: 50px;
@@ -77,6 +85,8 @@ border: none;
   border-bottom: 1px solid black;
 }
 #topbar{
+  background-color: var(--NavbarBG);
+        border-bottom: 1px solid black;
       height: 50px;
       width: 100%;
       top: 0px;
@@ -87,11 +97,13 @@ border: none;
       align-items: center;
 }
 #topbar h2{
+  color: var(--textColor);
 top: 0px; /*used to be -10*/
 font-family: calibri;
 margin: 0;
 }
 #mySidenav {
+  background-color: var(--SidenavBG);
  position: fixed;
  height: 100%;
  left: 0px;
@@ -114,6 +126,7 @@ margin: 0;
   cursor: pointer;
 }
 .NavBox:hover{
+  background-color: var(--NavbarBG);
   transition: .5s;
 }
 .iconSection{
@@ -137,10 +150,12 @@ margin: 0;
   padding-left: 1px;
 }
 .textSection p{
+  color: var(--textColor);
   font-size: 20px;
   font-family: Calibri;
 }
 .maticn{
+  -webkit-text-stroke: 1.2px var(--textColor);
   color: transparent; 
 }
 #mySidenav span:first-child{
@@ -152,6 +167,7 @@ margin: 0;
   width: 100%;
 }
 .selectedNavOption{
+  background-color: var(--textColor);
   position: absolute;
   height: 80%;
   border-top-right-radius: 5px;
@@ -177,4 +193,19 @@ transition: .3s;
 #close-btn:hover{
 color: white;
 transition: .3s;
+}
+.contChild:nth-child(1){
+  background-color: var(--SidenavBG);
+}
+.subcont{
+  background-color: var(--SidenavBG);
+}
+.subcont h2{
+  color: var(--textColor);
+}
+#contB-Wrap{
+padding-top: 15px;
+background-color: var(--SidenavBG);
+border-radius: 10px;
+box-shadow: 0 0 10px 1px rgba(0,0,0,0.4);
 }

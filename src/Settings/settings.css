@@ -11,12 +11,6 @@ h2.optionHeader{
 
   :root {
     --offwhite: #d1d1d1;
-    --darkBlue: #0d1f3d;
-    --lightBlue: #008891;
-    --offBlue: #00416d;
-    --green: #00914d;
-    --pink: #ff4b77;
-    --black: #000;
   }
 .optionContainer {
   height: fit-content;
@@ -67,6 +61,8 @@ h2.optionHeader{
 }
 
 #General .optionContainer span {
+  background-color: var(--NavbarBG);
+  color: var(--textColor);
   display: flex;
   justify-content: space-between;
   padding-left: 10px;
@@ -119,10 +115,7 @@ h2.optionHeader{
   margin-bottom: 5px;
   cursor: pointer;
 }
-/* .settingsBox:first-child span:hover{
-  background-color: gray;
-  transition: .3s;
-} */
+
 .settingsBox:last-child{
   width: 100%;
   background-color: rgba(0, 0, 0, 0.685);
@@ -133,13 +126,15 @@ h2.optionHeader{
   display: none;
 }
 
-/* #selectedSetting{
-  background-color: red;
-} */
 .radio input{
   display: none;
 }
-
+.radio input:checked ~ .mark {
+  background-color: #42ba96;
+}
+.checkBox input:checked ~ .mark {
+  background-color: #42ba96;
+}
 .radio input:checked ~ .mark > i{
   color: var(--offwhite);
   display: block;
@@ -184,4 +179,25 @@ h2.optionHeader{
   font-family: calibri;
   font-size: medium;
   border-bottom: 3px solid rgb(196, 25, 25);
+}
+#Appearance .optionContainer span:nth-of-type(n+3){
+  background-color: var(--NavbarBG);
+  color: var(--textColor);
+}
+
+#Appearance .optionContainer span:nth-of-type(1){
+  background-color: var(--NavbarBG);
+  color: var(--textColor);
+}
+#Appearance .optionContainer span:nth-of-type(2){
+  background-color: var(--NavbarBG);
+  color: var(--textColor);
+}
+.settingsBox:first-of-type span{
+  background-color: var(--textColor);
+  color: var(--NavbarBG);
+}
+#selectedSetting{
+  background-color: var(--NavbarBG);
+  color: var(--textColor);
 }

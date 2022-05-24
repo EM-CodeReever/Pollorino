@@ -3,6 +3,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link id="ThemeStyleSheet" rel="stylesheet" href="">
         <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="./meetings.css">
         <link rel="stylesheet" href="../../node_modules/material-icons/iconfont/material-icons.css">
         <title>Pollorino</title>
     </head>
@@ -41,7 +42,28 @@
           </div>
            
         <div class="content">
-            
+            <div class="meetingContainer">
+                <div class="meetingHeader">
+                    <div>
+                        <span class="tab-item">All</span>
+                        <span class="tab-item">Reucurring</span>
+                        <span class="tab-item">Happening Today</span>
+                    </div>
+                    <button id="btnCreateMeeting">Add Meeting</button>
+                </div>
+                <div class="meetingList">
+                    <div class="Meeting">
+                        <div class="meetingInfo">
+                            <span>Meeting Name: <p id="lblMeetingName">Name</p></span>
+                            <span>Medium: <p id="lblMeetingMedium">Medium</p></span>
+                            <span>Time: <p id="lblMeetingTime">Time 00:00 PM</p></span>
+                        </div>
+                        <div class="meetingInfo">
+                            <button>Join</button><button><i class="material-icons">more_vert</i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     <script src="../control.js"></script> 
     </body>

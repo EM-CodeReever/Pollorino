@@ -53,6 +53,7 @@ const createWindow = () => {
         cloneWindow.focus()
       }
     })
+    
   //Open the DevTools.
   mainWindow.webContents.openDevTools({mode: 'detach'})
   }

@@ -5,15 +5,16 @@
     width: 100%;
     margin-bottom: 20px;
 }
-.subCont{
+.eventGrid{
+    background-color: var(--SidenavBG);
     border-radius: 10px;
     height: 100%;
     box-shadow: 0 0 10px 1px rgba(0,0,0,0.4);
 }
-.subCont h2{
+.eventGrid h2{
     margin: 0;
 }
-.subCont:first-child{
+.eventGrid:first-child{
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -25,7 +26,7 @@
     font-size: xxx-large;
     display: none;
 }
-.subCont:last-child{
+.eventGrid:last-child{
     padding: 20px;
     display: flex;
     margin-left: 20px;
@@ -34,10 +35,11 @@
     flex-direction: column;
     justify-content: space-between;
 }
-.subCont:last-child h2{
+.eventGrid:last-child h2{
     text-align: center;
 }
 button#addEvent {
+    background-color: var(--Transparentish);
    height: 50%;
    width: 100%;
    margin-bottom: 20px;
@@ -49,6 +51,7 @@ button#addEvent {
     font-size: 60px;
 }
 .eventContainer{
+    background-color: var(--SidenavBG);
     width: 100%;
     height: 520px;
     padding: 10px;
@@ -79,6 +82,7 @@ button#addEvent {
     border-radius: 10px;
 }
 .eventCard{
+    background-color: var(--Transparentish);
     display: inline-flex;
     position: relative;
     border-top-right-radius: 15px;
@@ -140,6 +144,7 @@ button#addEvent {
     border-radius: 5px;
 }
 .wrapper{
+    background-color: var(--Transparentish);
     padding-left: 20px;
     border-radius: 10px;
     height: 100px;
@@ -148,7 +153,7 @@ button#addEvent {
     justify-content: space-between;
 }
 .wrapper:first-of-type div{
-    padding: 10px 20px 10px 10px; /* top - right - bottom -left */
+    padding: 10px 20px 10px 10px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -166,7 +171,6 @@ button#addEvent {
     font-size: 25px;
 }
 .eventCountdown{
-    /* background-color: blanchedalmond; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     height: 100px;
@@ -177,11 +181,9 @@ button#addEvent {
 .eventCountdown div{
     display: flex;
     justify-content: center;
-    /* border: 1px solid rgb(0, 255, 98); */
     color: white;
 }
 .eventCountdown div:nth-child(-n+5){
-    /* background-color: blue; */
     align-items: flex-end;
     font-size: 50px;
     font-weight: bold;
@@ -200,12 +202,16 @@ button#addEvent {
 }
 
 .popup-content {
+    background-color: var(--NavbarBG);
     margin: auto;
     border-radius: 5px;
     width: 500px;
     height: 350px;
     position: relative;
     padding-top: 1px;
+}
+.popup-content input, .popup-content select, .popup-content button{
+    color: #000;
 }
 .popup-content p{
     font-family: Calibri;
@@ -242,6 +248,7 @@ button#addEvent {
 }
 textarea{
     resize: none;
+    color: #000;
 }
 form label{
     margin-left: 20px;
@@ -252,8 +259,11 @@ form div.line{
 form div.line:last-child textarea{
     height: 120px;
 }
+*{
+    color: var(--textColor);
+}
 @media screen and (max-width: 1020px) {
-    .subCont:last-child{
+    .eventGrid:last-child{
         height: 100px;
         margin-left: 0;
         width: 100%;
@@ -262,7 +272,7 @@ form div.line:last-child textarea{
         align-items: center;
         max-width: none;
     }
-    .subCont:first-child{
+    .eventGrid:first-child{
         height: 250px;
         width: 100%;
     }
