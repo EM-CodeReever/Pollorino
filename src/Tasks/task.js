@@ -13,14 +13,23 @@ function taskFile(){
             })
         }else{
             TaskStorage = JSON.parse(jsonString)
-            TaskStorage.Tasks.forEach(e => {
+            TaskStorage.Tasks.forEach((e,i) => {
                 $(".taskList").append(
-                    `<div class="task">
+                    `<div class="task" id="${i}">
                     <div><i class="material-icons ${e.Priority}">circle</i></div>
                     <p>${e.Text}</p>
                     <span><i class="material-icons maticn" style="font-size: 30px;">done</i></span>
                 </div>`)
             });
+            $(".task").find("span").on("click",function(){
+                var id = $(this).parent().attr('id')
+                console.log(id)
+                $(this).parent().fadeOut(300,function(){
+                    TaskStorage.Tasks.splice(id,1)
+                    WriteToTaskFile(TaskStorage)
+                })
+                
+            })
         }
     })
 }
@@ -33,6 +42,7 @@ $("#btnNewTask").on('click',function(){
     })
     TaskStorage.Tasks.unshift({Text:text,Priority:prio})
     WriteToTaskFile(TaskStorage)
+    $("#txtNewTask").val("")
 })
 
 function WriteToTaskFile(Obj){
@@ -45,8 +55,6 @@ function WriteToTaskFile(Obj){
         }
     })
 }
-// var ttt = []
-// ttt.unshift
 
 // $(":checkbox").each(function(){
 //     if($(this).is(":checked")){sel++}
