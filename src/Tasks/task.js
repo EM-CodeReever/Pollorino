@@ -55,7 +55,3 @@ function WriteToTaskFile(Obj){
         }
     })
 }
-
-// $(":checkbox").each(function(){
-//     if($(this).is(":checked")){sel++}
-// })
