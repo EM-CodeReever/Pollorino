@@ -52,7 +52,7 @@
                     <button id="btnCreateMeeting">Add Meeting</button>
                 </div>
                 <div class="meetingList">
-                    <div class="Meeting">
+                    <!-- <div class="Meeting">
                         <div class="meetingInfo">
                             <span>Meeting Name: <p id="lblMeetingName">Name</p></span>
                             <span>Medium: <p id="lblMeetingMedium">Medium</p></span>
@@ -61,11 +61,67 @@
                         <div class="meetingInfo">
                             <button>Join</button><button><i class="material-icons">more_vert</i></button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
+        <div class="popup" style="display:none">
+            <div class="popup-content">
+                <span class="close">&times;</span>
+                <div class="popup-header">
+                    <h2>Add New Meeting</h2>
+                </div>
+                <div class="popup-body">
+                    <div class="form-group">
+                        <label for="meetingName">Meeting Name</label>
+                        <input type="text" id="meetingName" placeholder="Meeting Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="meetingPlatform">Meeting Platform</label>
+                        <select id="meetingPlatform">
+                            <option value="">Select Medium</option>
+                            <option value="1">Zoom</option>
+                            <option value="2">Webex</option>
+                            <option value="3">MS Teams</option>
+                            <option value="4">Skype</option>
+                            <option value="5">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="meetingRepeat">Re-occuring</label>
+                        <input type="checkbox" id="meetingRepeat">
+                    </div>
+                    <div class="form-group repeat" style="display:none">
+                        <label for="meetingRepeatDays">Meeting Day<br><i style="color: #ddd; font-size:medium;">[hold Ctrl for multiple]</i></label>
+                        <select id="meetingRepeatDays" multiple>
+                            <option value="0">Sunday</option>
+                            <option value="1">Monday</option>
+                            <option value="2">Tuesday</option>
+                            <option value="3">Wednesday</option>
+                            <option value="4">Thursday</option>
+                            <option value="5">Friday</option>
+                            <option value="6">Saturday</option>
+                        </select>
+                    </div>
+                    <div class="form-group non-repeat">
+                        <label for="meetingDate">Meeting Date</label>
+                        <input type="date" id="meetingDate" placeholder="Meeting Date">
+                    </div>
+                    <div class="form-group">
+                        <label for="meetingTime">Meeting Time</label>
+                        <input type="time" id="meetingTime" placeholder="Meeting Time">
+                    </div>
+                    <div class="form-group">
+                        <label for="meetingUrl">Meeting Url</label>
+                        <input type="text" id="meetingUrl" placeholder="Meeting Url">
+                    </div>
+                    <div class="form-group">
+                        <button id="btnAddNewMeeting">Add</button>
+                    </div>
+        </div>
+
     <script src="../control.js"></script> 
+    <script src="./meeting.js"></script>
     </body>
     
 </html>
