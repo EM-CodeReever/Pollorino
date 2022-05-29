@@ -22,6 +22,10 @@
     font-family: cursive;
     font-size: medium;
 }
+.newTask > input:focus{
+    outline: none;
+}
+
 .newTask > span{
     min-width: 80px;
     height: inherit;
@@ -42,12 +46,21 @@
 .taskWrapper:last-child{
     background-color: var(--SidenavBG);
     width: 75%;
-    padding: 15px;
+    padding: 15px 5px;
     border-radius: 10px;
 }
 .taskList{
-    height: calc(100% - 70px);
-    padding-top: 15px;
+    height: calc(100% - 80px);
+    border-radius: 10px;
+    overflow-y: scroll;
+    padding: 0px 10px;
+}
+.taskList::-webkit-scrollbar{
+    background-color: transparent;
+    width: 3px;
+}
+.taskList::-webkit-scrollbar-thumb{
+    background-color: var(--textColor);
     border-radius: 10px;
 }
 .taskSort{
@@ -70,6 +83,7 @@
     padding: 0px 3px;
 }
 .taskSort span{
+    cursor: pointer;
     color: var(--textColor);
     background-color: var(--NavbarBG);
     margin-top: 5px;
@@ -88,6 +102,7 @@
     justify-content: flex-end;
     align-items: center;
     padding: 0px 110px;
+    margin-bottom: 15px;
 }
 .taskPriority span{
     border-bottom-left-radius: 5px;
@@ -124,6 +139,7 @@
     align-items: center;
     border-radius: 12px;
     padding: 5px;
+    cursor: pointer;
 }
 .task > span:hover{
    background-color: var(--SidenavBG);
@@ -149,14 +165,16 @@
 @media screen and (max-width: 850px) {
     .taskContainer{
         flex-direction: column;
+        height: auto;
     }
     .taskWrapper:last-child{
         width: 100%;
         height: 100%;
+        margin-bottom: 10px;
     }
     .taskWrapper:first-child{
         width: 100%;
         padding: 0px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
   }
