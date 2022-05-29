@@ -26,3 +26,6 @@ button#addEvent {
 .wrapper{
   background-color: var(--Background) !important;
 }
+.active{
+  background-color: var(--Background) !important;
+}
