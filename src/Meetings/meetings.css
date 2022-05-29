@@ -3,6 +3,7 @@
     width: 100%;
     background-color: var(--SidenavBG);
     border-radius: 10px;
+    padding: 5px;
 }
 .meetingHeader{
     height: fit-content;
@@ -20,6 +21,7 @@
     height: 35px;
 }
 .tab-item{
+    cursor: pointer;
     height: inherit;
     display: flex;
     justify-content: center;
@@ -29,6 +31,10 @@
     border-radius: 15px;
     border: 1px solid var(--Background);
     color: var(--textColor);
+}
+.active{
+    background-color: var(--Transparentish);
+    border: none;
 }
 #btnCreateMeeting {
     height: inherit;
@@ -42,10 +48,11 @@
     align-items: center;
     justify-content: center;
 }
+
 .meetingList{
     height: calc(100% - 75px);
     width: 100%;
-    padding: 0px 20px;
+    padding: 0px 15px;
     overflow-y: scroll;
 }
 .meetingList::-webkit-scrollbar{
@@ -53,7 +60,7 @@
     width: 3px;
 }
 .meetingList::-webkit-scrollbar-thumb{
-    background-color: var(--NavbarBG);
+    background-color: var(--textColor);
     border-radius: 10px;
 }
 .Meeting{
@@ -64,10 +71,9 @@
     justify-content: space-between;
     height: 150px;
     background-color: var(--Transparentish);
-}
-.Meeting:not(:last-child){
     margin-bottom: 10px;
 }
+
 .meetingInfo:first-child{
     display: flex;
     flex-direction: column;
@@ -94,7 +100,7 @@
     height: 100%;
     max-width: fit-content;
 }
-.meetingInfo button, .form-group:last-of-type > button{
+.meetingInfo button, .form-group:last-of-type > button, #btnSaveMeeting{
     height: 30px;
     padding: 10px;
     border: none;
@@ -196,4 +202,40 @@
 #meetingRepeatDays::-webkit-scrollbar-thumb{
     background-color: var(--NavbarBG);
     border-radius: 10px;
+}
+.meetingTooltip{
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.meetingTooltip button{
+    width: 65px;
+    font-size: medium;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 5px;
+    border: none;
+    background-color: transparent;
+    color: aliceblue;
+}
+.meetingTooltip button:first-child{
+    margin-bottom: 5px;
+}
+.meetingTooltip button:hover{
+    background-color: rgba(255, 255, 255, 0.4);
+    color: #161c2d;
+}
+#meetingRepeatDays option{
+    border-radius: 5px;
+    padding: 5px;
+}
+#meetingRepeatDays option:hover{
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#meetingRepeatDays option:not(:last-child) {
+    margin-bottom: 5px;
 }
