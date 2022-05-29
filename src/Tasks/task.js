@@ -27,6 +27,7 @@ function taskFile(){
                 $(this).parent().fadeOut(300,function(){
                     TaskStorage.Tasks.splice(id,1)
                     WriteToTaskFile(TaskStorage)
+                    $(this).remove()
                 })
                 
             })
@@ -42,6 +43,8 @@ $("#btnNewTask").on('click',function(){
     })
     TaskStorage.Tasks.unshift({Text:text,Priority:prio})
     WriteToTaskFile(TaskStorage)
+    $(".taskList").empty()
+    taskFile()
     $("#txtNewTask").val("")
 })
 
@@ -49,9 +52,54 @@ function WriteToTaskFile(Obj){
     fs.writeFile(filePath,JSON.stringify(Obj, null, 2),err =>{
         if(err){
             console.log(err)
-        }else{
-            $(".taskList").empty();
-            taskFile()
         }
+    })
+}
+
+$(".taskSort").find("span").on("click",function(){
+    $(this).find(":radio").prop("checked", true)
+})
+
+$(".taskSort").find("span:nth-of-type(1)").on("click",function(){
+    $(".task").each(function(){
+        if($(this).find("i:first-of-type").hasClass("High")){
+            $(this).show()
+        }else{
+            $(this).hide()
+        }
+    })
+})
+$(".taskSort").find("span:nth-of-type(2)").on("click",function(){
+    $(".task").each(function(){
+        if($(this).find("i:first-of-type").hasClass("Medium")){
+            $(this).show()
+        }else{
+            $(this).hide()
+        }
+    })
+})
+$(".taskSort").find("span:nth-of-type(3)").on("click",function(){
+    $(".task").each(function(){
+        if($(this).find("i:first-of-type").hasClass("Low")){
+            $(this).show()
+        }else{
+            $(this).hide()
+        }
+    })
+})
+$(".taskSort").find("span:nth-of-type(4)").on("click",function(){
+    $(".taskList").empty();
+    taskFile()
+})
+
+function attachClickEvents(){
+    $(".task").find("span").off("click")
+    $(".task").find("span").on("click",function(){
+        var id = $(this).parent().attr('id')
+        console.log(id)
+        $(this).parent().fadeOut(300,function(){
+            TaskStorage.Tasks.splice(id,1)
+            WriteToTaskFile(TaskStorage)
+        })
     })
 }
