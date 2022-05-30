@@ -116,14 +116,16 @@ function showPopUp(){
 window.onclick = (event) => {
     if (event.target == popup) {
         $(".popup").fadeOut("fast")
+        clearModal()
     }
 }
 $(".close").on("click",function(){
     $(".popup").fadeOut("fast")
+    clearModal()
 })
 
 $("#addEventBtn").on("click",function(){
-    if($("#event_Name").val() != "" && document.getElementById("eventDate").value != ""){
+    if($("#event_Name").val() != "" && document.getElementById("eventDate").value != "" && $("#event_type").val() != null){
     var name = $("#event_Name").val()
     var type = $("#event_type :selected").text()
     var date = new Date(document.getElementById("eventDate").value)
@@ -133,8 +135,13 @@ $("#addEventBtn").on("click",function(){
     localStorage.setItem("eventContentArrayStorage",JSON.stringify(eventContentArray))
     eventArray[eventArray.length - 1].createEventCard()
     $(".popup").fadeOut("fast")
+    clearModal()
     $('.deleteEvent').off('click')
     deleteEvent();
+    }else{
+        $("#errorMsg").text("Please fill in all required fields")
+        $("#errorMsg").fadeIn("fast")
+        setTimeout(function(){$("#errorMsg").fadeOut(300)},2000)
     }
 })
 function deleteEvent(){
@@ -198,3 +205,10 @@ function timeCountDown(){
 deleteEvent()
 timeCountDown()
 setInterval(timeCountDown,1000)
+
+function clearModal(){
+    $("#event_Name").val("")
+    $("#eventDate").val("")
+    $("#event_type").val("")
+    $("#eventMemo").val("")
+}
