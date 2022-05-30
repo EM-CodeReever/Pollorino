@@ -90,6 +90,7 @@
                             <div class="line"> 
                             <label for="EventType">Type:</label>
                             <select id="event_type" name="typeofevents" class="inputArea">
+                                <option value="" selected>Select Event Type</option>
                                 <option value="Assignment">Assignment</option>
                                 <option value="Special Occasion">Special Occasion</option>
                                 <option value="Deadline">Deadline</option>
@@ -97,11 +98,13 @@
                               </select>
                             </div>
                             <div class="line"> 
-                            <label for="link">Memo:</label>
+                            <label for="link">Memo (optional):</label>
                             <textarea class="inputArea" id="eventMemo"></textarea>
                             </div>
+                            <div class="line">
+                                <span id="errorMsg"></span><button type="button" id="addEventBtn" class="popupBtn">Add</button>
+                            </div>
                         </form>
-                        <button id="addEventBtn" class="popupBtn">Add</button>
                     </div> 
                 </div>
 
