@@ -13,7 +13,36 @@ class Meeting{
         this.repeat = repeat;
     }
 }
-
+//check an array of sday strings andd returnsa shortened version of the days
+function getShortenedDays(days){
+    var shortenedDays = [];
+    days.forEach((day) => {
+        switch(day){
+            case "Monday":
+                shortenedDays.push("Mon");
+                break;
+            case "Tuesday":
+                shortenedDays.push("Tue");
+                break;
+            case "Wednesday":
+                shortenedDays.push("Wed");  //  shortenedDays.push("W");
+                break;
+            case "Thursday":
+                shortenedDays.push("Thu");
+                break;
+            case "Friday":
+                shortenedDays.push("Fri");
+                break;
+            case "Saturday":    
+                shortenedDays.push("Sat");
+                break;
+            case "Sunday":
+                shortenedDays.push("Sun");
+                break;
+        }   
+    })
+    return shortenedDays.join(", ")
+}
 function meetingFile(){
     fs.readFile(filePath,"utf-8",(err,jsonString) => {
         if(err){
@@ -32,7 +61,7 @@ function meetingFile(){
                     <div class="meetingInfo">
                         <span>Name:<p id="lblMeetingName">${e.name}</p></span>
                         <span>Platform:<p id="lblMeetingPlatform">${e.platform}</p></span>
-                        <span>${e.repeat ? "Reoccurs" : "Date"}:<p id="lblMeetingDate">${typeof e.date == "string" ? e.date : e.date.toString()}</p></span>
+                        <span>${e.repeat ? "Reoccurs" : "Date"}:<p id="lblMeetingDate">${displayDateStringArray(e)}</p></span>
                         <span>Time: <p id="lblMeetingTime">@ ${e.time}</p></span>
                     </div>
                     <div class="meetingInfo" id="${i}">
@@ -123,9 +152,6 @@ $("#btnAddNewMeeting").on('click',function(){
         $("#meetingRepeatDays").find(":selected").each(function(){
             date.push($(this).text())
         })
-        if(date.length == 7){
-            date.push("Everyday")
-        }
     }else{
         repeat = false
         var date = new Date($("#meetingDate").val())
@@ -341,6 +367,19 @@ function attachClickEvents(){
     $("#meetingPlatform").val("")
     $("#meetingUrl").val("")
     $("#meetingRepeat").prop("checked",false)
-    $("#meetingRepeatDays").find("option").removeAttr("selected")
+    $(".repeat").hide()
+    $(".non-repeat").show()
+    $("option:selected").prop("selected", false)
  }
 
+function displayDateStringArray(e){
+    if(typeof e.date == "string"){
+        return e.date
+    }else{
+        if(e.date.length == 7){
+            return "Everyday"
+        }else{
+        return "Every " + getShortenedDays(e.date)
+        }
+    }   
+}
