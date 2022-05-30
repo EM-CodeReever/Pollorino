@@ -39,7 +39,7 @@
     text-align: center;
 }
 button#addEvent {
-    background-color: var(--Transparentish);
+   background-color: var(--Transparentish);
    height: 50%;
    width: 100%;
    margin-bottom: 20px;
@@ -79,6 +79,7 @@ button#addEvent {
     background-color: transparent;
 }
 .eventWrap::-webkit-scrollbar-thumb{
+    background-color: var(--textColor);
     border-radius: 10px;
 }
 .eventCard{
@@ -205,12 +206,15 @@ button#addEvent {
     background-color: var(--NavbarBG);
     margin: auto;
     border-radius: 5px;
-    width: 500px;
-    height: 350px;
+    width: 600px;
+    height: auto;
     position: relative;
     padding-top: 1px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
 }
-.popup-content input, .popup-content select, .popup-content button{
+.popup-content input, .popup-content select, .popup-content button, #event_type option{
     color: #000;
 }
 .popup-content p{
@@ -237,27 +241,50 @@ button#addEvent {
     width: 70%;
 }
 .popupBtn{
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    background-color: #fefefe;
+    background-color: #42ba96;
     width: 50px;
     height: 25px;
     border: none;
     border-radius: 5px;
 }
+.line input, .line select{
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 textarea{
     resize: none;
     color: #000;
+}
+form{
+    margin: 0px;
 }
 form label{
     margin-left: 20px;
 }
 form div.line{
+    height: 30px;
     margin-bottom: 10px;
 }
-form div.line:last-child textarea{
+form div.line:nth-of-type(4) textarea, form div.line:nth-of-type(4){
     height: 120px;
+    border-radius: 5px;
+}
+.line:last-child{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0px 20px;
+}
+#errorMsg{
+    display: none; 
+    color: white;
+    height: 21px; 
+    margin-right: 20px;
+    background-color: #df4759;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 0px 5px;
 }
 *{
     color: var(--textColor);
