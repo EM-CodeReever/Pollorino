@@ -115,6 +115,10 @@
     margin-left: 5px;
     padding: 0px 10px;
 }
+
+.taskPriority span, .taskPriority span > label, .taskSort span, .taskSort span > label{
+    cursor: pointer;
+}
 .task{
     background-color: var(--Transparentish);
     height: fit-content;
