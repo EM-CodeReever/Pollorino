@@ -144,27 +144,34 @@ $("#btnCreateMeeting").on('click',function(){
     $("#btnSaveMeeting").hide()
 })
 $("#btnAddNewMeeting").on('click',function(){
-    var name = $("#meetingName").val()
-    var repeat
-    if($("#meetingRepeat").is(":checked")){
-        repeat = true
-        var date = [];
-        $("#meetingRepeatDays").find(":selected").each(function(){
-            date.push($(this).text())
-        })
+    console.log($("#meetingPlatform").val());
+    if(modalValidation()){
+        var name = $("#meetingName").val()
+        var repeat
+        if($("#meetingRepeat").is(":checked")){
+            repeat = true
+            var date = [];
+            $("#meetingRepeatDays").find(":selected").each(function(){
+                date.push($(this).text())
+            })
+        }else{
+            repeat = false
+            var date = new Date($("#meetingDate").val())
+            date = date.toDateString()
+        }
+        var time = convert24HourTimeTo12HourTime($("#meetingTime").val())
+        var platform = $("#meetingPlatform").find(":selected").text();
+        var url = $("#meetingUrl").val()
+        var newMeeting = new Meeting(name,date,time,platform,url,repeat)
+        MeetingStorage.Meetings.unshift(newMeeting)
+        writeToMeetingFile(MeetingStorage)
+        $(".popup").fadeOut(300)
+        clearPopup()
     }else{
-        repeat = false
-        var date = new Date($("#meetingDate").val())
-        date = date.toDateString()
+        $("#errorMsg").text("Please fill in all required fields")
+        $("#errorMsg").fadeIn("fast")
+        setTimeout(function(){$("#errorMsg").fadeOut(300)},2000)
     }
-    var time = convert24HourTimeTo12HourTime($("#meetingTime").val())
-    var platform = $("#meetingPlatform").find(":selected").text();
-    var url = $("#meetingUrl").val()
-    var newMeeting = new Meeting(name,date,time,platform,url,repeat)
-    MeetingStorage.Meetings.unshift(newMeeting)
-    writeToMeetingFile(MeetingStorage)
-    $(".popup").fadeOut(300)
-    clearPopup()
 })
 
 $("#btnSaveMeeting").on('click',function(){
@@ -370,6 +377,7 @@ function attachClickEvents(){
     $(".repeat").hide()
     $(".non-repeat").show()
     $("option:selected").prop("selected", false)
+
  }
 
 function displayDateStringArray(e){
@@ -381,5 +389,22 @@ function displayDateStringArray(e){
         }else{
         return "Every " + getShortenedDays(e.date)
         }
+    }   
+}
+function modalValidation(){
+    if($("#meetingName").val() == ""){
+        return false
+    }else if(!$("#meetingRepeat").prop("checked") && $("#meetingDate").val() == ""){
+        return false
+    }else if($("#meetingTime").val() == ""){
+        return false
+    }else if($("#meetingPlatform").val() == ""){
+        return false
+    }else if($("#meetingUrl").val() == ""){
+        return false
+    }else if($("#meetingRepeat").prop("checked") && $("#meetingRepeatDays").find(":selected").text() == ""){
+        return false
+    }else{
+        return true
     }   
 }
