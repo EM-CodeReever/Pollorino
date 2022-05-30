@@ -11,7 +11,6 @@ function WriteToFile(Object){
 }
 
 
-
 function radioSave(){
   var radioInputs = document.querySelectorAll('input[type="radio"]');//stores as nodelist which are arrays but not really
   var arrRadioData = [];
@@ -44,7 +43,11 @@ function checkBoxLoad(){
   if(localStorage.checkBoxInputs){
     var checkBoxInputs = JSON.parse(localStorage.getItem('checkBoxInputs'));
   checkBoxInputs.forEach((input) => {
-    document.getElementById(input.id).checked = input.checked;
+    try{
+      document.getElementById(input.id).checked = input.checked;
+    }catch(err){
+      localStorage.removeItem('checkBoxInputs');
+    }
   });
   }else{
     checkBoxSave();
