@@ -110,6 +110,7 @@ margin: 0;
  top: 0;
  width: 50px;
  overflow-x: hidden;
+ overflow-y: hidden;
  white-space: nowrap;
  z-index: 1;
  display: flex;
