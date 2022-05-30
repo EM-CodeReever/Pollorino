@@ -3,8 +3,8 @@ var currentDocUrlString = document.URL;
 var pageList = ["home.html","task.html","note.html","event.html","meetings.html","settings.html"];
 const fs = require('fs');
 const path = require('path');
-var os = require('os');
-var dir = path.join(os.homedir + "\\AppData\\Roaming\\Pollorino\\JSON_Data");
+const os = require('os');
+const dir = path.join(os.homedir + "\\AppData\\Roaming\\Pollorino\\JSON_Data");
 const configTemplate = {
   Settings: {
     MinimizeOnClose: false,
