@@ -36,16 +36,19 @@ function taskFile(){
 }
 taskFile()
 $("#btnNewTask").on('click',function(){
-    var text  = $("#txtNewTask").val()
-    var prio;
-    $(".taskPriority").find("input").each(function(){
-        if($(this).is(":checked")){prio = $(this).siblings("label").html()}
-    })
-    TaskStorage.Tasks.unshift({Text:text,Priority:prio})
-    WriteToTaskFile(TaskStorage)
-    $(".taskList").empty()
-    taskFile()
-    $("#txtNewTask").val("")
+    if($("#taskText").val() != ""){
+        var text  = $("#txtNewTask").val()
+        var prio;
+        $(".taskPriority").find("input").each(function(){
+            if($(this).is(":checked")){prio = $(this).siblings("label").html()}
+        })
+        TaskStorage.Tasks.unshift({Text:text,Priority:prio})
+        WriteToTaskFile(TaskStorage)
+        $(".taskList").empty()
+        taskFile()
+        $("#txtNewTask").val("")
+        $(".taskSort").find("span:nth-of-type(4)").find(":radio").prop("checked", true)
+    }
 })
 
 function WriteToTaskFile(Obj){
@@ -55,6 +58,10 @@ function WriteToTaskFile(Obj){
         }
     })
 }
+
+$(".taskPriority").find("span").on("click",function(){
+    $(this).find(":radio").prop("checked", true)
+})
 
 $(".taskSort").find("span").on("click",function(){
     $(this).find(":radio").prop("checked", true)
