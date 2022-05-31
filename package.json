@@ -32,7 +32,7 @@
       "installerIcon": "src/images/setupicon.ico",
       "uninstallerIcon": "src/images/setupicon.ico",
       "uninstallDisplayName": "Pollorino",
-      "license": "license.txt",
+      "license": "LICENSE",
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
     }

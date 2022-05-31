@@ -25,7 +25,7 @@ const createWindow = () => {
   mainWindow.removeMenu(true)
 
   //load the entrypoint of the app.
-  //mainWindow.loadFile('src/Home/home.html')
+  mainWindow.loadFile('src/Home/home.html')
 
   app.whenReady().then(() => {
     tray = new Tray(path.join(__dirname + '\\src\\images\\icon.ico'))
@@ -55,7 +55,7 @@ const createWindow = () => {
     })
     
   //Open the DevTools.
-  mainWindow.webContents.openDevTools({mode: 'detach'})
+  //mainWindow.webContents.openDevTools({mode: 'detach'})
   }
 app.whenReady().then(() => {
   createWindow()
