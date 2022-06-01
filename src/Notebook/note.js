@@ -39,7 +39,12 @@ function noteFile(){
                 noteFile()
             })
         }else{
-            NotebookStorage = JSON.parse(jsonString)
+            try{
+                NotebookStorage = JSON.parse(jsonString)
+            }catch(err){
+                console.log(err)
+                noteFile()
+            }
             for(var i = (NotebookStorage.NoteList.length - 1); i >= 0; i--){
                 $(".Note-Grid").append(
                 `<div class="Notes" id="${i}">

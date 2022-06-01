@@ -1,16 +1,4 @@
 $(".restartWarning").hide()
-let config;
-fs.readFile(path.join(dir + "\\config.json"),"utf-8",(err,jsonString)=>{
-   config = JSON.parse(jsonString)
-})
-function WriteToFile(Object){
-  fs.writeFile(path.join(dir + "\\config.json"),JSON.stringify(Object, null, 2),err => {
-    $(".se-pre-con").show()
-    $(".se-pre-con").fadeOut(1000)
-      if(err){console.log(err)}
-  })
-}
-
 
 function radioSave(){
   var radioInputs = document.querySelectorAll('input[type="radio"]');//stores as nodelist which are arrays but not really
@@ -65,8 +53,7 @@ $(".optionContainer").find(".radio").on("click",function(){
     $(this).find("input").prop("checked",true)
     let themeIndex = config.Settings.Theme.Name.indexOf($(this).text().replace("check",""))
     config.Settings.Theme.IndexChosen = themeIndex;
-    WriteToFile(config)
-    sessionStorage.setItem("Config",JSON.stringify(config))
+    localStorage.setItem("Config",JSON.stringify(config))
     radioSave()
     ThemeChange()
   }
@@ -90,7 +77,6 @@ $("#Appearance").find(".optionContainer").find(".eventMarkerVis").on("click",fun
   }else{
     config.Settings.EventMarkerVisible = false;
   }
-  WriteToFile(config)
-  sessionStorage.setItem("Config",JSON.stringify(config))
+  localStorage.setItem("Config",JSON.stringify(config))
 })
 

@@ -54,7 +54,13 @@ function meetingFile(){
                 meetingFile()
             })
         }else{
-            MeetingStorage = JSON.parse(jsonString)
+            try{
+                MeetingStorage = JSON.parse(jsonString)
+            }catch(err){
+                console.log(err)
+                meetingFile()
+            }
+            
             MeetingStorage.Meetings.forEach((e,i) => {
                 $(".meetingList").append(
                     `<div class="Meeting">
@@ -144,7 +150,7 @@ $("#btnCreateMeeting").on('click',function(){
     $("#btnSaveMeeting").hide()
 })
 $("#btnAddNewMeeting").on('click',function(){
-    console.log($("#meetingPlatform").val());
+
     if(modalValidation()){
         var name = $("#meetingName").val()
         var repeat
@@ -154,19 +160,25 @@ $("#btnAddNewMeeting").on('click',function(){
             $("#meetingRepeatDays").find(":selected").each(function(){
                 date.push($(this).text())
             })
+            var time = convert24HourTimeTo12HourTime($("#meetingTime").val())
         }else{
             repeat = false
             var date = new Date($("#meetingDate").val())
+            var time = convert24HourTimeTo12HourTime(date.toTimeString())
+            console.log(date.toTimeString());
+            console.log(time);
             date = date.toDateString()
+
         }
-        var time = convert24HourTimeTo12HourTime($("#meetingTime").val())
         var platform = $("#meetingPlatform").find(":selected").text();
         var url = $("#meetingUrl").val()
         var newMeeting = new Meeting(name,date,time,platform,url,repeat)
         MeetingStorage.Meetings.unshift(newMeeting)
         writeToMeetingFile(MeetingStorage)
         $(".popup").fadeOut(300)
-        clearPopup()
+        setTimeout(function(){
+            clearPopup()
+        },300)
     }else{
         $("#errorMsg").text("Please fill in all required fields")
         $("#errorMsg").fadeIn("fast")
@@ -184,12 +196,15 @@ $("#btnSaveMeeting").on('click',function(){
         $("#meetingRepeatDays").find(":selected").each(function(){
             date.push($(this).text())
         })
+        var time = convert24HourTimeTo12HourTime($("#meetingTime").val())
     }else{
         repeat = false
         var date = new Date($("#meetingDate").val())
-        date = date.toDateString()
+        var time = convert24HourTimeTo12HourTime(date.toTimeString())
+        console.log(date.toTimeString());
+        console.log(time);
+        date = date.toDateString()    
     }
-    var time = convert24HourTimeTo12HourTime($("#meetingTime").val())
     var platform = $("#meetingPlatform").find(":selected").text();
     var url = $("#meetingUrl").val()
     var newMeeting = new Meeting(name,date,time,platform,url,repeat)
@@ -396,7 +411,7 @@ function modalValidation(){
         return false
     }else if(!$("#meetingRepeat").prop("checked") && $("#meetingDate").val() == ""){
         return false
-    }else if($("#meetingTime").val() == ""){
+    }else if($("#meetingTime").val() == "" && $("#meetingRepeat").prop("checked")){
         return false
     }else if($("#meetingPlatform").val() == ""){
         return false

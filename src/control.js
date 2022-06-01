@@ -5,26 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const dir = path.join(os.homedir + "\\AppData\\Roaming\\Pollorino\\JSON_Data");
-
-function ThemeChange() {
-  
-  fs.readFile(path.join(dir + "\\config.json"),"utf-8",(err,jsonString)=>{
-    if(err){
-      fs.writeFile(path.join(dir + "\\config.json"),JSON.stringify(configTemplate, null, 2),(err)=>{ThemeChange()})    
-    }else{
-      var config = JSON.parse(jsonString)
-      
-      var theme = $("#ThemeStyleSheet")
-      for( var i = 0; i < config.Settings.Theme.Name.length; i++){
-        if(i == config.Settings.Theme.IndexChosen){
-          theme.attr("href",`../themes/${config.Settings.Theme.Name[i]}.css`)
-        }
-      }
-    }
-  })
-}
-ThemeChange()
-
+var config;
 const configTemplate = {
   Settings: {
     MinimizeOnClose: false,
@@ -40,6 +21,11 @@ const configTemplate = {
       "IndexChosen": 1
     }
   }
+}
+if(localStorage.Config){
+   config = JSON.parse(localStorage.Config)
+}else{
+  localStorage.setItem("Config",JSON.stringify(configTemplate))
 }
 
 if (!fs.existsSync(dir)){
@@ -84,7 +70,16 @@ window.onload = () => {
   $(".se-pre-con").fadeOut("slow");
 }
 
-
+function ThemeChange() {
+  config = JSON.parse(localStorage.Config)
+  var theme = $("#ThemeStyleSheet")
+  for( var i = 0; i < config.Settings.Theme.Name.length; i++){
+    if(i == config.Settings.Theme.IndexChosen){
+      theme.attr("href",`../themes/${config.Settings.Theme.Name[i]}.css`)
+    }
+  }
+}
+ThemeChange()
 
 
 

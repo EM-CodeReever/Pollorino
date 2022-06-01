@@ -12,7 +12,13 @@ function taskFile(){
                 taskFile()
             })
         }else{
-            TaskStorage = JSON.parse(jsonString)
+            try{
+                TaskStorage = JSON.parse(jsonString)
+            }catch(err){
+                console.log(err)
+                $(".taskList").empty()
+                taskFile()
+            }
             TaskStorage.Tasks.forEach((e,i) => {
                 $(".taskList").append(
                     `<div class="task" id="${i}">
@@ -21,16 +27,7 @@ function taskFile(){
                     <span><i class="material-icons maticn" style="font-size: 30px;">done</i></span>
                 </div>`)
             });
-            $(".task").find("span").on("click",function(){
-                var id = $(this).parent().attr('id')
-                console.log(id)
-                $(this).parent().fadeOut(300,function(){
-                    TaskStorage.Tasks.splice(id,1)
-                    WriteToTaskFile(TaskStorage)
-                    $(this).remove()
-                })
-                
-            })
+            attachClickEvents()
         }
     })
 }
@@ -45,7 +42,7 @@ $("#btnNewTask").on('click',function(){
         })
         TaskStorage.Tasks.unshift({Text:text,Priority:prio})
         WriteToTaskFile(TaskStorage)
-        $(".taskList").empty()
+        $(".taskList").empty();
         taskFile()
         $("#txtNewTask").val("")
         $(".taskSort").find("span:nth-of-type(4)").find(":radio").prop("checked", true)
@@ -106,6 +103,7 @@ function attachClickEvents(){
         var id = $(this).parent().attr('id')
         console.log(id)
         $(this).parent().fadeOut(300,function(){
+            $(this).remove()
             TaskStorage.Tasks.splice(id,1)
             WriteToTaskFile(TaskStorage)
         })

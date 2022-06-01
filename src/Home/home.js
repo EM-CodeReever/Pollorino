@@ -2,10 +2,7 @@ var meetingfilePath = path.join(dir + "\\MeetingStorage.json");
 var taskfilePath = path.join(dir + "\\TaskStorage.json");
 var eventfilePath = path.join(dir + "\\EventStorage.json");
 var toggle = true;
-fs.readFile(path.join(dir + "\\config.json"),"utf-8",(err,jsonString)=>{
-      var config = JSON.parse(jsonString)
-      sessionStorage.setItem("Config",JSON.stringify(config))
-})
+
 function greeting() {
     var time = new Date().getHours();
     var message;
@@ -42,8 +39,9 @@ $(".btnDropdown").on('click', function () {
 function meetingFile(){
     fs.readFile(meetingfilePath,"utf-8",(err,jsonString) => {
         if(err){
-            console.error(err)
+            console.log(err)
             fs.writeFile(meetingfilePath,JSON.stringify({Meetings:[]}, null, 2),err => {
+                console.log('wrote file');
                 if(err){
                     console.log(err)
                 }
@@ -55,6 +53,7 @@ function meetingFile(){
             MeetingStorage.Meetings.forEach(meeting => {
                 if(!meeting.repeat){
                     var date = new Date(meeting.date)
+                    console.log(date)
                     if(isDateToday(date)){
                         meetingsToday++
                         $(".dashboard-meeting-body").append(`<div class="item">${meeting.name} <p class="time-badge">@${meeting.time}</p></div>`)
@@ -80,7 +79,7 @@ function meetingFile(){
 function taskFile(){
     fs.readFile(taskfilePath,"utf-8",(err,jsonString) => {
         if(err){
-            console.error(err)
+            console.log(err)
             fs.writeFile(taskfilePath,JSON.stringify({Tasks:[]}, null, 2),err => {
                 if(err){
                     console.log(err)
@@ -104,7 +103,7 @@ function taskFile(){
 function eventFile(){
     fs.readFile(eventfilePath,"utf-8",(err,jsonString) => {
         if(err){
-            console.error(err)
+            console.log(err)
             fs.writeFile(eventfilePath,JSON.stringify({Events:[]}, null, 2),err => {
                 if(err){
                     console.log(err)

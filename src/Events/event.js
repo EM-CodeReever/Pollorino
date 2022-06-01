@@ -1,7 +1,7 @@
 var filePath = path.join(dir + "\\EventStorage.json");
 var EventStorage;
 var Configuration;
-Configuration = JSON.parse(sessionStorage.Config)
+
 
 function twoDigit(x){
     var output
@@ -70,7 +70,14 @@ function eventFile(){
                 eventFile()
             })
         }else{
-            EventStorage = JSON.parse(jsonString)
+            try{
+                EventStorage = JSON.parse(jsonString)
+            }catch(err){
+                console.log(err)
+                $(".eventWrap").empty()
+                eventFile()
+            }
+            Configuration = JSON.parse(localStorage.Config)
             EventStorage.Events.forEach((e,i) => {
                 $(".eventWrap").append(`<div class="eventCard" ${Configuration.Settings.EventMarkerVisible ? "style=\"border-bottom: 3px solid " + eventTypeColor(e.type) + "\"": ""} id="${i}">
                         <h2 id="eventName">${e.name}</h2>
@@ -82,7 +89,6 @@ function eventFile(){
                         <button class="deleteEvent">Delete</button>
                     </div>`)
             });
-            
             attachEvents()
             countDownTimer()
         }
