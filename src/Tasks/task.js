@@ -36,7 +36,8 @@ function taskFile(){
 }
 taskFile()
 $("#btnNewTask").on('click',function(){
-    if($("#taskText").val() != ""){
+    if($("#txtNewTask").val() != ""){
+        console.log($("#txtNewTask").val())
         var text  = $("#txtNewTask").val()
         var prio;
         $(".taskPriority").find("input").each(function(){

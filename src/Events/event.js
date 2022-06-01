@@ -1,9 +1,7 @@
-var eventArray = []
-var eventContentArray = []
-var countDownArray = []
-month_string_arr = ["January","February","March","April","May","June","July","August","September","October","November","December"]
-var typeName = ["Assignment","Deadline","Special Occasion","Custom"]
-var typeColor = ["green","#7B22A8","#FF8000","#1DB5B8"]
+var filePath = path.join(dir + "\\EventStorage.json");
+var EventStorage;
+var Configuration;
+Configuration = JSON.parse(sessionStorage.Config)
 
 function twoDigit(x){
     var output
@@ -16,22 +14,7 @@ function twoDigit(x){
         return x
     }
 }
-function dateConverter(rawDate){
-    var output;
-    var mer = "AM"
-    var hrs = rawDate.getHours();
-    if(rawDate.getHours() > 12){
-        mer = "PM"
-        hrs = rawDate.getHours() - 12
-    }else if(rawDate.getHours() == 12){
-        mer = "PM"
-    }else if(rawDate.getHours() == 0){
-        hrs = 12
-    }
-    
-    output = month_string_arr[rawDate.getMonth()] + " " + rawDate.getDate() + ", " + rawDate.getFullYear() + " " + twoDigit(hrs) + ":" + twoDigit(rawDate.getMinutes()) +" "+ mer
-    return output
-}
+
 function milliSecondsConverter(millis){
     var con_secs = (millis/1000);
     var con_secs_rounded = Math.round(con_secs);
@@ -56,159 +39,167 @@ function milliSecondsConverter(millis){
         con_days -= 7;
         con_weeks++;
     }
-    return [con_weeks,con_days,con_hrs,con_mins,con_secs_rounded];
-}
-function indexInClass(node,class_name)
-{
-    var entryNodeList = document.getElementsByClassName(class_name)
-    var num = 0;
-    for (var i = 0; i < entryNodeList.length; i++) {
-      if (entryNodeList[i] === node) {
-        return num;
-      }
-      num++;
+    return {
+        "weeks": con_weeks,
+        "days": con_days,
+        "hrs": con_hrs,
+        "mins": con_mins,
+        "secs": con_secs_rounded
     }
-    return -1;
 }
-class EventClass 
-{
-    constructor(name,type,memo,rawDate){
-        this.rawDate = new Date(rawDate);
-        this.name = name;
-        this.date = dateConverter(this.rawDate);
-        this.type = type;
-        this.memo = memo;
-        this.status = "Upcoming";
+
+class EventObject{
+    constructor(name,date,type,status,memo){
+        this.name = name
+        this.date = date
+        this.dateString = date.toDateString()
+        this.type = type
+        this.status = status
+        this.memo = memo
     }
-    createEventCard = () => {
-        var eventMarker;
-        if(JSON.parse(localStorage.eventMarkerVisible)){
-            for(var x = 0; x < typeName.length; x++){
-                if(this.type == typeName[x]){
-                eventMarker = `5px solid ${typeColor[x]}`;
+}
+
+function eventFile(){
+    fs.readFile(filePath,"utf-8",(err,jsonString) => {
+        if(err){
+            console.error(err)
+            fs.writeFile(filePath,JSON.stringify({Events:[]}, null, 2),err => {
+                if(err){
+                    console.log(err)
                 }
-            }
-        }else{eventMarker = 'none'}
-        var eventContent = `<div class="eventCard" style="border-bottom: ${eventMarker}"><h2 id="eventName">${this.name}</h2>
-        <h2><span>Date:</span><span>${this.date}</span></h2>
-        <h2><span>Type:</span><span>${this.type}</span></h2>
-        <h2><span>Status:</span><span id="status">${this.status}</span></h2>
-        <h2>Memo:</h2>
-        <div id="memoBox">${this.memo}</div>
-        <button class="deleteEvent">Delete</button>
-        </div>`
-        $(".eventWrap").append(eventContent)
-    }
+                eventFile()
+            })
+        }else{
+            EventStorage = JSON.parse(jsonString)
+            EventStorage.Events.forEach((e,i) => {
+                $(".eventWrap").append(`<div class="eventCard" ${Configuration.Settings.EventMarkerVisible ? "style=\"border-bottom: 3px solid " + eventTypeColor(e.type) + "\"": ""} id="${i}">
+                        <h2 id="eventName">${e.name}</h2>
+                        <h2><span>Date:</span><span>${e.dateString}</span></h2>
+                        <h2><span>Type:</span><span>${e.type}</span></h2>
+                        <h2><span>Status:</span><span id="status">${e.status}</span></h2>
+                        <h2>Memo:</h2>
+                        <div id="memoBox">${e.memo}</div>
+                        <button class="deleteEvent">Delete</button>
+                    </div>`)
+            });
+            
+            attachEvents()
+            countDownTimer()
+        }
+    })
 }
 
-(localStorage.eventContentArrayStorage) ? eventContentArray = JSON.parse(localStorage.eventContentArrayStorage) : eventContentArray = [];
+eventFile()
 
-
-for(x=0;x<eventContentArray.length;x++)
-{
-    eventArray.push(new EventClass(eventContentArray[x][0],eventContentArray[x][1],eventContentArray[x][2],eventContentArray[x][3]))
-    eventArray[x].createEventCard()
+function writeToEventFile(Obj){
+    fs.writeFile(filePath,JSON.stringify(Obj, null, 2),err =>{
+        if(err){
+            console.log(err)
+        }else{
+           $(".eventWrap").empty()
+           eventFile()
+        }
+    })
 }
 
-function showPopUp(){
-    $(".popup").fadeIn("fast")
-}
-window.onclick = (event) => {
-    if (event.target == popup) {
-        $(".popup").fadeOut("fast")
+$("#addEvent").on("click",function(){
+    $(".popup").fadeIn(300)
+})
+$(".close").on("click",function(){
+    $(".popup").fadeOut(300)
+    clearModal()
+})
+window.onclick = function(event){
+    if(event.target == $(".popup")[0]){
+        $(".popup").fadeOut(300)
         clearModal()
     }
 }
-$(".close").on("click",function(){
-    $(".popup").fadeOut("fast")
-    clearModal()
-})
-
-$("#addEventBtn").on("click",function(){
-    if($("#event_Name").val() != "" && document.getElementById("eventDate").value != "" && $("#event_type").val() != null){
-    var name = $("#event_Name").val()
-    var type = $("#event_type :selected").text()
-    var date = new Date(document.getElementById("eventDate").value)
-    var memo = document.getElementById("eventMemo").value
-    eventContentArray.push([name,type,memo,date])
-    eventArray.push(new EventClass(name,type,memo,date))
-    localStorage.setItem("eventContentArrayStorage",JSON.stringify(eventContentArray))
-    eventArray[eventArray.length - 1].createEventCard()
-    $(".popup").fadeOut("fast")
-    clearModal()
-    $('.deleteEvent').off('click')
-    deleteEvent();
-    }else{
-        $("#errorMsg").text("Please fill in all required fields")
-        $("#errorMsg").fadeIn("fast")
-        setTimeout(function(){$("#errorMsg").fadeOut(300)},2000)
-    }
-})
-function deleteEvent(){
-$(".deleteEvent").on("click",function(){
-    var num = indexInClass(this,"deleteEvent")
-    eventContentArray.splice(num,1)
-    eventArray.splice(num,1)
-    localStorage.setItem('eventContentArrayStorage',JSON.stringify(eventContentArray))
-    num++
-    $.when($(`.eventCard:nth-child(${num})`).fadeOut("slow")).then(function(){$(`.eventCard:nth-child(${num})`).remove()})
-    $('.deleteEvent').off('click')
-    deleteEvent();
-})
-}
-function timeCountDown(){
-    var CurrentDate = new Date();
-    var timeLeftForEvent;
-    var lowestTimeLeftForEvent = 0;
-    var upcomingEventName;
-    for(var x = 0;x < eventArray.length; x++){
-        timeLeftForEvent = (eventArray[x].rawDate - CurrentDate);
-        if(lowestTimeLeftForEvent == 0 && timeLeftForEvent > 0){
-            lowestTimeLeftForEvent = timeLeftForEvent
-            upcomingEventName = eventContentArray[x][0]
-        }else if(timeLeftForEvent < 0 && eventArray.length == 0){
-            $(".wrapper").fadeOut("fast","linear",function(){$("#noEvent").fadeIn("fast")})
-        }else if(timeLeftForEvent < 0){
-            if($(`.eventCard:nth-child(${x+1})`).attr("id") != "expired"){
-                $(`.eventCard:nth-child(${x+1})`).find("h2:nth-child(4)").find("span:nth-child(2)").css("color","#d63529")
-                $(`.eventCard:nth-child(${x+1})`).attr("id","expired")
-                eventArray[x].status = "Date Passed"
-                localStorage.setItem('eventContentArrayStorage',JSON.stringify(eventContentArray))  
-                $(`.eventCard:nth-child(${x+1})`).find("h2:nth-child(4)").find("span:nth-child(2)").html(eventArray[x].status)
-                $(`.eventCard:nth-child(${x+1})`).find("h2:nth-child(4)").find("span:nth-child(2)").css("font-style","italic")
-                
-            }
-        }else{
-            if(lowestTimeLeftForEvent > timeLeftForEvent && timeLeftForEvent > 0){
-                lowestTimeLeftForEvent = timeLeftForEvent
-                upcomingEventName = eventContentArray[x][0]
-            } 
-        }
-    }
-    if((eventArray.length != 0 && timeLeftForEvent > 0) || (eventArray.length != 0 && lowestTimeLeftForEvent > 0)){
-
-             $(".wrapper").show().children().show()
-             $("#noEvent").hide()
-
-        countDownArray = milliSecondsConverter(lowestTimeLeftForEvent)
-        
-        $("#nextEventName").html(upcomingEventName)
-        $("#weeks").html(twoDigit(countDownArray[0]))
-        $("#days").html(twoDigit(countDownArray[1]))
-        $("#hours").html(twoDigit(countDownArray[2]))
-        $("#minutes").html(twoDigit(countDownArray[3]))
-        $("#seconds").html(twoDigit(countDownArray[4]))
-    }else{
-        $(".wrapper").fadeOut(200,"linear",function(){$("#noEvent").show()})
-    }
-}
-deleteEvent()
-timeCountDown()
-setInterval(timeCountDown,1000)
-
 function clearModal(){
     $("#event_Name").val("")
     $("#eventDate").val("")
     $("#event_type").val("")
     $("#eventMemo").val("")
+}
+$("#addEventBtn").on("click",function(){
+    var name = $("#event_Name").val()
+    var date = new Date($("#eventDate").val())
+    var type = $("#event_type :selected").text()
+    var memo = $("#eventMemo").val()
+    var status = "Upcoming"
+    var newEvent = new EventObject(name,date,type,status,memo)
+    EventStorage.Events.unshift(newEvent)
+    writeToEventFile(EventStorage)
+    $(".popup").fadeOut(300)
+    clearModal()
+})
+function attachEvents(){
+    $(".deleteEvent").off('click')
+    $(".deleteEvent").on("click",function(){
+        var index = $(this).parent().attr("id")
+        EventStorage.Events.splice(index,1)
+        $(this).parent().fadeOut(300,function(){
+            writeToEventFile(EventStorage)
+        })
+    })
+}
+
+function timeUntilEvent(event){
+    var now = new Date()
+    var eventDate = new Date(event.date)
+    var diff = eventDate - now
+    return diff
+}
+
+function countDownTimer(){
+    var lowest = -99;
+    var nextEventName;
+    EventStorage.Events.forEach((e,i) => {
+        if(e.status != "Completed" && timeUntilEvent(e) > 0){
+            if(lowest == -99){
+                lowest = timeUntilEvent(e)
+                nextEventName = e.name
+           }else if(timeUntilEvent(e) < lowest){
+                lowest = timeUntilEvent(e)
+                nextEventName = e.name
+            }else if(timeUntilEvent(e) < 0){
+                e.status = "Completed"
+                writeToEventFile(EventStorage)
+            }
+        }else{
+            e.status = "Completed"
+            $(`#${i}`).find("#status").text(e.status)
+            $(`#${i}`).find("#status").addClass("completed")
+        }
+    })
+    if(lowest >= 0){
+        $(".wrapper").show()
+        $("#noEvent").hide()
+        var time = milliSecondsConverter(lowest)
+        $("#nextEventName").text(nextEventName)
+        $("#weeks").text(twoDigit(time.weeks))
+        $("#days").text(twoDigit(time.days))
+        $("#hours").text(twoDigit(time.hrs))
+        $("#minutes").text(twoDigit(time.mins))
+        $("#seconds").text(twoDigit(time.secs))
+    }
+    if(EventStorage.Events.length == 0 || lowest == -99){
+        $(".wrapper").fadeOut(300,function(){$("#noEvent").fadeIn(300)})
+    }
+}
+
+setInterval(countDownTimer,1000)
+
+
+function eventTypeColor(type){
+    switch(type){
+        case "Assignment":
+            return "#df4759"
+        case "Deadline":
+            return "#467fd0"
+        case "Custom":
+            return "#42ba96"
+        case "Special Occasion":
+            return "#ffc107"
+    }
 }

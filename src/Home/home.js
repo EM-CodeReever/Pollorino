@@ -1,6 +1,11 @@
 var meetingfilePath = path.join(dir + "\\MeetingStorage.json");
 var taskfilePath = path.join(dir + "\\TaskStorage.json");
+var eventfilePath = path.join(dir + "\\EventStorage.json");
 var toggle = true;
+fs.readFile(path.join(dir + "\\config.json"),"utf-8",(err,jsonString)=>{
+      var config = JSON.parse(jsonString)
+      sessionStorage.setItem("Config",JSON.stringify(config))
+})
 function greeting() {
     var time = new Date().getHours();
     var message;
@@ -33,16 +38,6 @@ $(".btnDropdown").on('click', function () {
     }
 });
 
-class EventClass 
-{
-    constructor(name,type,memo,rawDate){
-        this.rawDate = new Date(rawDate);
-        this.name = name;
-        this.type = type;
-        this.memo = memo;
-        this.status = "Upcoming";
-    }
-}
 
 function meetingFile(){
     fs.readFile(meetingfilePath,"utf-8",(err,jsonString) => {
@@ -106,22 +101,33 @@ function taskFile(){
     })
 }
 
-eventContentArray = localStorage.eventContentArrayStorage ? JSON.parse(localStorage.eventContentArrayStorage) : [];
-var eventArray = []
-var eventsToday = 0;
-for(x=0;x<eventContentArray.length;x++)
-{
-    eventArray.push(new EventClass(eventContentArray[x][0],eventContentArray[x][1],eventContentArray[x][2],eventContentArray[x][3]))
+function eventFile(){
+    fs.readFile(eventfilePath,"utf-8",(err,jsonString) => {
+        if(err){
+            console.error(err)
+            fs.writeFile(eventfilePath,JSON.stringify({Events:[]}, null, 2),err => {
+                if(err){
+                    console.log(err)
+                }
+                eventFile()
+            })
+        }else{
+            EventStorage = JSON.parse(jsonString)
+            var eventsToday = 0;
+            EventStorage.Events.forEach((e,i) => {
+                var date = new Date(e.date)
+                if(isDateToday(date)){
+                    eventsToday++
+                    $(".dashboard-event-body").append(`<div class="item">${e.name}</div>`)
+                }
+            });
+            $(".dashboard-event-header").find(".item-number").text(eventsToday)
+        }
+    })
 }
 
-eventArray.forEach(e => {
-    if(isDateToday(e.rawDate)){
-        eventsToday++
-        $(".dashboard-event-body").append(`<div class="item">${e.name}</div>`)
-    }
-})
-$(".dashboard-event-header").find(".item-number").text(eventsToday)
 taskFile()
+eventFile()
 meetingFile()
 
 function isDateToday(date){

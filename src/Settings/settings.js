@@ -1,4 +1,3 @@
-
 $(".restartWarning").hide()
 let config;
 fs.readFile(path.join(dir + "\\config.json"),"utf-8",(err,jsonString)=>{
@@ -6,6 +5,8 @@ fs.readFile(path.join(dir + "\\config.json"),"utf-8",(err,jsonString)=>{
 })
 function WriteToFile(Object){
   fs.writeFile(path.join(dir + "\\config.json"),JSON.stringify(Object, null, 2),err => {
+    $(".se-pre-con").show()
+    $(".se-pre-con").fadeOut(1000)
       if(err){console.log(err)}
   })
 }
@@ -65,8 +66,7 @@ $(".optionContainer").find(".radio").on("click",function(){
     let themeIndex = config.Settings.Theme.Name.indexOf($(this).text().replace("check",""))
     config.Settings.Theme.IndexChosen = themeIndex;
     WriteToFile(config)
-    $(".se-pre-con").show()
-    $(".se-pre-con").fadeOut(1000)
+    sessionStorage.setItem("Config",JSON.stringify(config))
     radioSave()
     ThemeChange()
   }
@@ -86,9 +86,11 @@ $(".settingsBox:first-child").children("span").on("click",function(){
 
 $("#Appearance").find(".optionContainer").find(".eventMarkerVis").on("click",function(){
   if($(this).find("input").prop("checked")){
-    localStorage.setItem('eventMarkerVisible',true)
+    config.Settings.EventMarkerVisible = true;
   }else{
-    localStorage.setItem('eventMarkerVisible',false)
+    config.Settings.EventMarkerVisible = false;
   }
+  WriteToFile(config)
+  sessionStorage.setItem("Config",JSON.stringify(config))
 })
 

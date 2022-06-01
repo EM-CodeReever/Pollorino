@@ -135,8 +135,11 @@ p.time-badge{
     border-radius: 5px;
 }
 /* write media query here to change .greeting h1 to font size 4rem*/
-@media screen and (max-width: 700px){
+@media screen and (max-width: 760px){
     .greeting h1{
-        font-size: 4.5rem;
+        font-size: 3.5rem;
+    }
+    .greeting p{
+        font-size: 1.2rem;
     }
 }
