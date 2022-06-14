@@ -1,36 +1,22 @@
 var filePath = path.join(dir + "\\TaskStorage.json");
-var TaskStorage;
-
+let { Tasks } = require(filePath)
 function taskFile(){
-    fs.readFile(filePath,"utf-8",(err,jsonString) => {
-        if(err){
-            console.error(err)
-            fs.writeFile(filePath,JSON.stringify({Tasks:[]}, null, 2),err => {
-                if(err){
-                    console.log(err)
-                }
-                taskFile()
-            })
-        }else{
-            try{
-                TaskStorage = JSON.parse(jsonString)
-            }catch(err){
-                console.log(err)
-                $(".taskList").empty()
-                taskFile()
-            }
-            TaskStorage.Tasks.forEach((e,i) => {
-                $(".taskList").append(
-                    `<div class="task" id="${i}">
-                    <div><i class="material-icons ${e.Priority}">circle</i></div>
-                    <p>${e.Text}</p>
-                    <span><i class="material-icons maticn" style="font-size: 30px;">done</i></span>
-                </div>`)
-            });
-            attachClickEvents()
-        }
-    })
+    Tasks.forEach((e,i) => {
+        $(".taskList").append(
+            `<div class="task" id="${i}">
+            <div><i class="material-icons ${e.Priority}">circle</i></div>
+            <p>${e.Text}</p>
+            <span><i class="material-icons maticn" style="font-size: 30px;">done</i></span>
+        </div>`)
+    });
+    if(Tasks.length == 0){
+        $(".taskList").append(`<p class="no-tasks">No Tasks</p>`)
+    }else{
+        $(".taskList").find(".no-tasks").remove()
+    }
+    attachClickEvents()            
 }
+    
 taskFile()
 $("#btnNewTask").on('click',function(){
     if($("#txtNewTask").val() != ""){
@@ -40,8 +26,8 @@ $("#btnNewTask").on('click',function(){
         $(".taskPriority").find("input").each(function(){
             if($(this).is(":checked")){prio = $(this).siblings("label").html()}
         })
-        TaskStorage.Tasks.unshift({Text:text,Priority:prio})
-        WriteToTaskFile(TaskStorage)
+        Tasks.unshift({Text:text,Priority:prio})
+        WriteToTaskFile(Tasks)
         $(".taskList").empty();
         taskFile()
         $("#txtNewTask").val("")
@@ -49,8 +35,8 @@ $("#btnNewTask").on('click',function(){
     }
 })
 
-function WriteToTaskFile(Obj){
-    fs.writeFile(filePath,JSON.stringify(Obj, null, 2),err =>{
+async function WriteToTaskFile(Obj){
+    await fs.writeFile(filePath,JSON.stringify({"Tasks":Obj}, null, 2),err =>{
         if(err){
             console.log(err)
         }
@@ -101,11 +87,11 @@ function attachClickEvents(){
     $(".task").find("span").off("click")
     $(".task").find("span").on("click",function(){
         var id = $(this).parent().attr('id')
-        console.log(id)
+        Tasks.splice(id,1)
+        WriteToTaskFile(Tasks)
         $(this).parent().fadeOut(300,function(){
-            $(this).remove()
-            TaskStorage.Tasks.splice(id,1)
-            WriteToTaskFile(TaskStorage)
+            $(".taskList").empty();
+            taskFile()
         })
     })
 }

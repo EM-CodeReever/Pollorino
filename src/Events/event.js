@@ -1,5 +1,5 @@
 var filePath = path.join(dir + "\\EventStorage.json");
-var EventStorage;
+let {Events} = require(filePath)
 var Configuration;
 
 
@@ -60,45 +60,25 @@ class EventObject{
 }
 
 function eventFile(){
-    fs.readFile(filePath,"utf-8",(err,jsonString) => {
-        if(err){
-            console.error(err)
-            fs.writeFile(filePath,JSON.stringify({Events:[]}, null, 2),err => {
-                if(err){
-                    console.log(err)
-                }
-                eventFile()
-            })
-        }else{
-            try{
-                EventStorage = JSON.parse(jsonString)
-            }catch(err){
-                console.log(err)
-                $(".eventWrap").empty()
-                eventFile()
-            }
-            Configuration = JSON.parse(localStorage.Config)
-            EventStorage.Events.forEach((e,i) => {
-                $(".eventWrap").append(`<div class="eventCard" ${Configuration.Settings.EventMarkerVisible ? "style=\"border-bottom: 3px solid " + eventTypeColor(e.type) + "\"": ""} id="${i}">
-                        <h2 id="eventName">${e.name}</h2>
-                        <h2><span>Date:</span><span>${e.dateString}</span></h2>
-                        <h2><span>Type:</span><span>${e.type}</span></h2>
-                        <h2><span>Status:</span><span id="status">${e.status}</span></h2>
-                        <h2>Memo:</h2>
-                        <div id="memoBox">${e.memo}</div>
-                        <button class="deleteEvent">Delete</button>
-                    </div>`)
-            });
-            attachEvents()
-            countDownTimer()
-        }
-    })
+    Configuration = JSON.parse(localStorage.Config)
+    Events.forEach((e,i) => {
+        $(".eventWrap").append(`<div class="eventCard" ${Configuration.Settings.EventMarkerVisible ? "style=\"border-bottom: 3px solid " + eventTypeColor(e.type) + "\"": ""} id="${i}">
+                <h2 id="eventName">${e.name}</h2>
+                <h2><span>Date:</span><span>${e.dateString}</span></h2>
+                <h2><span>Type:</span><span>${e.type}</span></h2>
+                <h2><span>Status:</span><span id="status">${e.status}</span></h2>
+                <h2>Memo:</h2>
+                <div id="memoBox">${e.memo}</div>
+                <button class="deleteEvent">Delete</button>
+            </div>`)
+    });
+    attachEvents()
+    countDownTimer()           
 }
-
 eventFile()
 
 function writeToEventFile(Obj){
-    fs.writeFile(filePath,JSON.stringify(Obj, null, 2),err =>{
+    fs.writeFile(filePath,JSON.stringify({"Events":Obj}, null, 2),err =>{
         if(err){
             console.log(err)
         }else{
@@ -134,8 +114,8 @@ $("#addEventBtn").on("click",function(){
     var memo = $("#eventMemo").val()
     var status = "Upcoming"
     var newEvent = new EventObject(name,date,type,status,memo)
-    EventStorage.Events.unshift(newEvent)
-    writeToEventFile(EventStorage)
+    Events.unshift(newEvent)
+    writeToEventFile(Events)
     $(".popup").fadeOut(300)
     clearModal()
 })
@@ -143,9 +123,9 @@ function attachEvents(){
     $(".deleteEvent").off('click')
     $(".deleteEvent").on("click",function(){
         var index = $(this).parent().attr("id")
-        EventStorage.Events.splice(index,1)
+        Events.splice(index,1)
         $(this).parent().fadeOut(300,function(){
-            writeToEventFile(EventStorage)
+            writeToEventFile(Events)
         })
     })
 }
@@ -160,7 +140,7 @@ function timeUntilEvent(event){
 function countDownTimer(){
     var lowest = -99;
     var nextEventName;
-    EventStorage.Events.forEach((e,i) => {
+    Events.forEach((e,i) => {
         if(e.status != "Completed" && timeUntilEvent(e) > 0){
             if(lowest == -99){
                 lowest = timeUntilEvent(e)
@@ -170,7 +150,7 @@ function countDownTimer(){
                 nextEventName = e.name
             }else if(timeUntilEvent(e) < 0){
                 e.status = "Completed"
-                writeToEventFile(EventStorage)
+                writeToEventFile(Events)
             }
         }else{
             e.status = "Completed"
@@ -189,7 +169,7 @@ function countDownTimer(){
         $("#minutes").text(twoDigit(time.mins))
         $("#seconds").text(twoDigit(time.secs))
     }
-    if(EventStorage.Events.length == 0 || lowest == -99){
+    if(Events.length == 0 || lowest == -99){
         $(".wrapper").fadeOut(300,function(){$("#noEvent").fadeIn(300)})
     }
 }

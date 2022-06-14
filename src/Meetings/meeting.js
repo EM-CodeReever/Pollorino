@@ -1,7 +1,7 @@
 const open = require("open");
 var filePath = path.join(dir + "\\MeetingStorage.json");
 const tippy = require('tippy.js').default;
-var MeetingStorage;
+let { Meetings } = require(filePath)
 
 class Meeting{
     constructor(name,date,time,platform,url,repeat){
@@ -25,7 +25,7 @@ function getShortenedDays(days){
                 shortenedDays.push("Tue");
                 break;
             case "Wednesday":
-                shortenedDays.push("Wed");  //  shortenedDays.push("W");
+                shortenedDays.push("Wed");
                 break;
             case "Thursday":
                 shortenedDays.push("Thu");
@@ -43,97 +43,82 @@ function getShortenedDays(days){
     })
     return shortenedDays.join(", ")
 }
+
 function meetingFile(){
-    fs.readFile(filePath,"utf-8",(err,jsonString) => {
-        if(err){
-            console.error(err)
-            fs.writeFile(filePath,JSON.stringify({Meetings:[]}, null, 2),err => {
-                if(err){
-                    console.log(err)
-                }
-                meetingFile()
-            })
-        }else{
-            try{
-                MeetingStorage = JSON.parse(jsonString)
-            }catch(err){
-                console.log(err)
-                meetingFile()
-            }
-            
-            MeetingStorage.Meetings.forEach((e,i) => {
-                $(".meetingList").append(
-                    `<div class="Meeting">
-                    <div class="meetingInfo">
-                        <span>Name:<p id="lblMeetingName">${e.name}</p></span>
-                        <span>Platform:<p id="lblMeetingPlatform">${e.platform}</p></span>
-                        <span>${e.repeat ? "Reoccurs" : "Date"}:<p id="lblMeetingDate">${displayDateStringArray(e)}</p></span>
-                        <span>Time: <p id="lblMeetingTime">@ ${e.time}</p></span>
-                    </div>
-                    <div class="meetingInfo" id="${i}">
-                        <button>Join</button><button class="options"><i class="material-icons">more_vert</i></button>
-                    </div>
-                </div>`)
-            });
-            tippy('.options',{
-                placement: "left",
-                allowHTML: true,
-                trigger: "mouseenter",
-                interactive: true,
-                onShown: function(){
-                    $(".meetingTooltip").find("button").on("click",function(){
-                        var Id = Number(sessionStorage.getItem("meetingId"))
-                        if($(this).html() == "Delete"){
-                            deleteMeeting(Id)
-                        }else{
-                            $("#btnAddNewMeeting").hide()
-                            $("#btnSaveMeeting").show()
-                            $(".popup").fadeIn(300)
-                            $("#meetingName").val(MeetingStorage.Meetings[Id].name)
-                            if(MeetingStorage.Meetings[Id].repeat){
-                                $("#meetingRepeat").prop("checked",false)
-                                $("#meetingRepeat").trigger("click")
-                                //check if text is equal to selected options and if it is set the option to selected
-                                for(var i = 0; i < MeetingStorage.Meetings[Id].date.length; i++){
-                                    $("#meetingRepeatDays").find("option").each(function(index){
-                                        if($(this).text() == MeetingStorage.Meetings[Id].date[i]){
-                                            $(this).attr("selected","selected")
-                                        }
-                                    })
-                                }
-                            }else{
-                                $("#meetingRepeat").prop("checked",false)
-                                var formattedDate = dateObjectToDateFormat(MeetingStorage.Meetings[Id].date)
-                                $("#meetingDate").val(formattedDate)
-                            }
-                            $("#meetingTime").val(convert12HourTimeTo24HourTime(MeetingStorage.Meetings[Id].time))
-                            // $("#meetingPlatform").val(MeetingStorage.Meetings[Id].platform)
-                            $("#meetingPlatform").find("option").each(function(){
-                                if($(this).text() == MeetingStorage.Meetings[Id].platform){
+    Meetings.forEach((e,i) => {
+        $(".meetingList").append(
+            `<div class="Meeting">
+            <div class="meetingInfo">
+                <span>Name:<p id="lblMeetingName">${e.name}</p></span>
+                <span>Platform:<p id="lblMeetingPlatform">${e.platform}</p></span>
+                <span>${e.repeat ? "Reoccurs" : "Date"}:<p id="lblMeetingDate">${displayDateStringArray(e)}</p></span>
+                <span>Time: <p id="lblMeetingTime">@ ${e.time}</p></span>
+            </div>
+            <div class="meetingInfo" id="${i}">
+                <button>Join</button><button class="options"><i class="material-icons">more_vert</i></button>
+            </div>
+        </div>`)
+    });
+    if(Meetings.length == 0){
+        $(".meetingList").append(`<p class="no-meetings">No Meetings</p>`)
+    }else{
+        $(".meetingList").find(".no-meetings").remove()
+    }
+    tippy('.options',{
+        placement: "left",
+        allowHTML: true,
+        trigger: "mouseenter",
+        interactive: true,
+        onShown: function(){
+            $(".meetingTooltip").find("button").on("click",function(){
+                var Id = Number(sessionStorage.getItem("meetingId"))
+                if($(this).html() == "Delete"){
+                    deleteMeeting(Id)
+                }else{
+                    $("#btnAddNewMeeting").hide()
+                    $("#btnSaveMeeting").show()
+                    $(".popup").fadeIn(300)
+                    $("#meetingName").val(Meetings[Id].name)
+                    if(Meetings[Id].repeat){
+                        $("#meetingRepeat").prop("checked",false)
+                        $("#meetingRepeat").trigger("click")
+                        //check if text is equal to selected options and if it is set the option to selected
+                        for(var i = 0; i < Meetings[Id].date.length; i++){
+                            $("#meetingRepeatDays").find("option").each(function(index){
+                                if($(this).text() == Meetings[Id].date[i]){
                                     $(this).attr("selected","selected")
                                 }
                             })
-                            $("#meetingUrl").val(MeetingStorage.Meetings[Id].url)
+                        }
+                    }else{
+                        $("#meetingRepeat").prop("checked",false)
+                        var formattedDate = dateObjectToDateFormat(Meetings[Id].date, Meetings[Id].time)
+                        $("#meetingDate").val(formattedDate)
+                    }
+                    $("#meetingTime").val(convert12HourTimeTo24HourTime(Meetings[Id].time))
+                    $("#meetingPlatform").find("option").each(function(){
+                        if($(this).text() == Meetings[Id].platform){
+                            $(this).attr("selected","selected")
                         }
                     })
-                },
-                onHide: function(){
-                    $(".meetingTooltip").find("button").off("click")
-                },
-                duration: 200,
-                content: `<div class="meetingTooltip">
-                <button>Delete</button>
-                <button>Edit</button>
-                </div>`,
+                    $("#meetingUrl").val(Meetings[Id].url)
+                }
             })
-            
-            attachClickEvents()
-        }
+        },
+        onHide: function(){
+            $(".meetingTooltip").find("button").off("click")
+        },
+        duration: 200,
+        content: `<div class="meetingTooltip">
+        <button>Delete</button>
+        <button>Edit</button>
+        </div>`,
     })
+    
+    attachClickEvents()           
 }
-
 function writeToMeetingFile(Obj){
-    fs.writeFile(filePath,JSON.stringify(Obj, null, 2),err =>{
+    fs.writeFile(filePath,JSON.stringify({"Meetings":Obj}, null, 2),err =>{
         if(err){
             console.log(err)
         }else{
@@ -173,8 +158,8 @@ $("#btnAddNewMeeting").on('click',function(){
         var platform = $("#meetingPlatform").find(":selected").text();
         var url = $("#meetingUrl").val()
         var newMeeting = new Meeting(name,date,time,platform,url,repeat)
-        MeetingStorage.Meetings.unshift(newMeeting)
-        writeToMeetingFile(MeetingStorage)
+        Meetings.unshift(newMeeting)
+        writeToMeetingFile(Meetings)
         $(".popup").fadeOut(300)
         setTimeout(function(){
             clearPopup()
@@ -187,31 +172,33 @@ $("#btnAddNewMeeting").on('click',function(){
 })
 
 $("#btnSaveMeeting").on('click',function(){
-    var Id = Number(sessionStorage.getItem("meetingId"))
-    var name = $("#meetingName").val()
-    var repeat
-    if($("#meetingRepeat").is(":checked")){
-        repeat = true
-        var date = [];
-        $("#meetingRepeatDays").find(":selected").each(function(){
-            date.push($(this).text())
-        })
-        var time = convert24HourTimeTo12HourTime($("#meetingTime").val())
-    }else{
-        repeat = false
-        var date = new Date($("#meetingDate").val())
-        var time = convert24HourTimeTo12HourTime(date.toTimeString())
-        console.log(date.toTimeString());
-        console.log(time);
-        date = date.toDateString()    
+    if(modalValidation()){
+        var Id = Number(sessionStorage.getItem("meetingId"))
+        var name = $("#meetingName").val()
+        var repeat
+        if($("#meetingRepeat").is(":checked")){
+            repeat = true
+            var date = [];
+            $("#meetingRepeatDays").find(":selected").each(function(){
+                date.push($(this).text())
+            })
+            var time = convert24HourTimeTo12HourTime($("#meetingTime").val())
+        }else{
+            repeat = false
+            var date = new Date($("#meetingDate").val())
+            var time = convert24HourTimeTo12HourTime(date.toTimeString())
+            console.log(date.toTimeString());
+            console.log(time);
+            date = date.toDateString()    
+        }
+        var platform = $("#meetingPlatform").find(":selected").text();
+        var url = $("#meetingUrl").val()
+        var newMeeting = new Meeting(name,date,time,platform,url,repeat)
+        Meetings[Id] = newMeeting
+        writeToMeetingFile(Meetings)
+        $(".popup").fadeOut(300)
+        clearPopup()
     }
-    var platform = $("#meetingPlatform").find(":selected").text();
-    var url = $("#meetingUrl").val()
-    var newMeeting = new Meeting(name,date,time,platform,url,repeat)
-    MeetingStorage.Meetings[Id] = newMeeting
-    writeToMeetingFile(MeetingStorage)
-    $(".popup").fadeOut(300)
-    clearPopup()
 })
 
 $(".close").on("click",function(){
@@ -226,8 +213,8 @@ window.onclick = function(event){
 }
 
 function deleteMeeting(id){
-    MeetingStorage.Meetings.splice(id,1)
-    writeToMeetingFile(MeetingStorage)
+    Meetings.splice(id,1)
+    writeToMeetingFile(Meetings)
 }
 $(".form-group").find("input[type=checkbox]").on("change",function(){
     if($(this).is(":checked")){
@@ -241,6 +228,7 @@ $(".form-group").find("input[type=checkbox]").on("change",function(){
 
 function convert24HourTimeTo12HourTime(time){
     var timeArray = time.split(":")
+    console.log(timeArray);
     var hour = parseInt(timeArray[0])
     var minute = timeArray[1]
     var suffix = "AM"
@@ -248,14 +236,33 @@ function convert24HourTimeTo12HourTime(time){
         hour -= 12
         suffix = "PM"
     }
+    if(hour == 12){
+        suffix = "PM"
+    }
+    if(hour == 0){
+        hour = 12
+    }
     return `${hour}:${minute} ${suffix}`
 }
-function dateObjectToDateFormat(date){
+
+function dateObjectToDateFormat(date,time){
     var dateArray = date.split(" ")
+    console.log(dateArray);
+    var timeArray = time.split(/[\s:]+/)
+    var hour = parseInt(timeArray[0])
+    var minute = timeArray[1]
+    var suffix = timeArray[2]
+    if(suffix == "PM"){
+        hour += 12
+    }
+    if(hour < 10){
+        hour = "0" + hour
+    }
+    console.log(timeArray);
     var month = monthStringToDateInt(dateArray[1])
     var day = dateArray[2]
     var year = dateArray[3]
-    return `${year}-${month}-${day}`
+    return `${year}-${month}-${day}T${hour}:${minute}`
 }
 function monthStringToDateInt(month){
     switch(month){
@@ -319,7 +326,7 @@ $(".tab-item:nth-of-type(1)").on("click",function(){
 $(".tab-item:nth-of-type(2)").on("click",function(){
     $(".Meeting").each(function(){
         var id = $(this).find(".meetingInfo:last-child").attr("id")
-        MeetingStorage.Meetings[id].repeat ? $(this).show() : $(this).hide()
+        Meetings[id].repeat ? $(this).show() : $(this).hide()
     })
     
 })
@@ -327,8 +334,8 @@ $(".tab-item:nth-of-type(2)").on("click",function(){
 $(".tab-item:nth-of-type(3)").on("click",function(){
     $(".Meeting").each(function(){
         var id = $(this).find(".meetingInfo:last-child").attr("id")
-        if(!MeetingStorage.Meetings[id].repeat){
-            var date = new Date(MeetingStorage.Meetings[id].date)
+        if(!Meetings[id].repeat){
+            var date = new Date(Meetings[id].date)
             if(isDateToday(date)){
                 $(this).show()
             }else{
@@ -336,8 +343,8 @@ $(".tab-item:nth-of-type(3)").on("click",function(){
             }
         }else{
             var reoccuringToday = false;
-            for(var x = 0; x < MeetingStorage.Meetings[id].date.length; x++){
-                if(isToday(MeetingStorage.Meetings[id].date[x])){
+            for(var x = 0; x < Meetings[id].date.length; x++){
+                if(isToday(Meetings[id].date[x])){
                     reoccuringToday = true;
                 }
             }
@@ -374,7 +381,7 @@ function attachClickEvents(){
     $(".meetingInfo").find("button").off("click")
     $(".meetingInfo").find("button:first-of-type").on("click",function(){
         var id = $(this).parent().attr('id')             
-        open(MeetingStorage.Meetings[id].url)
+        open(Meetings[id].url)
     })
     $(".meetingInfo").find("button:last-of-type").off("mouseenter")
     $(".meetingInfo").find("button:last-of-type").on("mouseenter",function(){

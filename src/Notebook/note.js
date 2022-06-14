@@ -1,8 +1,7 @@
 var QuillDeltaToHtmlConverter = require('quill-delta-to-html').QuillDeltaToHtmlConverter;
-var NotebookStorage = []
 var filePath = path.join(dir + "\\NotebookStorage.json");
-var noteTemplate = {NoteList: []}
-
+let { Notes } = require(filePath)
+console.log(Notes)
 class Note{
     constructor(title,desc){
         this.Title = title;
@@ -29,45 +28,34 @@ var toolbarOptions = [
   ];
   
 function noteFile(){
-    fs.readFile(filePath,"utf-8",(err,jsonString) => {
-        if(err){
-            console.log(err)
-            fs.writeFile(filePath,JSON.stringify(noteTemplate, null, 2),err => {
-                if(err){
-                    console.log(err)
-                }
-                noteFile()
-            })
-        }else{
-            try{
-                NotebookStorage = JSON.parse(jsonString)
-            }catch(err){
-                console.log(err)
-                noteFile()
-            }
-            for(var i = (NotebookStorage.NoteList.length - 1); i >= 0; i--){
+            Notes.forEach((note,index) => {
                 $(".Note-Grid").append(
-                `<div class="Notes" id="${i}">
-                <span class="Headings"><input type="checkbox"><p ${NotebookStorage.NoteList[i].isMarked ? "class=\"marked\"" : ""}>${NotebookStorage.NoteList[i].Title}</p></span>
+                `<div class="Notes" id="${index}">
+                <span class="Headings"><input type="checkbox"><p ${note.isMarked ? "class=\"marked\"" : ""}>${note.Title}</p></span>
                 <span class="Headings"><button class="btnViewNote">View</button><button class="btnEditNote">Edit</button></span>
                 </div>`)
+            })
+            if(Notes.length == 0){
+                $(".Note-Grid").append(`<p class="no-notes">No Notes Yet</p>`)
+            }else{
+                $(".Note-Grid").find(".no-notes").remove()
             }
             $(".btnEditNote").on('click',function(){
                 UpdateOperation(true)
                 var Id = Number($(this).parent().parent().attr('id'))
                 console.log(Number($(this).parent().parent().attr('id')))
-                $("#Note-Title").val(NotebookStorage.NoteList[Id].Title)
-                $("#Note-Description").val(NotebookStorage.NoteList[Id].Description)
-                quill.setContents(NotebookStorage.NoteList[Id].Delta)
+                $("#Note-Title").val(Notes[Id].Title)
+                $("#Note-Description").val(Notes[Id].Description)
+                quill.setContents(Notes[Id].Delta)
                 $(".Note-Container").fadeOut(200,()=>{$(".Note-Editor").fadeIn(300)})
                 sessionStorage.setItem('CurrentNoteId',Id)
             })
             $(".btnViewNote").on('click',function(){
                 var Id = Number($(this).parent().parent().attr('id'))
                 sessionStorage.setItem('CurrentNoteId',Id)
-                $("#NoteDisplay-Title").html(NotebookStorage.NoteList[Id].Title)
-                $("#NoteDisplay-Description").html(NotebookStorage.NoteList[Id].Description)
-                $("#NoteDisplay-Body").append(NotebookStorage.NoteList[Id].HTMLContent)
+                $("#NoteDisplay-Title").html(Notes[Id].Title)
+                $("#NoteDisplay-Description").html(Notes[Id].Description)
+                $("#NoteDisplay-Body").append(Notes[Id].HTMLContent)
                 $(".Note-Container").fadeOut(200,()=>{$(".Note-Viewer").fadeIn(300)})
             })
             $(":checkbox").on('change',function(){
@@ -83,8 +71,6 @@ function noteFile(){
                 }
             })
         }   
-    })
-}
 noteFile()
 
 function ClearEditor(){
@@ -94,7 +80,7 @@ function ClearEditor(){
 }
 
 function WriteToNoteFile(Obj){
-    fs.writeFile(filePath,JSON.stringify(Obj, null, 2),err =>{
+    fs.writeFile(filePath,JSON.stringify({"Notes":Obj}, null, 2),err =>{
         if(err){
             console.log(err)
         }else{
@@ -159,8 +145,8 @@ $("#CreateNewNote").on('click',()=>{
     var NewNote
     try{
         NewNote = GetCurrentNoteInstance()
-        NotebookStorage.NoteList.push(NewNote)
-        WriteToNoteFile(NotebookStorage)          
+        Notes.unshift(NewNote)
+        WriteToNoteFile(Notes)          
         location.reload()
     }catch(err){
         DisplayError(err)
@@ -172,8 +158,8 @@ $("#SaveNote").on('click',()=>{
     var UpdatedNote
     try{
         UpdatedNote = GetCurrentNoteInstance()
-        NotebookStorage.NoteList[Id] = UpdatedNote;
-        WriteToNoteFile(NotebookStorage)
+        Notes[Id] = UpdatedNote;
+        WriteToNoteFile(Notes)
         ClearEditor()
     }catch(err){
         DisplayError(err)
@@ -195,32 +181,32 @@ $("#btnDelete").on('click',()=>{
         SelectedArray.push(Number($(this).parent().parent().attr('id')))
     })
     for(var i = 0; i < SelectedArray.length; i++){
-        NotebookStorage.NoteList.splice(SelectedArray[i],1)
+        Notes.splice(SelectedArray[i],1)
         $(`#${SelectedArray[i]}`).remove()
     }
     $(".SelectionOptionsSpan").children().fadeOut(300)
-    WriteToNoteFile(NotebookStorage)
+    WriteToNoteFile(Notes)
 })
 
 $("#btnMark").on('click',()=>{
     var SelectedArray = []
     var SelectedID
-    $(":checked").each(function(){
+    $(".Headings").find(":checked").each(function(){
         SelectedID = Number($(this).parent().parent().attr('id'))
         console.log(SelectedID)
-        console.log(NotebookStorage.NoteList[SelectedID].isMarked )
-        NotebookStorage.NoteList[SelectedID].isMarked = !NotebookStorage.NoteList[SelectedID].isMarked
+        console.log(Notes[SelectedID].isMarked )
+        Notes[SelectedID].isMarked = !Notes[SelectedID].isMarked
         SelectedArray.push(SelectedID)
     })
     for(var i = 0; i < SelectedArray.length; i++){
-        if(NotebookStorage.NoteList[SelectedArray[i]].isMarked){
+        if(Notes[SelectedArray[i]].isMarked){
             $(`#${SelectedArray[i]}`).find("p").addClass('marked');
         }else{
             $(`#${SelectedArray[i]}`).find("p").removeClass('marked');
         }
     }
     clearSelection()
-    WriteToNoteFile(NotebookStorage)
+    WriteToNoteFile(Notes)
 })
 
 $("#btnCancelSelection").on('click',()=>{
