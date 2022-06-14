@@ -1,7 +1,6 @@
 var QuillDeltaToHtmlConverter = require('quill-delta-to-html').QuillDeltaToHtmlConverter;
 var filePath = path.join(dir + "\\NotebookStorage.json");
 let { Notes } = require(filePath)
-console.log(Notes)
 class Note{
     constructor(title,desc){
         this.Title = title;
@@ -43,7 +42,6 @@ function noteFile(){
             $(".btnEditNote").on('click',function(){
                 UpdateOperation(true)
                 var Id = Number($(this).parent().parent().attr('id'))
-                console.log(Number($(this).parent().parent().attr('id')))
                 $("#Note-Title").val(Notes[Id].Title)
                 $("#Note-Description").val(Notes[Id].Description)
                 quill.setContents(Notes[Id].Delta)
@@ -193,8 +191,6 @@ $("#btnMark").on('click',()=>{
     var SelectedID
     $(".Headings").find(":checked").each(function(){
         SelectedID = Number($(this).parent().parent().attr('id'))
-        console.log(SelectedID)
-        console.log(Notes[SelectedID].isMarked )
         Notes[SelectedID].isMarked = !Notes[SelectedID].isMarked
         SelectedArray.push(SelectedID)
     })

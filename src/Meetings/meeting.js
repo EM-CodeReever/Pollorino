@@ -150,8 +150,6 @@ $("#btnAddNewMeeting").on('click',function(){
             repeat = false
             var date = new Date($("#meetingDate").val())
             var time = convert24HourTimeTo12HourTime(date.toTimeString())
-            console.log(date.toTimeString());
-            console.log(time);
             date = date.toDateString()
 
         }
@@ -187,8 +185,6 @@ $("#btnSaveMeeting").on('click',function(){
             repeat = false
             var date = new Date($("#meetingDate").val())
             var time = convert24HourTimeTo12HourTime(date.toTimeString())
-            console.log(date.toTimeString());
-            console.log(time);
             date = date.toDateString()    
         }
         var platform = $("#meetingPlatform").find(":selected").text();
@@ -228,7 +224,6 @@ $(".form-group").find("input[type=checkbox]").on("change",function(){
 
 function convert24HourTimeTo12HourTime(time){
     var timeArray = time.split(":")
-    console.log(timeArray);
     var hour = parseInt(timeArray[0])
     var minute = timeArray[1]
     var suffix = "AM"
@@ -247,7 +242,6 @@ function convert24HourTimeTo12HourTime(time){
 
 function dateObjectToDateFormat(date,time){
     var dateArray = date.split(" ")
-    console.log(dateArray);
     var timeArray = time.split(/[\s:]+/)
     var hour = parseInt(timeArray[0])
     var minute = timeArray[1]
@@ -258,7 +252,6 @@ function dateObjectToDateFormat(date,time){
     if(hour < 10){
         hour = "0" + hour
     }
-    console.log(timeArray);
     var month = monthStringToDateInt(dateArray[1])
     var day = dateArray[2]
     var year = dateArray[3]
