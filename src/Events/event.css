@@ -23,7 +23,7 @@
 }
 #noEvent{
     text-align: center;
-    font-size: xxx-large;
+    font-size: x-large;
     display: none;
 }
 .eventGrid:last-child{
@@ -64,6 +64,7 @@ button#addEvent {
 }
 .eventContainer h2:first-child{
     text-align: center;
+    font-size: xx-large;
 }
 .eventWrap{
     width: 100%;
