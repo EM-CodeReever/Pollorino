@@ -6,6 +6,7 @@ const path = require('path');
 const os = require('os');
 const dir = path.join(os.homedir + "\\AppData\\Roaming\\Pollorino\\JSON_Data");
 var config;
+
 const configTemplate = {
   Settings: {
     MinimizeOnClose: false,
@@ -22,6 +23,7 @@ const configTemplate = {
     }
   }
 }
+
 if(localStorage.Config){
    config = JSON.parse(localStorage.Config)
 }else{
