@@ -120,6 +120,12 @@
     font-weight: bold;
     padding: 0px 5px;
 }
+.no-notes{
+    text-align: center;
+    font-size: x-large;
+    color: var(--textColor);
+    font-weight: bold;
+}
 #SelectedItemsText{
     color: white;
     height: 21px; 

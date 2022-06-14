@@ -157,6 +157,12 @@
     color: #42ba96;
     width: fit-content;
 }
+.no-tasks{
+    text-align: center;
+    font-size: x-large;
+    color: var(--textColor);
+    font-weight: bold;
+}
 .High{
     color: #df4759;
 }
