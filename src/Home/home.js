@@ -1,7 +1,7 @@
 var meetingfilePath = path.join(dir + "\\MeetingStorage.json");
 var taskfilePath = path.join(dir + "\\TaskStorage.json");
 var eventfilePath = path.join(dir + "\\EventStorage.json");
-var notefilePath = path.join(dir + "\\NotebookStorage.json");
+
 var toggle = true;
 
 function greeting() {
@@ -125,24 +125,12 @@ function eventFile(){
         }
     })
 }
-function noteFile(){
-    fs.readFile(notefilePath,"utf-8",(err) => {
-        if(err){
-            console.log(err)
-            fs.writeFile(notefilePath,JSON.stringify({Notes:[]}, null, 2),err => {
-                if(err){
-                    console.log(err)
-                }
-                noteFile()
-            })
-        }
-    })
-}
+
 
 taskFile()
 eventFile()
 meetingFile()
-noteFile()
+
 
 function isDateToday(date){
     var dateNow = new Date()
