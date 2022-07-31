@@ -1,4 +1,23 @@
-
+i.note-delete-btn{
+    cursor: pointer;
+    color:white; 
+    font-size: 20px;
+    aspect-ratio: 1/1;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.note-delete-btn:hover{
+    transition: .3s;
+    color:#df4759;
+    background: var(--Background);
+}
+.note-delete-btn:active{
+    opacity: .75;
+    transform: scale(0.8);
+}
 .Note-Editor{
     border-radius: 10px;
     width: 100%;
@@ -103,7 +122,7 @@
     justify-content: flex-end;
 }
 .Note-Container > .Note-Footer{
-    justify-content: space-between;
+    justify-content: end;
 }
 .Note-Viewer{
     display: none;
