@@ -55,6 +55,13 @@ background-color: rgb(49, 49, 49);
 button{
 cursor: pointer;
 }
+button:hover{
+  transition: .3s;
+  opacity: .75;
+}
+button:active{
+  transform: scale(0.7);
+}
 
 #title-bar-btns {
 display: inline-block;
