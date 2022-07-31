@@ -104,10 +104,7 @@ function noteFile(){
                     $(".SelectionOptionsSpan").children().slideUp(150)
                 }
             })
-            $('.options').on('click',function(){
-                $(this).parent().children('.n-btn').toggle(200)
-            })
-            $('.n-btn').on('click',function(){
+            $('.options, .n-btn').on('click',function(){
                 $(this).parent().children('.n-btn').toggle(200)
             })
         }   
